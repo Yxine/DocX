@@ -21,6 +21,2477 @@ using System.Xml.Linq;
 namespace Novacode
 {
 
+	#region Enums
+
+	#region Internal
+
+	/// <summary>Custom property types</summary>
+	internal enum CustomPropertyType
+	{
+
+		/// <summary>System.String</summary>
+		Text,
+
+		/// <summary>System.DateTime</summary>
+		Date,
+
+		/// <summary>System.Int32</summary>
+		NumberInteger,
+
+		/// <summary>System.Double</summary>
+		NumberDecimal,
+
+		/// <summary>System.Boolean</summary>
+		YesOrNo
+
+	}
+
+	/// <summary>Paragraph edit types</summary>
+	internal enum EditType
+	{
+
+		/// <summary>A ins is a tracked insertion</summary>
+		ins,
+
+		/// <summary>A del is tracked deletion</summary>
+		del
+
+	}
+
+	#endregion
+
+	#region Public
+
+	/// <summary>Specifies the possible directions for a bar chart. 21.2.3.3 ST_BarDir (Bar Direction)</summary>
+	public enum BarDirection
+	{
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("col")]
+		Column,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("bar")]
+		Bar
+
+	}
+
+	/// <summary>Specifies the possible groupings for a bar chart. 21.2.3.4 ST_BarGrouping (Bar Grouping)</summary>
+	public enum BarGrouping
+	{
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("clustered")]
+		Clustered,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("percentStacked")]
+		PercentStacked,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("stacked")]
+		Stacked,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("standard")]
+		Standard
+
+	}
+
+	/// <summary>Specifies the possible positions for a legend. 21.2.3.24 ST_LegendPos (Legend Position)</summary>
+	public enum ChartLegendPosition
+	{
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("t")]
+		Top,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("b")]
+		Bottom,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("l")]
+		Left,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("r")]
+		Right,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("tr")]
+		TopRight
+
+	}
+
+	/// <summary>Specifies the possible ways to display blanks. 21.2.3.10 ST_DispBlanksAs (Display Blanks As)</summary>
+	public enum DisplayBlanksAs
+	{
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("gap")]
+		Gap,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("span")]
+		Span,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("zero")]
+		Zero
+
+	}
+
+	/// <summary>Specifies the kind of grouping for a column, line, or area chart. 21.2.2.76 grouping (Grouping)</summary>
+	public enum Grouping
+	{
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("percentStacked")]
+		PercentStacked,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("stacked")]
+		Stacked,
+
+		/// <summary>TODO: comment</summary>
+		[XmlName("standard")]
+		Standard
+
+	}
+
+	/// <summary></summary>
+	public enum DocumentTypes
+	{
+
+		/// <summary>TODO: comment</summary>
+		Document,
+
+		/// <summary>TODO: comment</summary>
+		Template
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum ListItemType
+	{
+
+		/// <summary>TODO: comment</summary>
+		Bulleted,
+
+		/// <summary>TODO: comment</summary>
+		Numbered
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum SectionBreakType
+	{
+
+		/// <summary>TODO: comment</summary>
+		defaultNextPage,
+
+		/// <summary>TODO: comment</summary>
+		evenPage,
+
+		/// <summary>TODO: comment</summary>
+		oddPage,
+
+		/// <summary>TODO: comment</summary>
+		continuous
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum ContainerType
+	{
+
+		/// <summary>TODO: comment</summary>
+		None,
+
+		/// <summary>TODO: comment</summary>
+		TOC,
+
+		/// <summary>TODO: comment</summary>
+		Section,
+
+		/// <summary>TODO: comment</summary>
+		Cell,
+
+		/// <summary>TODO: comment</summary>
+		Table,
+
+		/// <summary>TODO: comment</summary>
+		Header,
+
+		/// <summary>TODO: comment</summary>
+		Footer,
+
+		/// <summary>TODO: comment</summary>
+		Paragraph,
+
+		/// <summary>TODO: comment</summary>
+		Body
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum PageNumberFormat
+	{
+
+		/// <summary>TODO: comment</summary>
+		normal,
+
+		/// <summary>TODO: comment</summary>
+		roman
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum BorderSize
+	{
+
+		/// <summary>TODO: comment</summary>
+		one,
+
+		/// <summary>TODO: comment</summary>
+		two,
+
+		/// <summary>TODO: comment</summary>
+		three,
+
+		/// <summary>TODO: comment</summary>
+		four,
+
+		/// <summary>TODO: comment</summary>
+		five,
+
+		/// <summary>TODO: comment</summary>
+		six,
+
+		/// <summary>TODO: comment</summary>
+		seven,
+
+		/// <summary>TODO: comment</summary>
+		eight,
+
+		/// <summary>TODO: comment</summary>
+		nine
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum EditRestrictions
+	{
+
+		/// <summary>TODO: comment</summary>
+		none,
+
+		/// <summary>TODO: comment</summary>
+		readOnly,
+
+		/// <summary>TODO: comment</summary>
+		forms,
+
+		/// <summary>TODO: comment</summary>
+		comments,
+
+		/// <summary>TODO: comment</summary>
+		trackedChanges
+
+	}
+
+	/// <summary>Table Cell Border styles. Added by lckuiper @ 20101117. Source: http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tablecellborders.aspx</summary>
+	public enum BorderStyle
+	{
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_none = 0,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_single,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thick,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_double,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_dotted,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_dashed,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_dotDash,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_dotDotDash,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_triple,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thinThickSmallGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thickThinSmallGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thinThickThinSmallGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thinThickMediumGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thickThinMediumGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thinThickThinMediumGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thinThickLargeGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thickThinLargeGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_thinThickThinLargeGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_wave,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_doubleWave,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_dashSmallGap,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_dashDotStroked,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_threeDEmboss,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_threeDEngrave,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_outset,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_inset,
+
+		/// <summary>TODO: comment</summary>
+		Tcbs_nil
+
+	}
+
+	/// <summary>Table Cell Border Types. Added by lckuiper @ 20101117. Source: http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tablecellborders.aspx</summary>
+	public enum TableCellBorderType
+	{
+
+		/// <summary>TODO: comment</summary>
+		Top,
+
+		/// <summary>TODO: comment</summary>
+		Bottom,
+
+		/// <summary>TODO: comment</summary>
+		Left,
+
+		/// <summary>TODO: comment</summary>
+		Right,
+
+		/// <summary>TODO: comment</summary>
+		InsideH,
+
+		/// <summary>TODO: comment</summary>
+		InsideV,
+
+		/// <summary>TODO: comment</summary>
+		TopLeftToBottomRight,
+
+		/// <summary>TODO: comment</summary>
+		TopRightToBottomLeft
+
+	}
+
+	/// <summary>Table Border Types. Added by lckuiper @ 20101117. Source: http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tableborders.aspx</summary>
+	public enum TableBorderType
+	{
+
+		/// <summary>TODO: comment</summary>
+		Top,
+
+		/// <summary>TODO: comment</summary>
+		Bottom,
+
+		/// <summary>TODO: comment</summary>
+		Left,
+
+		/// <summary>TODO: comment</summary>
+		Right,
+
+		/// <summary>TODO: comment</summary>
+		InsideH,
+
+		/// <summary>TODO: comment</summary>
+		InsideV
+
+	}
+
+	/// <summary>Patch 7398 added by lckuiper on Nov 16th 2010 @ 2:23 PM</summary>
+	public enum VerticalAlignment
+	{
+
+		/// <summary>TODO: comment</summary>
+		Top,
+
+		/// <summary>TODO: comment</summary>
+		Center,
+
+		/// <summary>TODO: comment</summary>
+		Bottom
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum Orientation
+	{
+
+		/// <summary>TODO: comment</summary>
+		Portrait,
+
+		/// <summary>TODO: comment</summary>
+		Landscape
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum XmlDocument
+	{
+
+		/// <summary>TODO: comment</summary>
+		Main,
+
+		/// <summary>TODO: comment</summary>
+		HeaderOdd,
+
+		/// <summary>TODO: comment</summary>
+		HeaderEven,
+
+		/// <summary>TODO: comment</summary>
+		HeaderFirst,
+
+		/// <summary>TODO: comment</summary>
+		FooterOdd,
+
+		/// <summary>TODO: comment</summary>
+		FooterEven,
+
+		/// <summary>TODO: comment</summary>
+		FooterFirst
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum MatchFormattingOptions
+	{
+
+		/// <summary>TODO: comment</summary>
+		ExactMatch,
+
+		/// <summary>TODO: comment</summary>
+		SubsetMatch
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum Script
+	{
+
+		/// <summary>TODO: comment</summary>
+		superscript,
+
+		/// <summary>TODO: comment</summary>
+		subscript,
+
+		/// <summary>TODO: comment</summary>
+		none
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum Highlight
+	{
+
+		/// <summary>TODO: comment</summary>
+		yellow,
+
+		/// <summary>TODO: comment</summary>
+		green,
+
+		/// <summary>TODO: comment</summary>
+		cyan,
+
+		/// <summary>TODO: comment</summary>
+		magenta,
+
+		/// <summary>TODO: comment</summary>
+		blue,
+
+		/// <summary>TODO: comment</summary>
+		red,
+
+		/// <summary>TODO: comment</summary>
+		darkBlue,
+
+		/// <summary>TODO: comment</summary>
+		darkCyan,
+
+		/// <summary>TODO: comment</summary>
+		darkGreen,
+
+		/// <summary>TODO: comment</summary>
+		darkMagenta,
+
+		/// <summary>TODO: comment</summary>
+		darkRed,
+
+		/// <summary>TODO: comment</summary>
+		darkYellow,
+
+		/// <summary>TODO: comment</summary>
+		darkGray,
+
+		/// <summary>TODO: comment</summary>
+		lightGray,
+
+		/// <summary>TODO: comment</summary>
+		black,
+
+		/// <summary>TODO: comment</summary>
+		none
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum UnderlineStyle
+	{
+
+		/// <summary>TODO: comment</summary>
+		none = 0,
+
+		/// <summary>TODO: comment</summary>
+		singleLine = 1,
+
+		/// <summary>TODO: comment</summary>
+		words = 2,
+
+		/// <summary>TODO: comment</summary>
+		doubleLine = 3,
+
+		/// <summary>TODO: comment</summary>
+		dotted = 4,
+
+		/// <summary>TODO: comment</summary>
+		thick = 6,
+
+		/// <summary>TODO: comment</summary>
+		dash = 7,
+
+		/// <summary>TODO: comment</summary>
+		dotDash = 9,
+
+		/// <summary>TODO: comment</summary>
+		dotDotDash = 10,
+
+		/// <summary>TODO: comment</summary>
+		wave = 11,
+
+		/// <summary>TODO: comment</summary>
+		dottedHeavy = 20,
+
+		/// <summary>TODO: comment</summary>
+		dashedHeavy = 23,
+
+		/// <summary>TODO: comment</summary>
+		dashDotHeavy = 25,
+
+		/// <summary>TODO: comment</summary>
+		dashDotDotHeavy = 26,
+
+		/// <summary>TODO: comment</summary>
+		dashLongHeavy = 27,
+
+		/// <summary>TODO: comment</summary>
+		dashLong = 39,
+
+		/// <summary>TODO: comment</summary>
+		wavyDouble = 43,
+
+		/// <summary>TODO: comment</summary>
+		wavyHeavy = 55
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum StrikeThrough
+	{
+
+		/// <summary>TODO: comment</summary>
+		none,
+
+		/// <summary>TODO: comment</summary>
+		strike,
+
+		/// <summary>TODO: comment</summary>
+		doubleStrike
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum Misc
+	{
+
+		/// <summary>TODO: comment</summary>
+		none,
+
+		/// <summary>TODO: comment</summary>
+		shadow,
+
+		/// <summary>TODO: comment</summary>
+		outline,
+
+		/// <summary>TODO: comment</summary>
+		outlineShadow,
+
+		/// <summary>TODO: comment</summary>
+		emboss,
+
+		/// <summary>TODO: comment</summary>
+		engrave
+
+	};
+
+	/// <summary>Change the caps style of text, for use with Append and AppendLine</summary>
+	public enum CapsStyle
+	{
+
+		/// <summary>No caps, make all characters are lowercase</summary>
+		none,
+
+		/// <summary>All caps, make every character uppercase</summary>
+		caps,
+
+		/// <summary>Small caps, make all characters capital but with a small font size</summary>
+		smallCaps
+
+	};
+
+	/// <summary>Designs\Styles that can be applied to a table</summary>
+	public enum TableDesign
+	{
+
+		/// <summary>TODO: comment</summary>
+		Custom,
+
+		/// <summary>TODO: comment</summary>
+		TableNormal,
+
+		/// <summary>TODO: comment</summary>
+		TableGrid,
+
+		/// <summary>TODO: comment</summary>
+		LightShading,
+
+		/// <summary>TODO: comment</summary>
+		LightShadingAccent1,
+
+		/// <summary>TODO: comment</summary>
+		LightShadingAccent2,
+
+		/// <summary>TODO: comment</summary>
+		LightShadingAccent3,
+
+		/// <summary>TODO: comment</summary>
+		LightShadingAccent4,
+
+		/// <summary>TODO: comment</summary>
+		LightShadingAccent5,
+
+		/// <summary>TODO: comment</summary>
+		LightShadingAccent6,
+
+		/// <summary>TODO: comment</summary>
+		LightList,
+
+		/// <summary>TODO: comment</summary>
+		LightListAccent1,
+
+		/// <summary>TODO: comment</summary>
+		LightListAccent2,
+
+		/// <summary>TODO: comment</summary>
+		LightListAccent3,
+
+		/// <summary>TODO: comment</summary>
+		LightListAccent4,
+
+		/// <summary>TODO: comment</summary>
+		LightListAccent5,
+
+		/// <summary>TODO: comment</summary>
+		LightListAccent6,
+
+		/// <summary>TODO: comment</summary>
+		LightGrid,
+
+		/// <summary>TODO: comment</summary>
+		LightGridAccent1,
+
+		/// <summary>TODO: comment</summary>
+		LightGridAccent2,
+
+		/// <summary>TODO: comment</summary>
+		LightGridAccent3,
+
+		/// <summary>TODO: comment</summary>
+		LightGridAccent4,
+
+		/// <summary>TODO: comment</summary>
+		LightGridAccent5,
+
+		/// <summary>TODO: comment</summary>
+		LightGridAccent6,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading1,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading1Accent1,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading1Accent2,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading1Accent3,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading1Accent4,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading1Accent5,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading1Accent6,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading2,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading2Accent1,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading2Accent2,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading2Accent3,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading2Accent4,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading2Accent5,
+
+		/// <summary>TODO: comment</summary>
+		MediumShading2Accent6,
+
+		/// <summary>TODO: comment</summary>
+		MediumList1,
+
+		/// <summary>TODO: comment</summary>
+		MediumList1Accent1,
+
+		/// <summary>TODO: comment</summary>
+		MediumList1Accent2,
+
+		/// <summary>TODO: comment</summary>
+		MediumList1Accent3,
+
+		/// <summary>TODO: comment</summary>
+		MediumList1Accent4,
+
+		/// <summary>TODO: comment</summary>
+		MediumList1Accent5,
+
+		/// <summary>TODO: comment</summary>
+		MediumList1Accent6,
+
+		/// <summary>TODO: comment</summary>
+		MediumList2,
+
+		/// <summary>TODO: comment</summary>
+		MediumList2Accent1,
+
+		/// <summary>TODO: comment</summary>
+		MediumList2Accent2,
+
+		/// <summary>TODO: comment</summary>
+		MediumList2Accent3,
+
+		/// <summary>TODO: comment</summary>
+		MediumList2Accent4,
+
+		/// <summary>TODO: comment</summary>
+		MediumList2Accent5,
+
+		/// <summary>TODO: comment</summary>
+		MediumList2Accent6,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid1,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid1Accent1,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid1Accent2,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid1Accent3,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid1Accent4,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid1Accent5,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid1Accent6,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid2,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid2Accent1,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid2Accent2,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid2Accent3,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid2Accent4,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid2Accent5,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid2Accent6,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid3,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid3Accent1,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid3Accent2,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid3Accent3,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid3Accent4,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid3Accent5,
+
+		/// <summary>TODO: comment</summary>
+		MediumGrid3Accent6,
+
+		/// <summary>TODO: comment</summary>
+		DarkList,
+
+		/// <summary>TODO: comment</summary>
+		DarkListAccent1,
+
+		/// <summary>TODO: comment</summary>
+		DarkListAccent2,
+
+		/// <summary>TODO: comment</summary>
+		DarkListAccent3,
+
+		/// <summary>TODO: comment</summary>
+		DarkListAccent4,
+
+		/// <summary>TODO: comment</summary>
+		DarkListAccent5,
+
+		/// <summary>TODO: comment</summary>
+		DarkListAccent6,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulShading,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulShadingAccent1,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulShadingAccent2,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulShadingAccent3,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulShadingAccent4,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulShadingAccent5,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulShadingAccent6,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulList,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulListAccent1,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulListAccent2,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulListAccent3,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulListAccent4,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulListAccent5,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulListAccent6,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulGrid,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulGridAccent1,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulGridAccent2,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulGridAccent3,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulGridAccent4,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulGridAccent5,
+
+		/// <summary>TODO: comment</summary>
+		ColorfulGridAccent6,
+
+		/// <summary>TODO: comment</summary>
+		None
+
+	};
+
+	/// <summary>How a Table should auto resize</summary>
+	public enum AutoFit
+	{
+
+		/// <summary>Autofit to Table contents</summary>
+		Contents,
+
+		/// <summary>Autofit to Window</summary>
+		Window,
+
+		/// <summary>Autofit to Column width</summary>
+		ColumnWidth,
+
+		/// <summary>Autofit to Fixed column width</summary>
+		Fixed
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum RectangleShapes
+	{
+
+		/// <summary>TODO: comment</summary>
+		rect,
+
+		/// <summary>TODO: comment</summary>
+		roundRect,
+
+		/// <summary>TODO: comment</summary>
+		snip1Rect,
+
+		/// <summary>TODO: comment</summary>
+		snip2SameRect,
+
+		/// <summary>TODO: comment</summary>
+		snip2DiagRect,
+
+		/// <summary>TODO: comment</summary>
+		snipRoundRect,
+
+		/// <summary>TODO: comment</summary>
+		round1Rect,
+
+		/// <summary>TODO: comment</summary>
+		round2SameRect,
+
+		/// <summary>TODO: comment</summary>
+		round2DiagRect
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum BasicShapes
+	{
+
+		/// <summary>TODO: comment</summary>
+		ellipse,
+
+		/// <summary>TODO: comment</summary>
+		triangle,
+
+		/// <summary>TODO: comment</summary>
+		rtTriangle,
+
+		/// <summary>TODO: comment</summary>
+		parallelogram,
+
+		/// <summary>TODO: comment</summary>
+		trapezoid,
+
+		/// <summary>TODO: comment</summary>
+		diamond,
+
+		/// <summary>TODO: comment</summary>
+		pentagon,
+
+		/// <summary>TODO: comment</summary>
+		hexagon,
+
+		/// <summary>TODO: comment</summary>
+		heptagon,
+
+		/// <summary>TODO: comment</summary>
+		octagon,
+
+		/// <summary>TODO: comment</summary>
+		decagon,
+
+		/// <summary>TODO: comment</summary>
+		dodecagon,
+
+		/// <summary>TODO: comment</summary>
+		pie,
+
+		/// <summary>TODO: comment</summary>
+		chord,
+
+		/// <summary>TODO: comment</summary>
+		teardrop,
+
+		/// <summary>TODO: comment</summary>
+		frame,
+
+		/// <summary>TODO: comment</summary>
+		halfFrame,
+
+		/// <summary>TODO: comment</summary>
+		corner,
+
+		/// <summary>TODO: comment</summary>
+		diagStripe,
+
+		/// <summary>TODO: comment</summary>
+		plus,
+
+		/// <summary>TODO: comment</summary>
+		plaque,
+
+		/// <summary>TODO: comment</summary>
+		can,
+
+		/// <summary>TODO: comment</summary>
+		cube,
+
+		/// <summary>TODO: comment</summary>
+		bevel,
+
+		/// <summary>TODO: comment</summary>
+		donut,
+
+		/// <summary>TODO: comment</summary>
+		noSmoking,
+
+		/// <summary>TODO: comment</summary>
+		blockArc,
+
+		/// <summary>TODO: comment</summary>
+		foldedCorner,
+
+		/// <summary>TODO: comment</summary>
+		smileyFace,
+
+		/// <summary>TODO: comment</summary>
+		heart,
+
+		/// <summary>TODO: comment</summary>
+		lightningBolt,
+
+		/// <summary>TODO: comment</summary>
+		sun,
+
+		/// <summary>TODO: comment</summary>
+		moon,
+
+		/// <summary>TODO: comment</summary>
+		cloud,
+
+		/// <summary>TODO: comment</summary>
+		arc,
+
+		/// <summary>TODO: comment</summary>
+		backetPair,
+
+		/// <summary>TODO: comment</summary>
+		bracePair,
+
+		/// <summary>TODO: comment</summary>
+		leftBracket,
+
+		/// <summary>TODO: comment</summary>
+		rightBracket,
+
+		/// <summary>TODO: comment</summary>
+		leftBrace,
+
+		/// <summary>TODO: comment</summary>
+		rightBrace
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum BlockArrowShapes
+	{
+
+		/// <summary>TODO: comment</summary>
+		rightArrow,
+
+		/// <summary>TODO: comment</summary>
+		leftArrow,
+
+		/// <summary>TODO: comment</summary>
+		upArrow,
+
+		/// <summary>TODO: comment</summary>
+		downArrow,
+
+		/// <summary>TODO: comment</summary>
+		leftRightArrow,
+
+		/// <summary>TODO: comment</summary>
+		upDownArrow,
+
+		/// <summary>TODO: comment</summary>
+		quadArrow,
+
+		/// <summary>TODO: comment</summary>
+		leftRightUpArrow,
+
+		/// <summary>TODO: comment</summary>
+		bentArrow,
+
+		/// <summary>TODO: comment</summary>
+		uturnArrow,
+
+		/// <summary>TODO: comment</summary>
+		leftUpArrow,
+
+		/// <summary>TODO: comment</summary>
+		bentUpArrow,
+
+		/// <summary>TODO: comment</summary>
+		curvedRightArrow,
+
+		/// <summary>TODO: comment</summary>
+		curvedLeftArrow,
+
+		/// <summary>TODO: comment</summary>
+		curvedUpArrow,
+
+		/// <summary>TODO: comment</summary>
+		curvedDownArrow,
+
+		/// <summary>TODO: comment</summary>
+		stripedRightArrow,
+
+		/// <summary>TODO: comment</summary>
+		notchedRightArrow,
+
+		/// <summary>TODO: comment</summary>
+		homePlate,
+
+		/// <summary>TODO: comment</summary>
+		chevron,
+
+		/// <summary>TODO: comment</summary>
+		rightArrowCallout,
+
+		/// <summary>TODO: comment</summary>
+		downArrowCallout,
+
+		/// <summary>TODO: comment</summary>
+		leftArrowCallout,
+
+		/// <summary>TODO: comment</summary>
+		upArrowCallout,
+
+		/// <summary>TODO: comment</summary>
+		leftRightArrowCallout,
+
+		/// <summary>TODO: comment</summary>
+		quadArrowCallout,
+
+		/// <summary>TODO: comment</summary>
+		circularArrow
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum EquationShapes
+	{
+
+		/// <summary>TODO: comment</summary>
+		mathPlus,
+
+		/// <summary>TODO: comment</summary>
+		mathMinus,
+
+		/// <summary>TODO: comment</summary>
+		mathMultiply,
+
+		/// <summary>TODO: comment</summary>
+		mathDivide,
+
+		/// <summary>TODO: comment</summary>
+		mathEqual,
+
+		/// <summary>TODO: comment</summary>
+		mathNotEqual
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum FlowchartShapes
+	{
+
+		/// <summary>TODO: comment</summary>
+		flowChartProcess,
+
+		/// <summary>TODO: comment</summary>
+		flowChartAlternateProcess,
+
+		/// <summary>TODO: comment</summary>
+		flowChartDecision,
+
+		/// <summary>TODO: comment</summary>
+		flowChartInputOutput,
+
+		/// <summary>TODO: comment</summary>
+		flowChartPredefinedProcess,
+
+		/// <summary>TODO: comment</summary>
+		flowChartInternalStorage,
+
+		/// <summary>TODO: comment</summary>
+		flowChartDocument,
+
+		/// <summary>TODO: comment</summary>
+		flowChartMultidocument,
+
+		/// <summary>TODO: comment</summary>
+		flowChartTerminator,
+
+		/// <summary>TODO: comment</summary>
+		flowChartPreparation,
+
+		/// <summary>TODO: comment</summary>
+		flowChartManualInput,
+
+		/// <summary>TODO: comment</summary>
+		flowChartManualOperation,
+
+		/// <summary>TODO: comment</summary>
+		flowChartConnector,
+
+		/// <summary>TODO: comment</summary>
+		flowChartOffpageConnector,
+
+		/// <summary>TODO: comment</summary>
+		flowChartPunchedCard,
+
+		/// <summary>TODO: comment</summary>
+		flowChartPunchedTape,
+
+		/// <summary>TODO: comment</summary>
+		flowChartSummingJunction,
+
+		/// <summary>TODO: comment</summary>
+		flowChartOr,
+
+		/// <summary>TODO: comment</summary>
+		flowChartCollate,
+
+		/// <summary>TODO: comment</summary>
+		flowChartSort,
+
+		/// <summary>TODO: comment</summary>
+		flowChartExtract,
+
+		/// <summary>TODO: comment</summary>
+		flowChartMerge,
+
+		/// <summary>TODO: comment</summary>
+		flowChartOnlineStorage,
+
+		/// <summary>TODO: comment</summary>
+		flowChartDelay,
+
+		/// <summary>TODO: comment</summary>
+		flowChartMagneticTape,
+
+		/// <summary>TODO: comment</summary>
+		flowChartMagneticDisk,
+
+		/// <summary>TODO: comment</summary>
+		flowChartMagneticDrum,
+
+		/// <summary>TODO: comment</summary>
+		flowChartDisplay
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum StarAndBannerShapes
+	{
+
+		/// <summary>TODO: comment</summary>
+		irregularSeal1,
+
+		/// <summary>TODO: comment</summary>
+		irregularSeal2,
+
+		/// <summary>TODO: comment</summary>
+		star4,
+
+		/// <summary>TODO: comment</summary>
+		star5,
+
+		/// <summary>TODO: comment</summary>
+		star6,
+
+		/// <summary>TODO: comment</summary>
+		star7,
+
+		/// <summary>TODO: comment</summary>
+		star8,
+
+		/// <summary>TODO: comment</summary>
+		star10,
+
+		/// <summary>TODO: comment</summary>
+		star12,
+
+		/// <summary>TODO: comment</summary>
+		star16,
+
+		/// <summary>TODO: comment</summary>
+		star24,
+
+		/// <summary>TODO: comment</summary>
+		star32,
+
+		/// <summary>TODO: comment</summary>
+		ribbon,
+
+		/// <summary>TODO: comment</summary>
+		ribbon2,
+
+		/// <summary>TODO: comment</summary>
+		ellipseRibbon,
+
+		/// <summary>TODO: comment</summary>
+		ellipseRibbon2,
+
+		/// <summary>TODO: comment</summary>
+		verticalScroll,
+
+		/// <summary>TODO: comment</summary>
+		horizontalScroll,
+
+		/// <summary>TODO: comment</summary>
+		wave,
+
+		/// <summary>TODO: comment</summary>
+		doubleWave
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum CalloutShapes
+	{
+
+		/// <summary>TODO: comment</summary>
+		wedgeRectCallout,
+
+		/// <summary>TODO: comment</summary>
+		wedgeRoundRectCallout,
+
+		/// <summary>TODO: comment</summary>
+		wedgeEllipseCallout,
+
+		/// <summary>TODO: comment</summary>
+		cloudCallout,
+
+		/// <summary>TODO: comment</summary>
+		borderCallout1,
+
+		/// <summary>TODO: comment</summary>
+		borderCallout2,
+
+		/// <summary>TODO: comment</summary>
+		borderCallout3,
+
+		/// <summary>TODO: comment</summary>
+		accentCallout1,
+
+		/// <summary>TODO: comment</summary>
+		accentCallout2,
+
+		/// <summary>TODO: comment</summary>
+		accentCallout3,
+
+		/// <summary>TODO: comment</summary>
+		callout1,
+
+		/// <summary>TODO: comment</summary>
+		callout2,
+
+		/// <summary>TODO: comment</summary>
+		callout3,
+
+		/// <summary>TODO: comment</summary>
+		accentBorderCallout1,
+
+		/// <summary>TODO: comment</summary>
+		accentBorderCallout2,
+
+		/// <summary>TODO: comment</summary>
+		accentBorderCallout3
+
+	};
+
+	/// <summary>Text alignment of a Paragraph</summary>
+	public enum Alignment
+	{
+
+		/// <summary>Align Paragraph to the left</summary>
+		left,
+
+		/// <summary>Align Paragraph as centered</summary>
+		center,
+
+		/// <summary>Align Paragraph to the right</summary>
+		right,
+
+		/// <summary>(Justified) Align Paragraph to both the left and right margins, adding extra space between content as necessary</summary>
+		both
+
+	};
+
+	/// <summary>TODO: comment</summary>
+	public enum Direction
+	{
+
+		/// <summary>TODO: comment</summary>
+		LeftToRight,
+
+		/// <summary>TODO: comment</summary>
+		RightToLeft
+
+	};
+
+	/// <summary>Text types in a Run</summary>
+	public enum RunTextType
+	{
+
+		/// <summary>System.String</summary>
+		Text,
+
+		/// <summary>System.String</summary>
+		DelText
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum LineSpacingType
+	{
+
+		/// <summary>TODO: comment</summary>
+		Line,
+
+		/// <summary>TODO: comment</summary>
+		Before,
+
+		/// <summary>TODO: comment</summary>
+		After
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum LineSpacingTypeAuto
+	{
+
+		/// <summary>TODO: comment</summary>
+		AutoBefore,
+
+		/// <summary>TODO: comment</summary>
+		AutoAfter,
+
+		/// <summary>TODO: comment</summary>
+		Auto,
+
+		/// <summary>TODO: comment</summary>
+		None
+
+	}
+
+	/// <summary>Cell margin for all sides of the table cell</summary>
+	public enum TableCellMarginType
+	{
+
+		/// <summary>The left cell margin</summary>
+		left,
+
+		/// <summary>The right cell margin</summary>
+		right,
+
+		/// <summary>The bottom cell margin</summary>
+		bottom,
+
+		/// <summary>The top cell margin</summary>
+		top
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum HeadingType
+	{
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading1")]
+		Heading1,
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading2")]
+		Heading2,
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading3")]
+		Heading3,
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading4")]
+		Heading4,
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading5")]
+		Heading5,
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading6")]
+		Heading6,
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading7")]
+		Heading7,
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading8")]
+		Heading8,
+
+		/// <summary>TODO: comment</summary>
+		[Description("Heading9")]
+		Heading9,
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public enum TextDirection
+	{
+
+		/// <summary>TODO: comment</summary>
+		btLr,
+
+		/// <summary>TODO: comment</summary>
+		right
+
+	};
+
+	/// <summary>Represents the switches set on a TOC</summary>
+	[Flags]
+	public enum TableOfContentsSwitches
+	{
+
+		/// <summary>TODO: comment</summary>
+		None = 0 << 0,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\a")]
+		A = 1 << 0,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\b")]
+		B = 1 << 1,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\c")]
+		C = 1 << 2,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\d")]
+		D = 1 << 3,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\f")]
+		F = 1 << 4,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\h")]
+		H = 1 << 5,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\l")]
+		L = 1 << 6,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\n")]
+		N = 1 << 7,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\o")]
+		O = 1 << 8,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\p")]
+		P = 1 << 9,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\s")]
+		S = 1 << 10,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\t")]
+		T = 1 << 11,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\u")]
+		U = 1 << 12,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\w")]
+		W = 1 << 13,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\x")]
+		X = 1 << 14,
+
+		/// <summary>TODO: comment</summary>
+		[Description("\\z")]
+		Z = 1 << 15
+
+	}
+
+	#endregion
+
+	#endregion
+
+	#region Interfaces
+
+	interface IContentContainer
+	{
+
+		ReadOnlyCollection<Content> Paragraphs
+		{
+			get;
+		}
+
+	}
+
+	/// <summary>TODO: comment</summary>
+	public interface IParagraphContainer
+	{
+
+		/// <summary>TODO: comment</summary>
+		ReadOnlyCollection<Paragraph> Paragraphs
+		{
+			get;
+		}
+
+	}
+
+	#endregion
+
+	#region Classes
+
+	#region Internal
+
+	internal static class Extensions
+	{
+
+		internal static string ToHex(this Color source)
+		{
+			byte
+				red = source.R,
+				green = source.G,
+				blue = source.B;
+			string
+				redHex = red.ToString("X"),
+				blueHex = blue.ToString("X"),
+				greenHex = green.ToString("X");
+			if (redHex.Length < 2) redHex = string.Concat("0", redHex);
+			if (blueHex.Length < 2) blueHex = string.Concat("0", blueHex);
+			if (greenHex.Length < 2) greenHex = string.Concat("0", greenHex);
+			return string.Format("{0}{1}{2}", redHex, greenHex, blueHex);
+		}
+
+		public static void Flatten(this XElement e, XName name, List<XElement> flat)
+		{
+			// Add this element (without its children) to the flat list
+			XElement clone = CloneElement(e);
+			clone.Elements().Remove();
+			// Filter elements using XName
+			if (clone.Name == name) flat.Add(clone);
+			// Process the children, filter elements using XName
+			if (e.HasElements) foreach (XElement elem in e.Elements(name)) elem.Flatten(name, flat);
+		}
+
+		static XElement CloneElement(XElement element)
+		{
+			return new XElement(element.Name, element.Attributes(), element.Nodes().Select(
+				n =>
+				{
+					XElement e = n as XElement;
+					if (e != null) return CloneElement(e);
+					return n;
+				}
+			));
+		}
+
+		public static string GetAttribute(this XElement el, XName name, string defaultValue = "")
+		{
+			var attr = el.Attribute(name);
+			if (attr != null) return attr.Value;
+			return defaultValue;
+		}
+
+		/// <summary>Sets margin for all the pages in a Dox document in Inches. Written by Shashwat Tripathi.</summary>
+		/// <param name="document"></param>
+		/// <param name="top">Margin from the Top. Leave -1 for no change</param>
+		/// <param name="bottom">Margin from the Bottom. Leave -1 for no change</param>
+		/// <param name="right">Margin from the Right. Leave -1 for no change</param>
+		/// <param name="left">Margin from the Left. Leave -1 for no change</param>
+		public static void SetMargin(this DocX document, float top, float bottom, float right, float left)
+		{
+			XNamespace ab = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+			var tempElement = document.PageLayout.Xml.Descendants(ab + "pgMar");
+			var e = tempElement.GetEnumerator();
+			foreach (var item in tempElement)
+			{
+				if (left != -1) item.SetAttributeValue(ab + "left", (1440 * left) / 1);
+				if (right != -1) item.SetAttributeValue(ab + "right", (1440 * right) / 1);
+				if (top != -1) item.SetAttributeValue(ab + "top", (1440 * top) / 1);
+				if (bottom != -1) item.SetAttributeValue(ab + "bottom", (1440 * bottom) / 1);
+			}
+		}
+
+	}
+
+	internal static class HelperFunctions
+	{
+
+		public const string DOCUMENT_DOCUMENTTYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml";
+
+		public const string TEMPLATE_DOCUMENTTYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.template.main+xml";
+
+		public static bool IsNullOrWhiteSpace(this string value)
+		{
+			if (value == null) return true;
+			return string.IsNullOrEmpty(value.Trim());
+		}
+
+		/// <summary>Checks whether 'toCheck' has all children that 'desired' has and values of 'val' attributes are the same</summary>
+		/// <param name="desired">TODO: comment</param>
+		/// <param name="toCheck">TODO: comment</param>
+		/// <param name="fo">Matching options whether check if desired attributes are inder a, or a has exactly and only these attributes as b has.</param>
+		/// <returns></returns>
+		internal static bool ContainsEveryChildOf(XElement desired, XElement toCheck, MatchFormattingOptions fo)
+		{
+			foreach (XElement e in desired.Elements())
+			{
+				// If a formatting property has the same name and 'val' attribute's value, its considered to be equivalent
+				if (!toCheck.Elements(e.Name).Where(bElement => bElement.GetAttribute(XName.Get("val", DocX.w.NamespaceName)) == e.GetAttribute(XName.Get("val", DocX.w.NamespaceName))).Any()) return false;
+			}
+			// If the formatting has to be exact, no additionaly formatting must exist
+			if (fo == MatchFormattingOptions.ExactMatch) return desired.Elements().Count() == toCheck.Elements().Count();
+			return true;
+		}
+
+		internal static void CreateRelsPackagePart(DocX Document, Uri uri)
+		{
+			PackagePart pp = Document.package.CreatePart(uri, "application/vnd.openxmlformats-package.relationships+xml", CompressionOption.Maximum);
+			using (TextWriter tw = new StreamWriter(new PackagePartStream(pp.GetStream())))
+			{
+				XDocument d = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), new XElement(XName.Get("Relationships", DocX.rel.NamespaceName)));
+				var root = d.Root;
+				d.Save(tw);
+			}
+		}
+
+		internal static int GetSize(XElement Xml)
+		{
+			switch (Xml.Name.LocalName)
+			{
+				case "tab":
+				case "br":
+					return 1;
+				case "t":
+					goto case "delText";
+				case "delText":
+					return Xml.Value.Length;
+				case "tr":
+				case "tc":
+					goto case "br";
+				default:
+					return 0;
+			}
+		}
+
+		internal static string GetText(XElement e)
+		{
+			StringBuilder sb = new StringBuilder();
+			GetTextRecursive(e, ref sb);
+			return sb.ToString();
+		}
+
+		internal static void GetTextRecursive(XElement Xml, ref StringBuilder sb)
+		{
+			sb.Append(ToText(Xml));
+			if (Xml.HasElements) foreach (XElement e in Xml.Elements()) GetTextRecursive(e, ref sb);
+		}
+
+		internal static List<FormattedText> GetFormattedText(XElement e)
+		{
+			List<FormattedText> alist = new List<FormattedText>();
+			GetFormattedTextRecursive(e, ref alist);
+			return alist;
+		}
+
+		internal static void GetFormattedTextRecursive(XElement Xml, ref List<FormattedText> alist)
+		{
+			FormattedText
+				ft = ToFormattedText(Xml),
+				last = null;
+			if (ft != null)
+			{
+				if (alist.Count() > 0) last = alist.Last();
+				if (last != null && last.CompareTo(ft) == 0)
+				{
+					// Update text of last entry
+					last.text += ft.text;
+				}
+				else
+				{
+					if (last != null) ft.index = last.index + last.text.Length;
+					alist.Add(ft);
+				}
+			}
+			if (Xml.HasElements) foreach (XElement e in Xml.Elements()) GetFormattedTextRecursive(e, ref alist);
+		}
+
+		internal static FormattedText ToFormattedText(XElement e)
+		{
+			// The text representation of e
+			string text = ToText(e);
+			if (text == string.Empty) return null;
+			// e is a w:t element, it must exist inside a w:r element or a w:tabs, lets climb until we find it
+			while (!e.Name.Equals(XName.Get("r", DocX.w.NamespaceName)) && !e.Name.Equals(XName.Get("tabs", DocX.w.NamespaceName))) e = e.Parent;
+			// e is a w:r element, lets find the rPr element
+			XElement rPr = e.Element(XName.Get("rPr", DocX.w.NamespaceName));
+			FormattedText ft = new FormattedText();
+			ft.text = text;
+			ft.index = 0;
+			ft.formatting = null;
+			// Return text with formatting
+			if (rPr != null) ft.formatting = Formatting.Parse(rPr);
+			return ft;
+		}
+
+		internal static string ToText(XElement e)
+		{
+			switch (e.Name.LocalName)
+			{
+				case "tab":
+					return "\t";
+				case "br":
+					return "\n";
+				case "t":
+					goto case "delText";
+				case "delText":
+					if (e.Parent != null && e.Parent.Name.LocalName == "r")
+					{
+						XElement run = e.Parent;
+						var rPr = run.Elements().FirstOrDefault(a => a.Name.LocalName == "rPr");
+						if (rPr != null)
+						{
+							var caps = rPr.Elements().FirstOrDefault(a => a.Name.LocalName == "caps");
+							if (caps != null) return e.Value.ToUpper();
+						}
+					}
+					return e.Value;
+				case "tr":
+					goto case "br";
+				case "tc":
+					goto case "tab";
+				default:
+					return string.Empty;
+			}
+		}
+
+		internal static XElement CloneElement(XElement element)
+		{
+			return new XElement(element.Name, element.Attributes(), element.Nodes().Select(
+				n =>
+				{
+					XElement e = n as XElement;
+					if (e != null) return CloneElement(e);
+					return n;
+				}
+			));
+		}
+
+		internal static PackagePart CreateOrGetSettingsPart(Package package)
+		{
+			PackagePart settingsPart;
+			Uri settingsUri = new Uri("/word/settings.xml", UriKind.Relative);
+			if (!package.PartExists(settingsUri))
+			{
+				settingsPart = package.CreatePart(settingsUri, "application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml", CompressionOption.Maximum);
+				PackagePart mainDocumentPart = package.GetParts().Single(p => p.ContentType.Equals(DOCUMENT_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase) || p.ContentType.Equals(TEMPLATE_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase));
+				mainDocumentPart.CreateRelationship(settingsUri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings");
+				XDocument settings = XDocument.Parse(@"<?xml version='1.0' encoding='utf-8' standalone='yes'?><w:settings xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:r='http://schemas.openxmlformats.org/officeDocument/2006/relationships' xmlns:m='http://schemas.openxmlformats.org/officeDocument/2006/math' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:w10='urn:schemas-microsoft-com:office:word' xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main' xmlns:sl='http://schemas.openxmlformats.org/schemaLibrary/2006/main'><w:zoom w:percent='100' /><w:defaultTabStop w:val='720' /><w:characterSpacingControl w:val='doNotCompress' /><w:compat /><w:rsids><w:rsidRoot w:val='00217F62' /><w:rsid w:val='001915A3' /><w:rsid w:val='00217F62' /><w:rsid w:val='00A906D8' /><w:rsid w:val='00AB5A74' /><w:rsid w:val='00F071AE' /></w:rsids><m:mathPr><m:mathFont m:val='Cambria Math' /><m:brkBin m:val='before' /><m:brkBinSub m:val='--' /><m:smallFrac m:val='off' /><m:dispDef /><m:lMargin m:val='0' /><m:rMargin m:val='0' /><m:defJc m:val='centerGroup' /><m:wrapIndent m:val='1440' /><m:intLim m:val='subSup' /><m:naryLim m:val='undOvr' /></m:mathPr><w:themeFontLang w:val='en-IE' w:bidi='ar-SA' /><w:clrSchemeMapping w:bg1='light1' w:t1='dark1' w:bg2='light2' w:t2='dark2' w:accent1='accent1' w:accent2='accent2' w:accent3='accent3' w:accent4='accent4' w:accent5='accent5' w:accent6='accent6' w:hyperlink='hyperlink' w:followedHyperlink='followedHyperlink' /><w:shapeDefaults><o:shapedefaults v:ext='edit' spidmax='2050' /><o:shapelayout v:ext='edit'><o:idmap v:ext='edit' data='1' /></o:shapelayout></w:shapeDefaults><w:decimalSymbol w:val='.' /><w:listSeparator w:val=',' /></w:settings>");
+				XElement themeFontLang = settings.Root.Element(XName.Get("themeFontLang", DocX.w.NamespaceName));
+				themeFontLang.SetAttributeValue(XName.Get("val", DocX.w.NamespaceName), CultureInfo.CurrentCulture);
+				// Save the settings document
+				using (TextWriter tw = new StreamWriter(new PackagePartStream(settingsPart.GetStream()))) settings.Save(tw);
+			}
+			else settingsPart = package.GetPart(settingsUri);
+			return settingsPart;
+		}
+
+		internal static void CreateCustomPropertiesPart(DocX document)
+		{
+			PackagePart customPropertiesPart = document.package.CreatePart(new Uri("/docProps/custom.xml", UriKind.Relative), "application/vnd.openxmlformats-officedocument.custom-properties+xml", CompressionOption.Maximum);
+			XDocument customPropDoc = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), new XElement(XName.Get("Properties", DocX.customPropertiesSchema.NamespaceName), new XAttribute(XNamespace.Xmlns + "vt", DocX.customVTypesSchema)));
+			using (TextWriter tw = new StreamWriter(new PackagePartStream(customPropertiesPart.GetStream(FileMode.Create, FileAccess.Write)))) customPropDoc.Save(tw, SaveOptions.None);
+			document.package.CreateRelationship(customPropertiesPart.Uri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties");
+		}
+
+		internal static XDocument DecompressXMLResource(string manifest_resource_name)
+		{
+			// XDocument to load the compressed Xml resource into
+			XDocument document;
+			// Get a reference to the executing assembly
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			// Open a Stream to the embedded resource
+			Stream stream = assembly.GetManifestResourceStream(manifest_resource_name);
+			// Decompress the embedded resource
+			// Load this decompressed embedded resource into an XDocument using a TextReader
+			using (GZipStream zip = new GZipStream(stream, CompressionMode.Decompress))
+			using (TextReader sr = new StreamReader(zip))
+			{
+				document = XDocument.Load(sr);
+			}
+			// Return the decompressed Xml as an XDocument
+			return document;
+		}
+
+		/// <summary>If this document does not contain a /word/numbering.xml add the default one generated by Microsoft Word when the default bullet, numbered and multilevel lists are added to a blank document</summary>
+		/// <param name="package">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
+		internal static XDocument AddDefaultNumberingXml(Package package)
+		{
+			XDocument numberingDoc;
+			// Create the main document part for this package
+			PackagePart wordNumbering = package.CreatePart(new Uri("/word/numbering.xml", UriKind.Relative), "application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml", CompressionOption.Maximum);
+			numberingDoc = DecompressXMLResource("Novacode.Resources.numbering.xml.gz");
+			// Save /word/numbering.xml
+			using (TextWriter tw = new StreamWriter(new PackagePartStream(wordNumbering.GetStream(FileMode.Create, FileAccess.Write)))) numberingDoc.Save(tw, SaveOptions.None);
+			PackagePart mainDocumentPart = package.GetParts().Single(p => p.ContentType.Equals(DOCUMENT_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase) || p.ContentType.Equals(TEMPLATE_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase));
+			mainDocumentPart.CreateRelationship(wordNumbering.Uri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering");
+			return numberingDoc;
+		}
+
+		/// <summary>If this document does not contain a /word/styles.xml add the default one generated by Microsoft Word</summary>
+		/// <param name="package">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
+		internal static XDocument AddDefaultStylesXml(Package package)
+		{
+			XDocument stylesDoc;
+			// Create the main document part for this package
+			PackagePart word_styles = package.CreatePart(new Uri("/word/styles.xml", UriKind.Relative), "application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml", CompressionOption.Maximum);
+			stylesDoc = DecompressXMLResource("Novacode.Resources.default_styles.xml.gz");
+			XElement lang = stylesDoc.Root.Element(XName.Get("docDefaults", DocX.w.NamespaceName)).Element(XName.Get("rPrDefault", DocX.w.NamespaceName)).Element(XName.Get("rPr", DocX.w.NamespaceName)).Element(XName.Get("lang", DocX.w.NamespaceName));
+			lang.SetAttributeValue(XName.Get("val", DocX.w.NamespaceName), CultureInfo.CurrentCulture);
+			// Save /word/styles.xml
+			using (TextWriter tw = new StreamWriter(new PackagePartStream(word_styles.GetStream(FileMode.Create, FileAccess.Write)))) stylesDoc.Save(tw, SaveOptions.None);
+			PackagePart mainDocumentPart = package.GetParts().Where(p => p.ContentType.Equals(DOCUMENT_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase) || p.ContentType.Equals(TEMPLATE_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase)).Single();
+			mainDocumentPart.CreateRelationship(word_styles.Uri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles");
+			return stylesDoc;
+		}
+
+		internal static XElement CreateEdit(EditType t, DateTime edit_time, object content)
+		{
+			if (t == EditType.del)
+			{
+				foreach (object o in (IEnumerable<XElement>)content)
+				{
+					if (o is XElement)
+					{
+						XElement e = (o as XElement);
+						IEnumerable<XElement> ts = e.DescendantsAndSelf(XName.Get("t", DocX.w.NamespaceName));
+						for (int i = 0; i < ts.Count(); i++)
+						{
+							XElement text = ts.ElementAt(i);
+							text.ReplaceWith(new XElement(DocX.w + "delText", text.Attributes(), text.Value));
+						}
+					}
+				}
+			}
+			return (new XElement(DocX.w + t.ToString(), new XAttribute(DocX.w + "id", 0), new XAttribute(DocX.w + "author", WindowsIdentity.GetCurrent().Name), new XAttribute(DocX.w + "date", edit_time), content));
+		}
+
+		internal static XElement CreateTable(int rowCount, int columnCount)
+		{
+			int[] columnWidths = new int[columnCount];
+			for (int i = 0; i < columnCount; i++) columnWidths[i] = 2310;
+			return CreateTable(rowCount, columnWidths);
+		}
+
+		internal static XElement CreateTable(int rowCount, int[] columnWidths)
+		{
+			XElement newTable = new XElement(XName.Get("tbl", DocX.w.NamespaceName), new XElement(XName.Get("tblPr", DocX.w.NamespaceName), new XElement(XName.Get("tblStyle", DocX.w.NamespaceName), new XAttribute(XName.Get("val", DocX.w.NamespaceName), "TableGrid")), new XElement(XName.Get("tblW", DocX.w.NamespaceName), new XAttribute(XName.Get("w", DocX.w.NamespaceName), "5000"), new XAttribute(XName.Get("type", DocX.w.NamespaceName), "auto")), new XElement(XName.Get("tblLook", DocX.w.NamespaceName), new XAttribute(XName.Get("val", DocX.w.NamespaceName), "04A0"))));
+			for (int i = 0; i < rowCount; i++)
+			{
+				XElement row = new XElement(XName.Get("tr", DocX.w.NamespaceName));
+				for (int j = 0; j < columnWidths.Length; j++)
+				{
+					XElement cell = CreateTableCell();
+					row.Add(cell);
+				}
+				newTable.Add(row);
+			}
+			return newTable;
+		}
+
+		/// <summary>Create and return a cell of a table</summary>
+		internal static XElement CreateTableCell(double w = 2310)
+		{
+			return new XElement(XName.Get("tc", DocX.w.NamespaceName), new XElement(XName.Get("tcPr", DocX.w.NamespaceName), new XElement(XName.Get("tcW", DocX.w.NamespaceName), new XAttribute(XName.Get("w", DocX.w.NamespaceName), w), new XAttribute(XName.Get("type", DocX.w.NamespaceName), "dxa"))), new XElement(XName.Get("p", DocX.w.NamespaceName), new XElement(XName.Get("pPr", DocX.w.NamespaceName))));
+		}
+
+		internal static List CreateItemInList(List list, string listText, int level = 0, ListItemType listType = ListItemType.Numbered, int? startNumber = null, bool trackChanges = false, bool continueNumbering = false)
+		{
+			if (list.NumId == 0) list.CreateNewNumberingNumId(level, listType, startNumber, continueNumbering);
+			// I see no reason why you shouldn't be able to insert an empty element. It simplifies tasks such as populating an item from html.
+			if (listText != null)
+			{
+				var newParagraphSection = new XElement(XName.Get("p", DocX.w.NamespaceName), new XElement(XName.Get("pPr", DocX.w.NamespaceName), new XElement(XName.Get("numPr", DocX.w.NamespaceName), new XElement(XName.Get("ilvl", DocX.w.NamespaceName), new XAttribute(DocX.w + "val", level)), new XElement(XName.Get("numId", DocX.w.NamespaceName), new XAttribute(DocX.w + "val", list.NumId)))), new XElement(XName.Get("r", DocX.w.NamespaceName), new XElement(XName.Get("t", DocX.w.NamespaceName), listText)));
+				if (trackChanges) newParagraphSection = CreateEdit(EditType.ins, DateTime.Now, newParagraphSection);
+				if (startNumber == null)
+				{
+					list.AddItem(new Paragraph(list.Document, newParagraphSection, 0, ContainerType.Paragraph));
+				}
+				else
+				{
+					list.AddItemWithStartValue(new Paragraph(list.Document, newParagraphSection, 0, ContainerType.Paragraph), (int)startNumber);
+				}
+			}
+			return list;
+		}
+
+		internal static void RenumberIDs(DocX document)
+		{
+			IEnumerable<XAttribute> trackerIDs = (from d in document.mainDoc.Descendants() where d.Name.LocalName == "ins" || d.Name.LocalName == "del" select d.Attribute(XName.Get("id", "http://schemas.openxmlformats.org/wordprocessingml/2006/main")));
+			for (int i = 0; i < trackerIDs.Count(); i++) trackerIDs.ElementAt(i).Value = i.ToString();
+		}
+
+		internal static Paragraph GetFirstParagraphEffectedByInsert(DocX document, int index)
+		{
+			// This document contains no Paragraphs and insertion is at index 0
+			if (document.paragraphLookup.Keys.Count() == 0 && index == 0) return null;
+			foreach (int paragraphEndIndex in document.paragraphLookup.Keys) if (paragraphEndIndex >= index) return document.paragraphLookup[paragraphEndIndex];
+			throw new ArgumentOutOfRangeException();
+		}
+
+		internal static List<XElement> FormatInput(string text, XElement rPr)
+		{
+			List<XElement> newRuns = new List<XElement>();
+			XElement
+				tabRun = new XElement(DocX.w + "tab"),
+				breakRun = new XElement(DocX.w + "br");
+			StringBuilder sb = new StringBuilder();
+			// I dont wanna get an exception if text == null, so just return empty list
+			if (string.IsNullOrEmpty(text)) return newRuns;
+			char lastChar = '\0';
+			foreach (char c in text)
+			{
+				switch (c)
+				{
+					case '\t':
+						if (sb.Length > 0)
+						{
+							XElement t = new XElement(DocX.w + "t", sb.ToString());
+							Text.PreserveSpace(t);
+							newRuns.Add(new XElement(DocX.w + "r", rPr, t));
+							sb = new StringBuilder();
+						}
+						newRuns.Add(new XElement(DocX.w + "r", rPr, tabRun));
+						break;
+					case '\r':
+						if (sb.Length > 0)
+						{
+							XElement t = new XElement(DocX.w + "t", sb.ToString());
+							Text.PreserveSpace(t);
+							newRuns.Add(new XElement(DocX.w + "r", rPr, t));
+							sb = new StringBuilder();
+						}
+						newRuns.Add(new XElement(DocX.w + "r", rPr, breakRun));
+						break;
+					case '\n':
+						if (lastChar == '\r') break;
+						if (sb.Length > 0)
+						{
+							XElement t = new XElement(DocX.w + "t", sb.ToString());
+							Text.PreserveSpace(t);
+							newRuns.Add(new XElement(DocX.w + "r", rPr, t));
+							sb = new StringBuilder();
+						}
+						newRuns.Add(new XElement(DocX.w + "r", rPr, breakRun));
+						break;
+					default:
+						sb.Append(c);
+						break;
+				}
+				lastChar = c;
+			}
+			if (sb.Length > 0)
+			{
+				XElement t = new XElement(DocX.w + "t", sb.ToString());
+				Text.PreserveSpace(t);
+				newRuns.Add(new XElement(DocX.w + "r", rPr, t));
+			}
+			return newRuns;
+		}
+
+		internal static XElement[] SplitParagraph(Paragraph p, int index)
+		{
+			// In this case edit dosent really matter, you have a choice
+			Run r = p.GetFirstRunEffectedByEdit(index, EditType.ins);
+			XElement[] split;
+			XElement before, after;
+			if (r.Xml.Parent.Name.LocalName == "ins")
+			{
+				split = p.SplitEdit(r.Xml.Parent, index, EditType.ins);
+				before = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.Parent.ElementsBeforeSelf(), split[0]);
+				after = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.Parent.ElementsAfterSelf(), split[1]);
+			}
+			else if (r.Xml.Parent.Name.LocalName == "del")
+			{
+				split = p.SplitEdit(r.Xml.Parent, index, EditType.del);
+				before = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.Parent.ElementsBeforeSelf(), split[0]);
+				after = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.Parent.ElementsAfterSelf(), split[1]);
+			}
+			else
+			{
+				split = Run.SplitRun(r, index);
+				before = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.ElementsBeforeSelf(), split[0]);
+				after = new XElement(p.Xml.Name, p.Xml.Attributes(), split[1], r.Xml.ElementsAfterSelf());
+			}
+			if (before.Elements().Count() == 0) before = null;
+			if (after.Elements().Count() == 0) after = null;
+			return new XElement[] { before, after };
+		}
+
+		/// <summary>Bug found and fixed by trnilse. To see the change, please compare this release to the previous release using TFS compare</summary>
+		/// <param name="streamOne"></param>
+		/// <param name="streamTwo"></param>
+		/// <returns></returns>
+		internal static bool IsSameFile(Stream streamOne, Stream streamTwo)
+		{
+			int file1byte,
+				file2byte;
+			// Return false to indicate files are different
+			if (streamOne.Length != streamTwo.Length) return false;
+			// Read and compare a byte from each file until either a non-matching set of bytes is found or until the end of file1 is reached
+			do
+			{
+				// Read one byte from each file
+				file1byte = streamOne.ReadByte();
+				file2byte = streamTwo.ReadByte();
+			}
+			while ((file1byte == file2byte) && (file1byte != -1));
+			// Return the success of the comparison. "file1byte" is equal to "file2byte" at this point only if the files are the same.
+			streamOne.Position = 0;
+			streamTwo.Position = 0;
+			return ((file1byte - file2byte) == 0);
+		}
+
+		internal static UnderlineStyle GetUnderlineStyle(string underlineStyle)
+		{
+			switch (underlineStyle)
+			{
+				case "single":
+					return UnderlineStyle.singleLine;
+				case "double":
+					return UnderlineStyle.doubleLine;
+				case "thick":
+					return UnderlineStyle.thick;
+				case "dotted":
+					return UnderlineStyle.dotted;
+				case "dottedHeavy":
+					return UnderlineStyle.dottedHeavy;
+				case "dash":
+					return UnderlineStyle.dash;
+				case "dashedHeavy":
+					return UnderlineStyle.dashedHeavy;
+				case "dashLong":
+					return UnderlineStyle.dashLong;
+				case "dashLongHeavy":
+					return UnderlineStyle.dashLongHeavy;
+				case "dotDash":
+					return UnderlineStyle.dotDash;
+				case "dashDotHeavy":
+					return UnderlineStyle.dashDotHeavy;
+				case "dotDotDash":
+					return UnderlineStyle.dotDotDash;
+				case "dashDotDotHeavy":
+					return UnderlineStyle.dashDotDotHeavy;
+				case "wave":
+					return UnderlineStyle.wave;
+				case "wavyHeavy":
+					return UnderlineStyle.wavyHeavy;
+				case "wavyDouble":
+					return UnderlineStyle.wavyDouble;
+				case "words":
+					return UnderlineStyle.words;
+				default:
+					return UnderlineStyle.none;
+			}
+		}
+
+	}
+
+	internal class Text : DocXElement
+	{
+
+		private int startIndex;
+
+		private int endIndex;
+
+		private string text;
+
+		/// <summary>Gets the start index of this Text (text length before this text)</summary>
+		public int StartIndex
+		{
+			get
+			{
+				return startIndex;
+			}
+		}
+
+		/// <summary>Gets the end index of this Text (text length before this text + this texts length)</summary>
+		public int EndIndex
+		{
+			get
+			{
+				return endIndex;
+			}
+		}
+
+		/// <summary>The text value of this text element</summary>
+		public string Value
+		{
+			get
+			{
+				return text;
+			}
+		}
+
+		internal Text(DocX document, XElement xml, int startIndex) : base(document, xml)
+		{
+			this.startIndex = startIndex;
+			switch (Xml.Name.LocalName)
+			{
+				case "t":
+					goto case "delText";
+				case "delText":
+					endIndex = startIndex + xml.Value.Length;
+					text = xml.Value;
+					break;
+				case "br":
+					text = "\n";
+					endIndex = startIndex + 1;
+					break;
+				case "tab":
+					text = "\t";
+					endIndex = startIndex + 1;
+					break;
+			}
+		}
+
+		internal static XElement[] SplitText(Text t, int index)
+		{
+			if (index < t.startIndex || index > t.EndIndex) throw new ArgumentOutOfRangeException(nameof(index));
+			XElement splitLeft = null, splitRight = null;
+			if (t.Xml.Name.LocalName == "t" || t.Xml.Name.LocalName == "delText")
+			{
+				// The origional text element, now containing only the text before the index point
+				splitLeft = new XElement(t.Xml.Name, t.Xml.Attributes(), t.Xml.Value.Substring(0, index - t.startIndex));
+				if (splitLeft.Value.Length == 0) splitLeft = null;
+				else PreserveSpace(splitLeft);
+				// The origional text element, now containing only the text after the index point
+				splitRight = new XElement(t.Xml.Name, t.Xml.Attributes(), t.Xml.Value.Substring(index - t.startIndex, t.Xml.Value.Length - (index - t.startIndex)));
+				if (splitRight.Value.Length == 0) splitRight = null;
+				else PreserveSpace(splitRight);
+			}
+			else
+			{
+				if (index == t.EndIndex) splitLeft = t.Xml;
+				else splitRight = t.Xml;
+			}
+			return (new XElement[] { splitLeft, splitRight });
+		}
+
+		/// <summary>If a text element or delText element, starts or ends with a space, it must have the attribute space, otherwise it must not have it</summary>
+		/// <param name="e">The (t or delText) element check</param>
+		public static void PreserveSpace(XElement e)
+		{
+			// PreserveSpace should only be used on (t or delText) elements
+			if (!e.Name.Equals(DocX.w + "t") && !e.Name.Equals(DocX.w + "delText")) throw new ArgumentException("SplitText can only split elements of type t or delText", "e");
+			// Check if this w:t contains a space atribute
+			XAttribute space = e.Attributes().Where(a => a.Name.Equals(XNamespace.Xml + "space")).SingleOrDefault();
+			// This w:t's text begins or ends with whitespace
+			if (e.Value.StartsWith(" ") || e.Value.EndsWith(" "))
+			{
+				// If this w:t contains no space attribute, add one
+				if (space == null) e.Add(new XAttribute(XNamespace.Xml + "space", "preserve"));
+			}
+			// This w:t's text does not begin or end with a space
+			else
+			{
+				// If this w:r contains a space attribute, remove it
+				if (space != null) space.Remove();
+			}
+		}
+
+	}
+
+	internal static class XElementHelpers
+	{
+
+		/// <summary>Get value from XElement and convert it to enum</summary>
+		/// <typeparam name="T">Enum type</typeparam>
+		internal static T GetValueToEnum<T>(XElement element)
+		{
+			if (element == null) throw new ArgumentNullException(nameof(element));
+			string value = element.Attribute(XName.Get("val")).Value;
+			foreach (T e in Enum.GetValues(typeof(T)))
+			{
+				FieldInfo fi = typeof(T).GetField(e.ToString());
+				if (fi.GetCustomAttributes(typeof(XmlNameAttribute), false).Count() == 0) throw new Exception(string.Format("Attribute 'XmlNameAttribute' is not assigned to {0} fields!", typeof(T).Name));
+				XmlNameAttribute a = (XmlNameAttribute)fi.GetCustomAttributes(typeof(XmlNameAttribute), false).First();
+				if (a.XmlName == value) return e;
+			}
+			throw new ArgumentException("Invalid element value!");
+		}
+
+		/// <summary>Convert value to xml string and set it into XElement</summary>
+		/// <typeparam name="T">Enum type</typeparam> 
+		internal static void SetValueFromEnum<T>(XElement element, T value)
+		{
+			if (element == null) throw new ArgumentNullException(nameof(element));
+			element.Attribute(XName.Get("val")).Value = GetXmlNameFromEnum<T>(value);
+		}
+
+		/// <summary>Return xml string for this value</summary>
+		/// <typeparam name="T">Enum type</typeparam>
+		internal static string GetXmlNameFromEnum<T>(T value)
+		{
+			if (value == null) throw new ArgumentNullException(nameof(value));
+			FieldInfo fi = typeof(T).GetField(value.ToString());
+			if (fi.GetCustomAttributes(typeof(XmlNameAttribute), false).Count() == 0) throw new Exception(string.Format("Attribute 'XmlNameAttribute' is not assigned to {0} fields!", typeof(T).Name));
+			XmlNameAttribute a = (XmlNameAttribute)fi.GetCustomAttributes(typeof(XmlNameAttribute), false).First();
+			return a.XmlName;
+		}
+
+	}
+
+	/// <summary>This attribute applied to enum's fields for definition their's real xml names in DocX file</summary>
+	/// <example>
+	///		public enum MyEnum
+	///		{
+	///			[XmlName("one")] // This means, that xml element has 'val="one"'
+	///			ValueOne,
+	///			[XmlName("two")] // This means, that xml element has 'val="two"'
+	///			ValueTwo
+	///		}
+	/// </example>
+	[AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
+	internal sealed class XmlNameAttribute : Attribute
+	{
+
+		/// <summary>Real xml name</summary>
+		public string XmlName
+		{
+			get;
+			private set;
+		}
+
+		public XmlNameAttribute(string xmlName)
+		{
+			XmlName = xmlName;
+		}
+
+	}
+
+	#endregion
+
+	#region Public
+
 	/// <summary>Axis base class</summary>
 	public abstract class Axis
 	{
@@ -39,12 +2510,11 @@ namespace Novacode
 		{
 			get
 			{
-				return Xml.Element(XName.Get("delete", DocX.c.NamespaceName)).Attribute(XName.Get("val")).Value == "0";
+				return "0".Equals(Xml.Element(XName.Get("delete", DocX.c.NamespaceName)).Attribute(XName.Get("val")).Value);
 			}
 			set
 			{
-				if (value) Xml.Element(XName.Get("delete", DocX.c.NamespaceName)).Attribute(XName.Get("val")).Value = "0";
-				else Xml.Element(XName.Get("delete", DocX.c.NamespaceName)).Attribute(XName.Get("val")).Value = "1";
+				Xml.Element(XName.Get("delete", DocX.c.NamespaceName)).Attribute(XName.Get("val")).Value = value ? "0" : "1";
 			}
 		}
 
@@ -60,6 +2530,8 @@ namespace Novacode
 			Xml = xml;
 		}
 
+		/// <summary>Конструктор</summary>
+		/// <param name="id">TODO: comment</param>
 		public Axis(string id)
 		{
 		}
@@ -74,6 +2546,8 @@ namespace Novacode
 		{
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="id">TODO: comment</param>
 		public CategoryAxis(string id) : base(id)
 		{
 			Xml = XElement.Parse(string.Format(@"<c:catAx xmlns:c=""http://schemas.openxmlformats.org/drawingml/2006/chart""><c:axId val=""{0}""/><c:scaling><c:orientation val=""minMax""/></c:scaling><c:delete val=""0""/><c:axPos val=""b""/><c:majorTickMark val=""out""/><c:minorTickMark val=""none""/><c:tickLblPos val=""nextTo""/><c:crossAx val=""154227840""/><c:crosses val=""autoZero""/><c:auto val=""1""/><c:lblAlgn val=""ctr""/><c:lblOffset val=""100""/><c:noMultiLvlLbl val=""0""/></c:catAx>", id));
@@ -89,6 +2563,8 @@ namespace Novacode
 		{
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="id">TODO: comment</param>
 		public ValueAxis(string id) : base(id)
 		{
 			Xml = XElement.Parse(string.Format(@"<c:valAx xmlns:c=""http://schemas.openxmlformats.org/drawingml/2006/chart""><c:axId val=""{0}""/><c:scaling><c:orientation val=""minMax""/></c:scaling><c:delete val=""0""/><c:axPos val=""l""/><c:numFmt sourceLinked=""0"" formatCode=""General""/><c:majorGridlines/><c:majorTickMark val=""out""/><c:minorTickMark val=""none""/><c:tickLblPos val=""nextTo""/><c:crossAx val=""148921728""/><c:crosses val=""autoZero""/><c:crossBetween val=""between""/></c:valAx>", id));
@@ -96,7 +2572,7 @@ namespace Novacode
 
 	}
 
-	/// <summary>This element contains the 2-D bar or column series on this chart. 21.2.2.16 barChart (Bar Charts)</summary>
+	/// <summary>This element contains the 2-D bar or column series on this chart. 21.2.2.16 barChart (Bar Charts).</summary>
 	public class BarChart : Chart
 	{
 
@@ -140,6 +2616,8 @@ namespace Novacode
 			}
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <returns>TODO: comment</returns>
 		protected override XElement CreateChartXml()
 		{
 			return XElement.Parse(@"<c:barChart xmlns:c=""http://schemas.openxmlformats.org/drawingml/2006/chart""><c:barDir val=""col""/><c:grouping val=""clustered""/><c:gapWidth val=""150""/></c:barChart>");
@@ -147,46 +2625,18 @@ namespace Novacode
 
 	}
 
-	/// <summary>Specifies the possible directions for a bar chart. 21.2.3.3 ST_BarDir (Bar Direction)</summary>
-	public enum BarDirection
-	{
-
-		[XmlName("col")]
-		Column,
-
-		[XmlName("bar")]
-		Bar
-
-	}
-
-	/// <summary>Specifies the possible groupings for a bar chart. 21.2.3.4 ST_BarGrouping (Bar Grouping)</summary>
-	public enum BarGrouping
-	{
-
-		[XmlName("clustered")]
-		Clustered,
-
-		[XmlName("percentStacked")]
-		PercentStacked,
-
-		[XmlName("stacked")]
-		Stacked,
-
-		[XmlName("standard")]
-		Standard
-
-	}
-
 	/// <summary>Represents every Chart in this document</summary>
 	public abstract class Chart
 	{
 
+		/// <summary>TODO: comment</summary>
 		protected XElement ChartXml
 		{
 			get;
 			private set;
 		}
 
+		/// <summary>TODO: comment</summary>
 		protected XElement ChartRootXml
 		{
 			get;
@@ -387,7 +2837,7 @@ namespace Novacode
 			private set;
 		}
 
-		/// <summary></summary>
+		/// <summary>TODO: comment</summary>
 		public Color Color
 		{
 			get
@@ -412,6 +2862,8 @@ namespace Novacode
 			numCache = xml.Element(XName.Get("val", DocX.c.NamespaceName)).Element(XName.Get("numRef", DocX.c.NamespaceName)).Element(XName.Get("numCache", DocX.c.NamespaceName));
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="name">TODO: comment</param>
 		public Series(string name)
 		{
 			strCache = new XElement(XName.Get("strCache", DocX.c.NamespaceName));
@@ -419,10 +2871,15 @@ namespace Novacode
 			Xml = new XElement(XName.Get("ser", DocX.c.NamespaceName), new XElement(XName.Get("tx", DocX.c.NamespaceName), new XElement(XName.Get("strRef", DocX.c.NamespaceName), new XElement(XName.Get("f", DocX.c.NamespaceName), ""), new XElement(XName.Get("strCache", DocX.c.NamespaceName), new XElement(XName.Get("pt", DocX.c.NamespaceName), new XAttribute(XName.Get("idx"), "0"), new XElement(XName.Get("v", DocX.c.NamespaceName), name))))), new XElement(XName.Get("invertIfNegative", DocX.c.NamespaceName), "0"), new XElement(XName.Get("cat", DocX.c.NamespaceName), new XElement(XName.Get("strRef", DocX.c.NamespaceName), new XElement(XName.Get("f", DocX.c.NamespaceName), ""), strCache)), new XElement(XName.Get("val", DocX.c.NamespaceName), new XElement(XName.Get("numRef", DocX.c.NamespaceName), new XElement(XName.Get("f", DocX.c.NamespaceName), ""), numCache)));
 		}
 
-		public void Bind(ICollection list, String categoryPropertyName, String valuePropertyName)
+		/// <summary>TODO: comment</summary>
+		/// <param name="list">TODO: comment</param>
+		/// <param name="categoryPropertyName">TODO: comment</param>
+		/// <param name="valuePropertyName">TODO: comment</param>
+		public void Bind(ICollection list, string categoryPropertyName, string valuePropertyName)
 		{
-			XElement ptCount = new XElement(XName.Get("ptCount", DocX.c.NamespaceName), new XAttribute(XName.Get("val"), list.Count));
-			XElement formatCode = new XElement(XName.Get("formatCode", DocX.c.NamespaceName), "General");
+			XElement
+				ptCount = new XElement(XName.Get("ptCount", DocX.c.NamespaceName), new XAttribute(XName.Get("val"), list.Count)),
+				formatCode = new XElement(XName.Get("formatCode", DocX.c.NamespaceName), "General");
 			strCache.RemoveAll();
 			numCache.RemoveAll();
 			strCache.Add(ptCount);
@@ -440,11 +2897,15 @@ namespace Novacode
 			}
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="categories">TODO: comment</param>
+		/// <param name="values">TODO: comment</param>
 		public void Bind(IList categories, IList values)
 		{
 			if (categories.Count != values.Count) throw new ArgumentException("Categories count must equal to Values count");
-			XElement ptCount = new XElement(XName.Get("ptCount", DocX.c.NamespaceName), new XAttribute(XName.Get("val"), categories.Count));
-			XElement formatCode = new XElement(XName.Get("formatCode", DocX.c.NamespaceName), "General");
+			XElement
+				ptCount = new XElement(XName.Get("ptCount", DocX.c.NamespaceName), new XAttribute(XName.Get("val"), categories.Count)),
+				formatCode = new XElement(XName.Get("formatCode", DocX.c.NamespaceName), "General");
 			strCache.RemoveAll();
 			numCache.RemoveAll();
 			strCache.Add(ptCount);
@@ -462,7 +2923,7 @@ namespace Novacode
 
 	}
 
-	/// <summary>Represents a chart legend. More: http://msdn.microsoft.com/ru-ru/library/cc845123.aspx</summary>
+	/// <summary>Represents a chart legend, more at http://msdn.microsoft.com/ru-ru/library/cc845123.aspx </summary>
 	public class ChartLegend
 	{
 
@@ -507,49 +2968,12 @@ namespace Novacode
 		/// <summary>ECMA-376, page 3840. 21.2.2.132 overlay (Overlay)</summary>
 		private string GetOverlayValue(bool overlay)
 		{
-			if (overlay) return "1";
-			return "0";
+			return overlay ? "1" : "0";
 		}
 
 	}
 
-	/// <summary>Specifies the possible positions for a legend. 21.2.3.24 ST_LegendPos (Legend Position)</summary>
-	public enum ChartLegendPosition
-	{
-
-		[XmlName("t")]
-		Top,
-
-		[XmlName("b")]
-		Bottom,
-
-		[XmlName("l")]
-		Left,
-
-		[XmlName("r")]
-		Right,
-
-		[XmlName("tr")]
-		TopRight
-
-	}
-
-	/// <summary>Specifies the possible ways to display blanks. 21.2.3.10 ST_DispBlanksAs (Display Blanks As)</summary>
-	public enum DisplayBlanksAs
-	{
-
-		[XmlName("gap")]
-		Gap,
-
-		[XmlName("span")]
-		Span,
-
-		[XmlName("zero")]
-		Zero
-
-	}
-
-	/// <summary>This element contains the 2-D line chart series. 21.2.2.97 lineChart (Line Charts)</summary>
+	/// <summary>This element contains the 2-D line chart series. 21.2.2.97 lineChart (Line Charts).</summary>
 	public class LineChart : Chart
 	{
 
@@ -566,6 +2990,8 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <returns></returns>
 		protected override XElement CreateChartXml()
 		{
 			return XElement.Parse(@"<c:lineChart xmlns:c=""http://schemas.openxmlformats.org/drawingml/2006/chart""><c:grouping val=""standard""/></c:lineChart>");
@@ -573,25 +2999,11 @@ namespace Novacode
 
 	}
 
-	/// <summary>Specifies the kind of grouping for a column, line, or area chart. 21.2.2.76 grouping (Grouping)</summary>
-	public enum Grouping
-	{
-
-		[XmlName("percentStacked")]
-		PercentStacked,
-
-		[XmlName("stacked")]
-		Stacked,
-
-		[XmlName("standard")]
-		Standard
-
-	}
-
-	/// <summary>This element contains the 2-D pie series for this chart. 21.2.2.141 pieChart (Pie Charts)</summary>
+	/// <summary>This element contains the 2-D pie series for this chart. 21.2.2.141 pieChart (Pie Charts).</summary>
 	public class PieChart : Chart
 	{
 
+		/// <summary>TODO: comment</summary>
 		public override bool IsAxisExist
 		{
 			get
@@ -600,6 +3012,7 @@ namespace Novacode
 			}
 		}
 
+		/// <summary>TODO: comment</summary>
 		public override short MaxSeriesCount
 		{
 			get
@@ -608,6 +3021,8 @@ namespace Novacode
 			}
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <returns>TODO: comment</returns>
 		protected override XElement CreateChartXml()
 		{
 			return XElement.Parse(@"<c:pieChart xmlns:c=""http://schemas.openxmlformats.org/drawingml/2006/chart""></c:pieChart>");
@@ -615,87 +3030,40 @@ namespace Novacode
 
 	}
 
-	internal static class XElementHelpers
-	{
-
-		/// <summary>Get value from XElement and convert it to enum</summary>
-		/// <typeparam name="T">Enum type</typeparam>
-		internal static T GetValueToEnum<T>(XElement element)
-		{
-			if (element == null) throw new ArgumentNullException(nameof(element));
-			string value = element.Attribute(XName.Get("val")).Value;
-			foreach (T e in Enum.GetValues(typeof(T)))
-			{
-				FieldInfo fi = typeof(T).GetField(e.ToString());
-				if (fi.GetCustomAttributes(typeof(XmlNameAttribute), false).Count() == 0) throw new Exception(string.Format("Attribute 'XmlNameAttribute' is not assigned to {0} fields!", typeof(T).Name));
-				XmlNameAttribute a = (XmlNameAttribute)fi.GetCustomAttributes(typeof(XmlNameAttribute), false).First();
-				if (a.XmlName == value) return e;
-			}
-			throw new ArgumentException("Invalid element value!");
-		}
-
-		/// <summary>Convert value to xml string and set it into XElement</summary>
-		/// <typeparam name="T">Enum type</typeparam> 
-		internal static void SetValueFromEnum<T>(XElement element, T value)
-		{
-			if (element == null) throw new ArgumentNullException(nameof(element));
-			element.Attribute(XName.Get("val")).Value = GetXmlNameFromEnum<T>(value);
-		}
-
-		/// <summary>Return xml string for this value</summary>
-		/// <typeparam name="T">Enum type</typeparam>
-		internal static string GetXmlNameFromEnum<T>(T value)
-		{
-			if (value == null) throw new ArgumentNullException(nameof(value));
-			FieldInfo fi = typeof(T).GetField(value.ToString());
-			if (fi.GetCustomAttributes(typeof(XmlNameAttribute), false).Count() == 0) throw new Exception(string.Format("Attribute 'XmlNameAttribute' is not assigned to {0} fields!", typeof(T).Name));
-			XmlNameAttribute a = (XmlNameAttribute)fi.GetCustomAttributes(typeof(XmlNameAttribute), false).First();
-			return a.XmlName;
-		}
-
-	}
-
-	/// <summary>This attribute applied to enum's fields for definition their's real xml names in DocX file</summary>
-	/// <example>
-	/// public enum MyEnum
-	/// {
-	///    [XmlName("one")] // This means, that xml element has 'val="one"'
-	///    ValueOne,
-	///    [XmlName("two")] // This means, that xml element has 'val="two"'
-	///    ValueTwo
-	/// }
-	/// </example>
-	[AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-	internal sealed class XmlNameAttribute : Attribute
-	{
-
-		/// <summary>Real xml name</summary>
-		public string XmlName
-		{
-			get;
-			private set;
-		}
-
-		public XmlNameAttribute(string xmlName)
-		{
-			XmlName = xmlName;
-		}
-
-	}
-
+	/// <summary>TODO: comment</summary>
 	public class Bookmark
 	{
-		public string Name { get; set; }
-		public Paragraph Paragraph { get; set; }
 
+		/// <summary>TODO: comment</summary>
+		public string Name
+		{
+			get;
+			set;
+		}
+
+		/// <summary>TODO: comment</summary>
+		public Paragraph Paragraph
+		{
+			get;
+			set;
+		}
+
+		/// <summary>TODO: comment</summary>
+		/// <param name="newText">TODO: comment</param>
 		public void SetText(string newText)
 		{
 			Paragraph.ReplaceAtBookmark(newText, Name);
 		}
+
 	}
 
+	/// <summary>TODO: comment</summary>
 	public class BookmarkCollection : List<Bookmark>
 	{
+
+		/// <summary>TODO: comment</summary>
+		/// <param name="name">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
 		public Bookmark this[string name]
 		{
 			get
@@ -703,142 +3071,151 @@ namespace Novacode
 				return this.FirstOrDefault(bookmark => string.Equals(bookmark.Name, name, StringComparison.CurrentCultureIgnoreCase));
 			}
 		}
+
 	}
 
-	/// <summary>
-	/// Represents a border of a table or table cell
-	/// Added by lckuiper @ 20101117
-	/// </summary>
+	/// <summary>Represents a border of a table or table cell. Added by lckuiper @ 20101117.</summary>
 	public class Border
 	{
-		public BorderStyle Tcbs { get; set; }
-		public BorderSize Size { get; set; }
-		public int Space { get; set; }
-		public Color Color { get; set; }
+
+		/// <summary>TODO: comment</summary>
+		public BorderStyle Tcbs
+		{
+			get;
+			set;
+		}
+
+		/// <summary>TODO: comment</summary>
+		public BorderSize Size
+		{
+			get;
+			set;
+		}
+
+		/// <summary>TODO: comment</summary>
+		public int Space
+		{
+			get;
+			set;
+		}
+
+		/// <summary>TODO: comment</summary>
+		public Color Color
+		{
+			get;
+			set;
+		}
+
+		/// <summary>TODO: comment</summary>
 		public Border()
 		{
-			this.Tcbs = BorderStyle.Tcbs_single;
-			this.Size = BorderSize.one;
-			this.Space = 0;
-			this.Color = Color.Black;
+			Tcbs = BorderStyle.Tcbs_single;
+			Size = BorderSize.one;
+			Space = 0;
+			Color = Color.Black;
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="tcbs">TODO: comment</param>
+		/// <param name="size">TODO: comment</param>
+		/// <param name="space">TODO: comment</param>
+		/// <param name="color">TODO: comment</param>
 		public Border(BorderStyle tcbs, BorderSize size, int space, Color color)
 		{
-			this.Tcbs = tcbs;
-			this.Size = size;
-			this.Space = space;
-			this.Color = color;
+			Tcbs = tcbs;
+			Size = size;
+			Space = space;
+			Color = color;
 		}
+
 	}
 
+	// TILL HERE +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	/// <summary>TODO: comment</summary>
 	public abstract class Container : DocXElement
 	{
 
+		/// <summary>TODO: comment</summary>
 		public virtual ReadOnlyCollection<Content> Contents
 		{
 			get
 			{
 				List<Content> contents = GetContents();
-
-
-
 				return contents.AsReadOnly();
 			}
 		}
-		/// <summary>
-		/// Returns a list of all Paragraphs inside this container.
-		/// </summary>
+
+		/// <summary>Returns a list of all Paragraphs inside this container</summary>
 		/// <example>
-		/// <code>
-		///  Load a document.
-		/// using (DocX document = DocX.Load(@"Test.docx"))
-		/// {
-		///    // All Paragraphs in this document.
-		///    <![CDATA[ List<Paragraph> ]]> documentParagraphs = document.Paragraphs;
-		///    
-		///    // Make sure this document contains at least one Table.
-		///    if (document.Tables.Count() > 0)
-		///    {
-		///        // Get the first Table in this document.
-		///        Table t = document.Tables[0];
-		///
-		///        // All Paragraphs in this Table.
-		///        <![CDATA[ List<Paragraph> ]]> tableParagraphs = t.Paragraphs;
-		///    
-		///        // Make sure this Table contains at least one Row.
-		///        if (t.Rows.Count() > 0)
-		///        {
-		///            // Get the first Row in this document.
-		///            Row r = t.Rows[0];
-		///
-		///            // All Paragraphs in this Row.
-		///            <![CDATA[ List<Paragraph> ]]> rowParagraphs = r.Paragraphs;
-		///
-		///            // Make sure this Row contains at least one Cell.
-		///            if (r.Cells.Count() > 0)
-		///            {
-		///                // Get the first Cell in this document.
-		///                Cell c = r.Cells[0];
-		///
-		///                // All Paragraphs in this Cell.
-		///                <![CDATA[ List<Paragraph> ]]> cellParagraphs = c.Paragraphs;
-		///            }
-		///        }
-		///    }
-		///
-		///    // Save all changes to this document.
-		///    document.Save();
-		/// }// Release this document from memory.
-		/// </code>
+		///		<code>
+		///			Load a document
+		///			using (DocX document = DocX.Load(@"Test.docx"))
+		///			{
+		///				// All Paragraphs in this document
+		///				<![CDATA[ List<Paragraph> ]]> documentParagraphs = document.Paragraphs;
+		///				// Make sure this document contains at least one Table
+		///				if (document.Tables.Count() > 0)
+		///				{
+		///					// Get the first Table in this document
+		///					Table t = document.Tables[0];
+		///					// All Paragraphs in this Table
+		///					<![CDATA[ List<Paragraph> ]]> tableParagraphs = t.Paragraphs;
+		///					// Make sure this Table contains at least one Row
+		///					if (t.Rows.Count() > 0)
+		///					{
+		///						// Get the first Row in this document
+		///						Row r = t.Rows[0];
+		///						// All Paragraphs in this Row
+		///						<![CDATA[ List<Paragraph> ]]> rowParagraphs = r.Paragraphs;
+		///						// Make sure this Row contains at least one Cell
+		///						if (r.Cells.Count() > 0)
+		///						{
+		///							// Get the first Cell in this document
+		///							Cell c = r.Cells[0];
+		///							// All Paragraphs in this Cell
+		///							<![CDATA[ List<Paragraph> ]]> cellParagraphs = c.Paragraphs;
+		///						}
+		///					}
+		///				}
+		///				// Save all changes to this document
+		///				document.Save();
+		///			}
+		///			// Release this document from memory
+		///		</code>
 		/// </example>
 		public virtual ReadOnlyCollection<Paragraph> Paragraphs
 		{
 			get
 			{
 				List<Paragraph> paragraphs = GetParagraphs();
-
 				foreach (var p in paragraphs)
 				{
-					if ((p.Xml.ElementsAfterSelf().FirstOrDefault() != null) && (p.Xml.ElementsAfterSelf().First().Name.Equals(DocX.w + "tbl")))
-						p.FollowingTable = new Table(this.Document, p.Xml.ElementsAfterSelf().First());
-
+					if ((p.Xml.ElementsAfterSelf().FirstOrDefault() != null) && (p.Xml.ElementsAfterSelf().First().Name.Equals(DocX.w + "tbl"))) p.FollowingTable = new Table(Document, p.Xml.ElementsAfterSelf().First());
 					p.ParentContainer = GetParentFromXmlName(p.Xml.Ancestors().First().Name.LocalName);
-
-					if (p.IsListItem)
-					{
-						GetListItemType(p);
-					}
+					if (p.IsListItem) GetListItemType(p);
 				}
-
 				return paragraphs.AsReadOnly();
 			}
 		}
+
+		/// <summary>TODO: comment</summary>
 		public virtual ReadOnlyCollection<Paragraph> ParagraphsDeepSearch
 		{
 			get
 			{
 				List<Paragraph> paragraphs = GetParagraphs(true);
-
 				foreach (var p in paragraphs)
 				{
-					if ((p.Xml.ElementsAfterSelf().FirstOrDefault() != null) && (p.Xml.ElementsAfterSelf().First().Name.Equals(DocX.w + "tbl")))
-						p.FollowingTable = new Table(this.Document, p.Xml.ElementsAfterSelf().First());
-
+					if ((p.Xml.ElementsAfterSelf().FirstOrDefault() != null) && (p.Xml.ElementsAfterSelf().First().Name.Equals(DocX.w + "tbl"))) p.FollowingTable = new Table(Document, p.Xml.ElementsAfterSelf().First());
 					p.ParentContainer = GetParentFromXmlName(p.Xml.Ancestors().First().Name.LocalName);
-
-					if (p.IsListItem)
-					{
-						GetListItemType(p);
-					}
+					if (p.IsListItem) GetListItemType(p);
 				}
-
 				return paragraphs.AsReadOnly();
 			}
 		}
-		/// <summary>
-		/// Removes paragraph at specified position
-		/// </summary>
+
+		/// <summary>Removes paragraph at specified position</summary>
 		/// <param name="index">Index of paragraph to remove</param>
 		/// <returns>True if removed</returns>
 		public bool RemoveParagraphAt(int index)
@@ -852,15 +3229,11 @@ namespace Novacode
 					return true;
 				}
 				++i;
-
 			}
-
 			return false;
 		}
 
-		/// <summary>
-		/// Removes paragraph
-		/// </summary>
+		/// <summary>Removes paragraph</summary>
 		/// <param name="p">Paragraph to remove</param>
 		/// <returns>True if removed</returns>
 		public bool RemoveParagraph(Paragraph p)
@@ -873,25 +3246,20 @@ namespace Novacode
 					return true;
 				}
 			}
-
 			return false;
 		}
 
-
+		/// <summary>TODO: comment</summary>
 		public virtual List<Section> Sections
 		{
 			get
 			{
 				var allParas = Paragraphs;
-
 				var parasInASection = new List<Paragraph>();
 				var sections = new List<Section>();
-
 				foreach (var para in allParas)
 				{
-
 					var sectionInPara = para.Xml.Descendants().FirstOrDefault(s => s.Name.LocalName == "sectPr");
-
 					if (sectionInPara == null)
 					{
 						parasInASection.Add(para);
@@ -903,42 +3271,32 @@ namespace Novacode
 						sections.Add(section);
 						parasInASection = new List<Paragraph>();
 					}
-
 				}
-
 				XElement body = Xml.Element(XName.Get("body", DocX.w.NamespaceName));
 				XElement baseSectionXml = body.Element(XName.Get("sectPr", DocX.w.NamespaceName));
 				var baseSection = new Section(Document, baseSectionXml) { SectionParagraphs = parasInASection };
 				sections.Add(baseSection);
-
 				return sections;
 			}
 		}
-
 
 		private void GetListItemType(Paragraph p)
 		{
 			var ilvlNode = p.ParagraphNumberProperties.Descendants().FirstOrDefault(el => el.Name.LocalName == "ilvl");
 			var ilvlValue = ilvlNode.Attribute(DocX.w + "val").Value;
-
 			var numIdNode = p.ParagraphNumberProperties.Descendants().FirstOrDefault(el => el.Name.LocalName == "numId");
 			var numIdValue = numIdNode.Attribute(DocX.w + "val").Value;
-
-			//find num node in numbering 
+			// find num node in numbering
 			var numNodes = Document.numbering.Descendants().Where(n => n.Name.LocalName == "num");
 			XElement numNode = numNodes.FirstOrDefault(node => node.Attribute(DocX.w + "numId").Value.Equals(numIdValue));
-
 			if (numNode != null)
 			{
-				//Get abstractNumId node and its value from numNode
+				// Get abstractNumId node and its value from numNode
 				var abstractNumIdNode = numNode.Descendants().First(n => n.Name.LocalName == "abstractNumId");
 				var abstractNumNodeValue = abstractNumIdNode.Attribute(DocX.w + "val").Value;
-
 				var abstractNumNodes = Document.numbering.Descendants().Where(n => n.Name.LocalName == "abstractNum");
-				XElement abstractNumNode =
-				  abstractNumNodes.FirstOrDefault(node => node.Attribute(DocX.w + "abstractNumId").Value.Equals(abstractNumNodeValue));
-
-				//Find lvl node
+				XElement abstractNumNode = abstractNumNodes.FirstOrDefault(node => node.Attribute(DocX.w + "abstractNumId").Value.Equals(abstractNumNodeValue));
+				// Find lvl node
 				var lvlNodes = abstractNumNode.Descendants().Where(n => n.Name.LocalName == "lvl");
 				XElement lvlNode = null;
 				foreach (XElement node in lvlNodes)
@@ -949,20 +3307,17 @@ namespace Novacode
 						break;
 					}
 				}
-
 				var numFmtNode = lvlNode.Descendants().First(n => n.Name.LocalName == "numFmt");
 				p.ListItemType = GetListItemType(numFmtNode.Attribute(DocX.w + "val").Value);
 			}
-
 		}
 
-
+		/// <summary>TODO: comment</summary>
 		public ContainerType ParentContainer;
 
 		internal List<Content> GetContents(bool deepSearch = false)
 		{
-			// Need some memory that can be updated by the recursive search.
-			//int index = 0;
+			// Need some memory that can be updated by the recursive search
 			List<Content> contents = new List<Content>();
 			foreach (XElement e in Xml.Descendants(XName.Get("sdt", DocX.w.NamespaceName)))
 			{
@@ -970,13 +3325,11 @@ namespace Novacode
 				XElement el = e.Elements(XName.Get("sdtPr", DocX.w.NamespaceName)).First();
 				content.Name = GetAttribute(el, "alias", "val");
 				content.Tag = GetAttribute(el, "tag", "val");
-
 				contents.Add(content);
 			}
-
-
 			return contents;
 		}
+
 		private string GetAttribute(XElement e, string localName, string attributeName)
 		{
 			string val = string.Empty;
@@ -988,13 +3341,12 @@ namespace Novacode
 			{
 				val = "Missing";
 			}
-
 			return val;
 		}
 
 		internal List<Paragraph> GetParagraphs(bool deepSearch = false)
 		{
-			// Need some memory that can be updated by the recursive search.
+			// Need some memory that can be updated by the recursive search
 			int index = 0;
 			List<Paragraph> paragraphs = new List<Paragraph>();
 			foreach (XElement e in Xml.Descendants(XName.Get("p", DocX.w.NamespaceName)))
@@ -1003,56 +3355,38 @@ namespace Novacode
 				Paragraph paragraph = new Paragraph(Document, e, index);
 				paragraphs.Add(paragraph);
 			}
-			//  GetParagraphsRecursive(Xml, ref index, ref paragraphs, deepSearch);
-
 			return paragraphs;
 		}
 
 		internal void GetParagraphsRecursive(XElement Xml, ref int index, ref List<Paragraph> paragraphs, bool deepSearch = false)
 		{
-			// sdtContent are for PageNumbers inside Headers or Footers, don't go any deeper.
-			//if (Xml.Name.LocalName == "sdtContent")
-			//    return;
-
 			var keepSearching = true;
 			if (Xml.Name.LocalName == "p")
 			{
 				paragraphs.Add(new Paragraph(Document, Xml, index));
-
 				index += HelperFunctions.GetText(Xml).Length;
-				if (!deepSearch)
-					keepSearching = false;
+				if (!deepSearch) keepSearching = false;
 			}
-			if (keepSearching && Xml.HasElements)
-			{
-				foreach (XElement e in Xml.Elements())
-				{
-					GetParagraphsRecursive(e, ref index, ref paragraphs, deepSearch);
-				}
-			}
+			if (keepSearching && Xml.HasElements) foreach (XElement e in Xml.Elements()) GetParagraphsRecursive(e, ref index, ref paragraphs, deepSearch);
 		}
 
+		/// <summary>TODO: comment</summary>
 		public virtual List<Table> Tables
 		{
 			get
 			{
-				List<Table> tables =
-				(
-					from t in Xml.Descendants(DocX.w + "tbl")
-					select new Table(Document, t)
-				).ToList();
-
+				List<Table> tables = (from t in Xml.Descendants(DocX.w + "tbl") select new Table(Document, t)).ToList();
 				return tables;
 			}
 		}
 
+		/// <summary>TODO: comment</summary>
 		public virtual List<List> Lists
 		{
 			get
 			{
 				var lists = new List<List>();
 				var list = new List(Document, Xml);
-
 				foreach (var paragraph in Paragraphs)
 				{
 					if (paragraph.IsListItem)
@@ -1069,202 +3403,176 @@ namespace Novacode
 						}
 					}
 				}
-
 				lists.Add(list);
-
 				return lists;
 			}
 		}
 
+		/// <summary>TODO: comment</summary>
 		public virtual List<Hyperlink> Hyperlinks
 		{
 			get
 			{
 				List<Hyperlink> hyperlinks = new List<Hyperlink>();
-
-				foreach (Paragraph p in Paragraphs)
-					hyperlinks.AddRange(p.Hyperlinks);
-
+				foreach (Paragraph p in Paragraphs) hyperlinks.AddRange(p.Hyperlinks);
 				return hyperlinks;
 			}
 		}
 
+		/// <summary>TODO: comment</summary>
 		public virtual List<Picture> Pictures
 		{
 			get
 			{
 				List<Picture> pictures = new List<Picture>();
-
-				foreach (Paragraph p in Paragraphs)
-					pictures.AddRange(p.Pictures);
-
+				foreach (Paragraph p in Paragraphs) pictures.AddRange(p.Pictures);
 				return pictures;
 			}
 		}
 
-		/// <summary>
-		/// Sets the Direction of content.
-		/// </summary>
+		/// <summary>Sets the Direction of content</summary>
 		/// <param name="direction">Direction either LeftToRight or RightToLeft</param>
 		/// <example>
-		/// Set the Direction of content in a Paragraph to RightToLeft.
-		/// <code>
-		/// // Load a document.
-		/// using (DocX document = DocX.Load(@"Test.docx"))
-		/// {
-		///    // Get the first Paragraph from this document.
-		///    Paragraph p = document.InsertParagraph();
-		///
-		///    // Set the Direction of this Paragraph.
-		///    p.Direction = Direction.RightToLeft;
-		///
-		///    // Make sure the document contains at lest one Table.
-		///    if (document.Tables.Count() > 0)
-		///    {
-		///        // Get the first Table from this document.
-		///        Table t = document.Tables[0];
-		///
-		///        /* 
-		///         * Set the direction of the entire Table.
-		///         * Note: The same function is available at the Row and Cell level.
-		///         */
-		///        t.SetDirection(Direction.RightToLeft);
-		///    }
-		///
-		///    // Save all changes to this document.
-		///    document.Save();
-		/// }// Release this document from memory.
-		/// </code>
+		///		Set the Direction of content in a Paragraph to RightToLeft
+		///		<code>
+		///			// Load a document
+		///			using (DocX document = DocX.Load(@"Test.docx"))
+		///			{
+		///				// Get the first Paragraph from this document
+		///				Paragraph p = document.InsertParagraph();
+		///				// Set the Direction of this Paragraph
+		///				p.Direction = Direction.RightToLeft;
+		///				// Make sure the document contains at lest one Table
+		///				if (document.Tables.Count() > 0)
+		///				{
+		///					// Get the first Table from this document
+		///					Table t = document.Tables[0];
+		///					// Set the direction of the entire Table
+		///					// Note: The same function is available at the Row and Cell level
+		///					t.SetDirection(Direction.RightToLeft);
+		///				}
+		///				// Save all changes to this document
+		///				document.Save();
+		///			}
+		///			// Release this document from memory
+		///		</code>
 		/// </example>
 		public virtual void SetDirection(Direction direction)
 		{
-			foreach (Paragraph p in Paragraphs)
-				p.Direction = direction;
+			foreach (Paragraph p in Paragraphs) p.Direction = direction;
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="str">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
 		public virtual List<int> FindAll(string str)
 		{
 			return FindAll(str, RegexOptions.None);
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="str">TODO: comment</param>
+		/// <param name="options">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
 		public virtual List<int> FindAll(string str, RegexOptions options)
 		{
 			List<int> list = new List<int>();
-
 			foreach (Paragraph p in Paragraphs)
 			{
 				List<int> indexes = p.FindAll(str, options);
-
-				for (int i = 0; i < indexes.Count(); i++)
-					indexes[0] += p.startIndex;
-
+				for (int i = 0; i < indexes.Count(); i++) indexes[0] += p.startIndex;
 				list.AddRange(indexes);
 			}
-
 			return list;
 		}
 
-		/// <summary>
-		/// Find all unique instances of the given Regex Pattern,
-		/// returning the list of the unique strings found
-		/// </summary>
-		/// <param name="pattern"></param>
-		/// <param name="options"></param>
-		/// <returns></returns>
+		/// <summary>Find all unique instances of the given Regex Pattern, returning the list of the unique strings found</summary>
+		/// <param name="pattern">TODO: comment</param>
+		/// <param name="options">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
 		public virtual List<string> FindUniqueByPattern(string pattern, RegexOptions options)
 		{
 			List<string> rawResults = new List<string>();
-
 			foreach (Paragraph p in Paragraphs)
-			{   // accumulate the search results from all paragraphs
+			{
+				// accumulate the search results from all paragraphs
 				List<string> partials = p.FindAllByPattern(pattern, options);
 				rawResults.AddRange(partials);
 			}
-
 			// this dictionary is used to collect results and test for uniqueness
 			Dictionary<string, int> uniqueResults = new Dictionary<string, int>();
-
 			foreach (string currValue in rawResults)
 			{
-				if (!uniqueResults.ContainsKey(currValue))
-				{   // if the dictionary doesn't have it, add it
-					uniqueResults.Add(currValue, 0);
-				}
+				// if the dictionary doesn't have it, add it
+				if (!uniqueResults.ContainsKey(currValue)) uniqueResults.Add(currValue, 0);
 			}
-
-			return uniqueResults.Keys.ToList();  // return the unique list of results
+			// return the unique list of results
+			return uniqueResults.Keys.ToList();
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="searchValue">TODO: comment</param>
+		/// <param name="newValue">TODO: comment</param>
+		/// <param name="trackChanges">TODO: comment</param>
+		/// <param name="options">TODO: comment</param>
+		/// <param name="newFormatting">TODO: comment</param>
+		/// <param name="matchFormatting">TODO: comment</param>
+		/// <param name="formattingOptions">TODO: comment</param>
+		/// <param name="escapeRegEx">TODO: comment</param>
+		/// <param name="useRegExSubstitutions">TODO: comment</param>
 		public virtual void ReplaceText(string searchValue, string newValue, bool trackChanges = false, RegexOptions options = RegexOptions.None, Formatting newFormatting = null, Formatting matchFormatting = null, MatchFormattingOptions formattingOptions = MatchFormattingOptions.SubsetMatch, bool escapeRegEx = true, bool useRegExSubstitutions = false)
 		{
-			if (string.IsNullOrEmpty(searchValue))
-				throw new ArgumentException("oldValue cannot be null or empty", "searchValue");
-
-			if (newValue == null)
-				throw new ArgumentException("newValue cannot be null or empty", "newValue");
-			// ReplaceText in Headers of the document.
-			var headerList = new List<Header> { Document.Headers.first, Document.Headers.even, Document.Headers.odd };
-			foreach (var header in headerList)
-				if (header != null)
-					foreach (var paragraph in header.Paragraphs)
-						paragraph.ReplaceText(searchValue, newValue, trackChanges, options, newFormatting, matchFormatting, formattingOptions, escapeRegEx, useRegExSubstitutions);
-
-			// ReplaceText int main body of document.
-			foreach (var paragraph in Paragraphs)
-				paragraph.ReplaceText(searchValue, newValue, trackChanges, options, newFormatting, matchFormatting, formattingOptions, escapeRegEx, useRegExSubstitutions);
-
-			// ReplaceText in Footers of the document.
-			var footerList = new List<Footer> { Document.Footers.first, Document.Footers.even, Document.Footers.odd };
-			foreach (var footer in footerList)
-				if (footer != null)
-					foreach (var paragraph in footer.Paragraphs)
-						paragraph.ReplaceText(searchValue, newValue, trackChanges, options, newFormatting, matchFormatting, formattingOptions, escapeRegEx, useRegExSubstitutions);
+			if (string.IsNullOrEmpty(searchValue)) throw new ArgumentException("oldValue cannot be null or empty", "searchValue");
+			if (newValue == null) throw new ArgumentException("newValue cannot be null or empty", "newValue");
+			// ReplaceText in Headers of the document
+			var headerList = new List<Header>
+			{
+				Document.Headers.first,
+				Document.Headers.even,
+				Document.Headers.odd
+			};
+			foreach (var header in headerList) if (header != null) foreach (var paragraph in header.Paragraphs) paragraph.ReplaceText(searchValue, newValue, trackChanges, options, newFormatting, matchFormatting, formattingOptions, escapeRegEx, useRegExSubstitutions);
+			// ReplaceText int main body of document
+			foreach (var paragraph in Paragraphs) paragraph.ReplaceText(searchValue, newValue, trackChanges, options, newFormatting, matchFormatting, formattingOptions, escapeRegEx, useRegExSubstitutions);
+			// ReplaceText in Footers of the document
+			var footerList = new List<Footer>
+			{
+				Document.Footers.first,
+				Document.Footers.even,
+				Document.Footers.odd
+			};
+			foreach (var footer in footerList) if (footer != null) foreach (var paragraph in footer.Paragraphs) paragraph.ReplaceText(searchValue, newValue, trackChanges, options, newFormatting, matchFormatting, formattingOptions, escapeRegEx, useRegExSubstitutions);
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
+		/// <summary>TODO: comment</summary>
 		/// <param name="searchValue">Value to find</param>
 		/// <param name="regexMatchHandler">A Func that accepts the matching regex search group value and passes it to this to return the replacement string</param>
 		/// <param name="trackChanges">Enable trackchanges</param>
 		/// <param name="options">Regex options</param>
-		/// <param name="newFormatting"></param>
-		/// <param name="matchFormatting"></param>
-		/// <param name="formattingOptions"></param>
+		/// <param name="newFormatting">TODO: comment</param>
+		/// <param name="matchFormatting">TODO: comment</param>
+		/// <param name="formattingOptions">TODO: comment</param>
 		public virtual void ReplaceText(string searchValue, Func<string, string> regexMatchHandler, bool trackChanges = false, RegexOptions options = RegexOptions.None, Formatting newFormatting = null, Formatting matchFormatting = null, MatchFormattingOptions formattingOptions = MatchFormattingOptions.SubsetMatch)
 		{
-			if (string.IsNullOrEmpty(searchValue))
-				throw new ArgumentException("oldValue cannot be null or empty", "searchValue");
-
-			if (regexMatchHandler == null)
-				throw new ArgumentException("regexMatchHandler cannot be null", "regexMatchHandler");
-
-			// ReplaceText in Headers/Footers of the document.
-			var containerList = new List<IParagraphContainer> {
+			if (string.IsNullOrEmpty(searchValue)) throw new ArgumentException("oldValue cannot be null or empty", "searchValue");
+			if (regexMatchHandler == null) throw new ArgumentException("regexMatchHandler cannot be null", "regexMatchHandler");
+			// ReplaceText in Headers/Footers of the document
+			var containerList = new List<IParagraphContainer>
+			{
 				Document.Headers.first, Document.Headers.even, Document.Headers.odd,
-				Document.Footers.first, Document.Footers.even, Document.Footers.odd };
-			foreach (var container in containerList)
-				if (container != null)
-					foreach (var paragraph in container.Paragraphs)
-						paragraph.ReplaceText(searchValue, regexMatchHandler, trackChanges, options, newFormatting, matchFormatting, formattingOptions);
-
-			// ReplaceText int main body of document.
-			foreach (var paragraph in Paragraphs)
-				paragraph.ReplaceText(searchValue, regexMatchHandler, trackChanges, options, newFormatting, matchFormatting, formattingOptions);
+				Document.Footers.first, Document.Footers.even, Document.Footers.odd
+			};
+			foreach (var container in containerList) if (container != null) foreach (var paragraph in container.Paragraphs) paragraph.ReplaceText(searchValue, regexMatchHandler, trackChanges, options, newFormatting, matchFormatting, formattingOptions);
+			// ReplaceText int main body of document
+			foreach (var paragraph in Paragraphs) paragraph.ReplaceText(searchValue, regexMatchHandler, trackChanges, options, newFormatting, matchFormatting, formattingOptions);
 		}
 
-		/// <summary>
-		/// Removes all items with required formatting
-		/// </summary>
+		/// <summary>Removes all items with required formatting</summary>
 		/// <returns>Numer of texts removed</returns>
 		public int RemoveTextInGivenFormat(Formatting matchFormatting, MatchFormattingOptions fo = MatchFormattingOptions.SubsetMatch)
 		{
 			var deletedCount = 0;
-			foreach (var x in Xml.Elements())
-			{
-				deletedCount += RemoveTextWithFormatRecursive(x, matchFormatting, fo);
-			}
-
+			foreach (var x in Xml.Elements()) deletedCount += RemoveTextWithFormatRecursive(x, matchFormatting, fo);
 			return deletedCount;
 		}
 
@@ -1281,39 +3589,43 @@ namespace Novacode
 						++deletedCount;
 					}
 				}
-
 				deletedCount += RemoveTextWithFormatRecursive(x, matchFormatting, fo);
 			}
-
 			return deletedCount;
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="toInsert">TODO: comment</param>
+		/// <param name="bookmarkName">TODO: comment</param>
 		public virtual void InsertAtBookmark(string toInsert, string bookmarkName)
 		{
-			if (bookmarkName.IsNullOrWhiteSpace())
-				throw new ArgumentException("bookmark cannot be null or empty", "bookmarkName");
-
+			if (bookmarkName.IsNullOrWhiteSpace()) throw new ArgumentException("bookmark cannot be null or empty", "bookmarkName");
 			var headerCollection = Document.Headers;
-			var headers = new List<Header> { headerCollection.first, headerCollection.even, headerCollection.odd };
-			foreach (var header in headers.Where(x => x != null))
-				foreach (var paragraph in header.Paragraphs)
-					paragraph.InsertAtBookmark(toInsert, bookmarkName);
-
-			foreach (var paragraph in Paragraphs)
-				paragraph.InsertAtBookmark(toInsert, bookmarkName);
-
+			var headers = new List<Header>
+			{
+				headerCollection.first,
+				headerCollection.even,
+				headerCollection.odd
+			};
+			foreach (var header in headers.Where(x => x != null)) foreach (var paragraph in header.Paragraphs) paragraph.InsertAtBookmark(toInsert, bookmarkName);
+			foreach (var paragraph in Paragraphs) paragraph.InsertAtBookmark(toInsert, bookmarkName);
 			var footerCollection = Document.Footers;
-			var footers = new List<Footer> { footerCollection.first, footerCollection.even, footerCollection.odd };
-			foreach (var footer in footers.Where(x => x != null))
-				foreach (var paragraph in footer.Paragraphs)
-					paragraph.InsertAtBookmark(toInsert, bookmarkName);
+			var footers = new List<Footer>
+			{
+				footerCollection.first,
+				footerCollection.even,
+				footerCollection.odd
+			};
+			foreach (var footer in footers.Where(x => x != null)) foreach (var paragraph in footer.Paragraphs) paragraph.InsertAtBookmark(toInsert, bookmarkName);
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="bookmarkNames">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
 		public string[] ValidateBookmarks(params string[] bookmarkNames)
 		{
 			var headers = new[] { Document.Headers.first, Document.Headers.even, Document.Headers.odd }.Where(h => h != null).ToList();
 			var footers = new[] { Document.Footers.first, Document.Footers.even, Document.Footers.odd }.Where(f => f != null).ToList();
-
 			var nonMatching = new List<string>();
 			foreach (var bookmarkName in bookmarkNames)
 			{
@@ -1322,51 +3634,51 @@ namespace Novacode
 				if (Paragraphs.Any(p => p.ValidateBookmark(bookmarkName))) return new string[0];
 				nonMatching.Add(bookmarkName);
 			}
-
 			return nonMatching.ToArray();
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="index">TODO: comment</param>
+		/// <param name="text">TODO: comment</param>
+		/// <param name="trackChanges">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
 		public virtual Paragraph InsertParagraph(int index, string text, bool trackChanges)
 		{
 			return InsertParagraph(index, text, trackChanges, null);
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <returns>TODO: comment</returns>
 		public virtual Paragraph InsertParagraph()
 		{
 			return InsertParagraph(string.Empty, false);
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="index">TODO: comment</param>
+		/// <param name="p">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
 		public virtual Paragraph InsertParagraph(int index, Paragraph p)
 		{
 			XElement newXElement = new XElement(p.Xml);
 			p.Xml = newXElement;
-
 			Paragraph paragraph = HelperFunctions.GetFirstParagraphEffectedByInsert(Document, index);
-
-			if (paragraph == null)
-				Xml.Add(p.Xml);
+			if (paragraph == null) Xml.Add(p.Xml);
 			else
 			{
 				XElement[] split = HelperFunctions.SplitParagraph(paragraph, index - paragraph.startIndex);
-
-				paragraph.Xml.ReplaceWith
-				(
-					split[0],
-					newXElement,
-					split[1]
-				);
+				paragraph.Xml.ReplaceWith(split[0], newXElement, split[1]);
 			}
-
 			GetParent(p);
-
 			return p;
 		}
 
+		/// <summary>TODO: comment</summary>
+		/// <param name="p">TODO: comment</param>
+		/// <returns>TODO: comment</returns>
 		public virtual Paragraph InsertParagraph(Paragraph p)
 		{
-			#region Styles
 			XDocument style_document;
-
 			if (p.styles.Count() > 0)
 			{
 				Uri style_package_uri = new Uri("/word/styles.xml", UriKind.Relative);
@@ -1375,71 +3687,50 @@ namespace Novacode
 					PackagePart style_package = Document.package.CreatePart(style_package_uri, "application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml", CompressionOption.Maximum);
 					using (TextWriter tw = new StreamWriter(new PackagePartStream(style_package.GetStream())))
 					{
-						style_document = new XDocument
-						(
-							new XDeclaration("1.0", "UTF-8", "yes"),
-							new XElement(XName.Get("styles", DocX.w.NamespaceName))
-						);
-
+						style_document = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), new XElement(XName.Get("styles", DocX.w.NamespaceName)));
 						style_document.Save(tw);
 					}
 				}
-
 				PackagePart styles_document = Document.package.GetPart(style_package_uri);
 				using (TextReader tr = new StreamReader(styles_document.GetStream()))
 				{
 					style_document = XDocument.Load(tr);
 					XElement styles_element = style_document.Element(XName.Get("styles", DocX.w.NamespaceName));
-
-					var ids = from d in styles_element.Descendants(XName.Get("style", DocX.w.NamespaceName))
-							  let a = d.Attribute(XName.Get("styleId", DocX.w.NamespaceName))
-							  where a != null
-							  select a.Value;
-
+					var ids = from d in styles_element.Descendants(XName.Get("style", DocX.w.NamespaceName)) let a = d.Attribute(XName.Get("styleId", DocX.w.NamespaceName)) where a != null select a.Value;
 					foreach (XElement style in p.styles)
 					{
-						// If styles_element does not contain this element, then add it.
-
-						if (!ids.Contains(style.Attribute(XName.Get("styleId", DocX.w.NamespaceName)).Value))
-							styles_element.Add(style);
+						// If styles_element does not contain this element, then add it
+						if (!ids.Contains(style.Attribute(XName.Get("styleId", DocX.w.NamespaceName)).Value)) styles_element.Add(style);
 					}
 				}
-
-				using (TextWriter tw = new StreamWriter(new PackagePartStream(styles_document.GetStream())))
-					style_document.Save(tw);
+				using (TextWriter tw = new StreamWriter(new PackagePartStream(styles_document.GetStream()))) style_document.Save(tw);
 			}
-			#endregion
-
 			XElement newXElement = new XElement(p.Xml);
-
 			Xml.Add(newXElement);
-
 			int index = 0;
 			if (Document.paragraphLookup.Keys.Count() > 0)
 			{
 				index = Document.paragraphLookup.Last().Key;
-
-				if (Document.paragraphLookup.Last().Value.Text.Length == 0)
-					index++;
-				else
-					index += Document.paragraphLookup.Last().Value.Text.Length;
+				if (Document.paragraphLookup.Last().Value.Text.Length == 0) index++;
+				else index += Document.paragraphLookup.Last().Value.Text.Length;
 			}
-
 			Paragraph newParagraph = new Paragraph(Document, newXElement, index);
 			Document.paragraphLookup.Add(index, newParagraph);
-
 			GetParent(newParagraph);
-
 			return newParagraph;
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraph(int index, string text, bool trackChanges, Formatting formatting)
 		{
 			Paragraph newParagraph = new Paragraph(Document, new XElement(DocX.w + "p"), index);
 			newParagraph.InsertText(0, text, trackChanges, formatting);
-
 			Paragraph firstPar = HelperFunctions.GetFirstParagraphEffectedByInsert(Document, index);
-
 			if (firstPar != null)
 			{
 				var splitindex = index - firstPar.startIndex;
@@ -1450,7 +3741,6 @@ namespace Novacode
 				else
 				{
 					XElement[] splitParagraph = HelperFunctions.SplitParagraph(firstPar, splitindex);
-
 					firstPar.Xml.ReplaceWith
 					(
 						splitParagraph[0],
@@ -1459,20 +3749,14 @@ namespace Novacode
 					);
 				}
 			}
-
-			else
-				Xml.Add(newParagraph);
-
+			else Xml.Add(newParagraph);
 			GetParent(newParagraph);
-
 			return newParagraph;
 		}
-
 
 		private ContainerType GetParentFromXmlName(string xmlName)
 		{
 			ContainerType parent;
-
 			switch (xmlName)
 			{
 				case "body":
@@ -1500,10 +3784,8 @@ namespace Novacode
 		private void GetParent(Paragraph newParagraph)
 		{
 			var containerType = GetType();
-
 			switch (containerType.Name)
 			{
-
 				case "Body":
 					newParagraph.ParentContainer = ContainerType.Body;
 					break;
@@ -1531,11 +3813,9 @@ namespace Novacode
 			}
 		}
 
-
 		private ListItemType GetListItemType(string styleName)
 		{
 			ListItemType listItemType;
-
 			switch (styleName)
 			{
 				case "bullet":
@@ -1545,62 +3825,68 @@ namespace Novacode
 					listItemType = ListItemType.Numbered;
 					break;
 			}
-
 			return listItemType;
 		}
 
-
-
+		/// <summary></summary>
 		public virtual void InsertSection()
 		{
 			InsertSection(false);
 		}
 
+		/// <summary></summary>
+		/// <param name="trackChanges"></param>
 		public virtual void InsertSection(bool trackChanges)
 		{
 			var newParagraphSection = new XElement
 			(
 				XName.Get("p", DocX.w.NamespaceName), new XElement(XName.Get("pPr", DocX.w.NamespaceName), new XElement(XName.Get("sectPr", DocX.w.NamespaceName), new XElement(XName.Get("type", DocX.w.NamespaceName), new XAttribute(DocX.w + "val", "continuous"))))
 			);
-
-			if (trackChanges)
-				newParagraphSection = HelperFunctions.CreateEdit(EditType.ins, DateTime.Now, newParagraphSection);
-
+			if (trackChanges) newParagraphSection = HelperFunctions.CreateEdit(EditType.ins, DateTime.Now, newParagraphSection);
 			Xml.Add(newParagraphSection);
 		}
 
+		/// <summary></summary>
+		/// <param name="trackChanges"></param>
 		public virtual void InsertSectionPageBreak(bool trackChanges = false)
 		{
 			var newParagraphSection = new XElement
 			(
 				XName.Get("p", DocX.w.NamespaceName), new XElement(XName.Get("pPr", DocX.w.NamespaceName), new XElement(XName.Get("sectPr", DocX.w.NamespaceName)))
 			);
-
-			if (trackChanges)
-				newParagraphSection = HelperFunctions.CreateEdit(EditType.ins, DateTime.Now, newParagraphSection);
-
+			if (trackChanges) newParagraphSection = HelperFunctions.CreateEdit(EditType.ins, DateTime.Now, newParagraphSection);
 			Xml.Add(newParagraphSection);
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraph(string text)
 		{
 			return InsertParagraph(text, false, new Formatting());
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraph(string text, bool trackChanges)
 		{
 			return InsertParagraph(text, trackChanges, new Formatting());
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraph(string text, bool trackChanges, Formatting formatting)
 		{
 			XElement newParagraph = new XElement
 			(
 				XName.Get("p", DocX.w.NamespaceName), new XElement(XName.Get("pPr", DocX.w.NamespaceName)), HelperFunctions.FormatInput(text, formatting.Xml)
 			);
-
-			if (trackChanges)
-				newParagraph = HelperFunctions.CreateEdit(EditType.ins, DateTime.Now, newParagraph);
+			if (trackChanges) newParagraph = HelperFunctions.CreateEdit(EditType.ins, DateTime.Now, newParagraph);
 			Xml.Add(newParagraph);
 			var paragraphAdded = new Paragraph(Document, newParagraph, 0);
 			if (this is Cell)
@@ -1627,13 +3913,13 @@ namespace Novacode
 				Console.WriteLine("No idea what we are {0}", this);
 				paragraphAdded.PackagePart = Document.mainPart;
 			}
-
-
 			GetParent(paragraphAdded);
-
 			return paragraphAdded;
 		}
 
+		/// <summary></summary>
+		/// <param name="equation"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertEquation(string equation)
 		{
 			Paragraph p = InsertParagraph();
@@ -1641,96 +3927,95 @@ namespace Novacode
 			return p;
 		}
 
-		public virtual Paragraph InsertBookmark(String bookmarkName)
+		/// <summary></summary>
+		/// <param name="bookmarkName"></param>
+		/// <returns></returns>
+		public virtual Paragraph InsertBookmark(string bookmarkName)
 		{
 			var p = InsertParagraph();
 			p.AppendBookmark(bookmarkName);
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public virtual Table InsertTable(int rowCount, int columnCount) //Dmitchern, changed to virtual, and overrided in Table.Cell
 		{
 			XElement newTable = HelperFunctions.CreateTable(rowCount, columnCount);
 			Xml.Add(newTable);
-
 			return new Table(Document, newTable) { mainPart = mainPart };
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public Table InsertTable(int index, int rowCount, int columnCount)
 		{
 			XElement newTable = HelperFunctions.CreateTable(rowCount, columnCount);
-
 			Paragraph p = HelperFunctions.GetFirstParagraphEffectedByInsert(Document, index);
-
-			if (p == null)
-				Xml.Elements().First().AddFirst(newTable);
-
+			if (p == null) Xml.Elements().First().AddFirst(newTable);
 			else
 			{
 				XElement[] split = HelperFunctions.SplitParagraph(p, index - p.startIndex);
-
-				p.Xml.ReplaceWith
-				(
-					split[0],
-					newTable,
-					split[1]
-				);
+				p.Xml.ReplaceWith(split[0], newTable, split[1]);
 			}
-
-
 			return new Table(Document, newTable) { mainPart = mainPart };
 		}
 
+		/// <summary></summary>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		public Table InsertTable(Table t)
 		{
 			XElement newXElement = new XElement(t.Xml);
 			Xml.Add(newXElement);
-
 			Table newTable = new Table(Document, newXElement)
 			{
 				mainPart = mainPart,
 				Design = t.Design
 			};
-
 			return newTable;
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		public Table InsertTable(int index, Table t)
 		{
 			Paragraph p = HelperFunctions.GetFirstParagraphEffectedByInsert(Document, index);
-
 			XElement[] split = HelperFunctions.SplitParagraph(p, index - p.startIndex);
 			XElement newXElement = new XElement(t.Xml);
-			p.Xml.ReplaceWith
-			(
-				split[0],
-				newXElement,
-				split[1]
-			);
-
+			p.Xml.ReplaceWith(split[0], newXElement, split[1]);
 			Table newTable = new Table(Document, newXElement)
 			{
 				mainPart = mainPart,
 				Design = t.Design
 			};
-
 			return newTable;
 		}
-		internal Container(DocX document, XElement xml)
-			: base(document, xml)
-		{
 
+		internal Container(DocX document, XElement xml) : base(document, xml)
+		{
 		}
 
+		/// <summary></summary>
+		/// <param name="list"></param>
+		/// <returns></returns>
 		public List InsertList(List list)
 		{
-			foreach (var item in list.Items)
-			{
-				Xml.Add(item.Xml);
-			}
-
+			foreach (var item in list.Items) Xml.Add(item.Xml);
 			return list;
 		}
+
+		/// <summary></summary>
+		/// <param name="list"></param>
+		/// <param name="fontSize"></param>
+		/// <returns></returns>
 		public List InsertList(List list, double fontSize)
 		{
 			foreach (var item in list.Items)
@@ -1741,6 +4026,11 @@ namespace Novacode
 			return list;
 		}
 
+		/// <summary></summary>
+		/// <param name="list"></param>
+		/// <param name="fontFamily"></param>
+		/// <param name="fontSize"></param>
+		/// <returns></returns>
 		public List InsertList(List list, Font fontFamily, double fontSize)
 		{
 			foreach (var item in list.Items)
@@ -1752,49 +4042,64 @@ namespace Novacode
 			return list;
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="list"></param>
+		/// <returns></returns>
 		public List InsertList(int index, List list)
 		{
 			Paragraph p = HelperFunctions.GetFirstParagraphEffectedByInsert(Document, index);
-
 			XElement[] split = HelperFunctions.SplitParagraph(p, index - p.startIndex);
 			var elements = new List<XElement> { split[0] };
 			elements.AddRange(list.Items.Select(i => new XElement(i.Xml)));
 			elements.Add(split[1]);
 			p.Xml.ReplaceWith(elements.ToArray());
-
 			return list;
 		}
+
 	}
 
+	/// <summary></summary>
 	public class Content : InsertBeforeOrAfter
 	{
 
+		/// <summary></summary>
 		public string Name { get; set; }
+
+		/// <summary></summary>
 		public string Tag { get; set; }
+
+		/// <summary></summary>
 		public string Text { get; set; }
+
+		/// <summary></summary>
 		public List<Content> Sections { get; set; }
+
+		/// <summary></summary>
 		public ContainerType ParentContainer;
 
-
-		internal Content(DocX document, XElement xml, int startIndex)
-			: base(document, xml)
+		internal Content(DocX document, XElement xml, int startIndex) : base(document, xml)
 		{
-
 		}
 
+		/// <summary></summary>
+		/// <param name="newText"></param>
 		public void SetText(string newText)
 		{
-
 			string x = this.Tag;
 			XElement el = Xml;
 			Xml.Descendants(XName.Get("t", DocX.w.NamespaceName)).First().Value = newText;
-
 		}
 
 	}
 
+	/// <summary></summary>
 	public class ContentCollection : List<Content>
 	{
+
+		/// <summary></summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
 		public Content this[string name]
 		{
 			get
@@ -1802,25 +4107,44 @@ namespace Novacode
 				return this.FirstOrDefault(content => string.Equals(content.Name, name, StringComparison.CurrentCultureIgnoreCase));
 			}
 		}
+
 	}
 
+	/// <summary></summary>
 	public class CustomProperty
 	{
+
 		private string name;
+
 		private object value;
+
 		private string type;
 
-		/// <summary>
-		/// The name of this CustomProperty.
-		/// </summary>
-		public string Name { get { return name; } }
+		/// <summary>The name of this CustomProperty</summary>
+		public string Name
+		{
+			get
+			{
+				return name;
+			}
+		}
 
-		/// <summary>
-		/// The value of this CustomProperty.
-		/// </summary>
-		public object Value { get { return value; } }
+		/// <summary>The value of this CustomProperty</summary>
+		public object Value
+		{
+			get
+			{
+				return value;
+			}
+		}
 
-		internal string Type { get { return type; } }
+		internal string Type
+		{
+			get
+			{
+				return type;
+			}
+		}
 
 		internal CustomProperty(string name, string type, string value)
 		{
@@ -1832,34 +4156,28 @@ namespace Novacode
 						realValue = value;
 						break;
 					}
-
 				case "i4":
 					{
 						realValue = int.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
 						break;
 					}
-
 				case "r8":
 					{
-						realValue = Double.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
+						realValue = double.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
 						break;
 					}
-
 				case "filetime":
 					{
 						realValue = DateTime.Parse(value, System.Globalization.CultureInfo.InvariantCulture);
 						break;
 					}
-
 				case "bool":
 					{
 						realValue = bool.Parse(value);
 						break;
 					}
-
 				default: throw new Exception();
 			}
-
 			this.name = name;
 			this.type = type;
 			this.value = realValue;
@@ -1872,123 +4190,121 @@ namespace Novacode
 			this.value = value;
 		}
 
-		/// <summary>
-		/// Create a new CustomProperty to hold a string.
-		/// </summary>
+		/// <summary>Create a new CustomProperty to hold a string</summary>
 		/// <param name="name">The name of this CustomProperty.</param>
 		/// <param name="value">The value of this CustomProperty.</param>
-		public CustomProperty(string name, string value) : this(name, "lpwstr", value as object) { }
+		public CustomProperty(string name, string value) : this(name, "lpwstr", value as object)
+		{
+		}
 
-
-		/// <summary>
-		/// Create a new CustomProperty to hold an int.
-		/// </summary>
+		/// <summary>Create a new CustomProperty to hold an int</summary>
 		/// <param name="name">The name of this CustomProperty.</param>
 		/// <param name="value">The value of this CustomProperty.</param>
-		public CustomProperty(string name, int value) : this(name, "i4", value as object) { }
+		public CustomProperty(string name, int value) : this(name, "i4", value as object)
+		{
+		}
 
-
-		/// <summary>
-		/// Create a new CustomProperty to hold a double.
-		/// </summary>
+		/// <summary>Create a new CustomProperty to hold a double</summary>
 		/// <param name="name">The name of this CustomProperty.</param>
 		/// <param name="value">The value of this CustomProperty.</param>
-		public CustomProperty(string name, double value) : this(name, "r8", value as object) { }
+		public CustomProperty(string name, double value) : this(name, "r8", value as object)
+		{
+		}
 
-
-		/// <summary>
-		/// Create a new CustomProperty to hold a DateTime.
-		/// </summary>
+		/// <summary>Create a new CustomProperty to hold a DateTime</summary>
 		/// <param name="name">The name of this CustomProperty.</param>
 		/// <param name="value">The value of this CustomProperty.</param>
-		public CustomProperty(string name, DateTime value) : this(name, "filetime", value.ToUniversalTime() as object) { }
+		public CustomProperty(string name, DateTime value) : this(name, "filetime", value.ToUniversalTime() as object)
+		{
+		}
 
-		/// <summary>
-		/// Create a new CustomProperty to hold a bool.
-		/// </summary>
+		/// <summary>Create a new CustomProperty to hold a bool</summary>
 		/// <param name="name">The name of this CustomProperty.</param>
 		/// <param name="value">The value of this CustomProperty.</param>
-		public CustomProperty(string name, bool value) : this(name, "bool", value as object) { }
+		public CustomProperty(string name, bool value) : this(name, "bool", value as object)
+		{
+		}
+
 	}
 
-	/// <summary>
-	/// Represents a field of type document property. This field displays the value stored in a custom property.
-	/// </summary>
+	/// <summary>Represents a field of type document property. This field displays the value stored in a custom property.</summary>
 	public class DocProperty : DocXElement
 	{
+
 		internal Regex extractName = new Regex(@"DOCPROPERTY  (?<name>.*)  ");
+
 		private string name;
 
-		/// <summary>
-		/// The custom property to display.
-		/// </summary>
-		public string Name { get { return name; } }
+		/// <summary>The custom property to display</summary>
+		public string Name
+		{
+			get
+			{
+				return name;
+			}
+		}
 
 		internal DocProperty(DocX document, XElement xml) : base(document, xml)
 		{
 			string instr = Xml.Attribute(XName.Get("instr", "http://schemas.openxmlformats.org/wordprocessingml/2006/main")).Value;
-			this.name = extractName.Match(instr.Trim()).Groups["name"].Value;
+			name = extractName.Match(instr.Trim()).Groups["name"].Value;
 		}
+
 	}
 
-	public enum DocumentTypes
-	{
-		Document,
-		Template
-	}
-
-	/// <summary>
-	/// Represents a document.
-	/// </summary>
+	/// <summary>Represents a document</summary>
 	public class DocX : Container, IDisposable
 	{
-		#region Namespaces
+
 		static internal XNamespace w = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
+
 		static internal XNamespace rel = "http://schemas.openxmlformats.org/package/2006/relationships";
 
 		static internal XNamespace r = "http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+
 		static internal XNamespace m = "http://schemas.openxmlformats.org/officeDocument/2006/math";
+
 		static internal XNamespace customPropertiesSchema = "http://schemas.openxmlformats.org/officeDocument/2006/custom-properties";
+
 		static internal XNamespace customVTypesSchema = "http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes";
 
 		static internal XNamespace wp = "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing";
+
 		static internal XNamespace a = "http://schemas.openxmlformats.org/drawingml/2006/main";
+
 		static internal XNamespace c = "http://schemas.openxmlformats.org/drawingml/2006/chart";
 
 		static internal XNamespace v = "urn:schemas-microsoft-com:vml";
 
 		internal static XNamespace n = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering";
-		#endregion
 
 		internal float getMarginAttribute(XName name)
 		{
-			XElement body = mainDoc.Root.Element(XName.Get("body", DocX.w.NamespaceName));
-			XElement sectPr = body.Element(XName.Get("sectPr", DocX.w.NamespaceName));
+			XElement body = mainDoc.Root.Element(XName.Get("body", w.NamespaceName));
+			XElement sectPr = body.Element(XName.Get("sectPr", w.NamespaceName));
 			if (sectPr != null)
 			{
-				XElement pgMar = sectPr.Element(XName.Get("pgMar", DocX.w.NamespaceName));
+				XElement pgMar = sectPr.Element(XName.Get("pgMar", w.NamespaceName));
 				if (pgMar != null)
 				{
 					XAttribute top = pgMar.Attribute(name);
 					if (top != null)
 					{
 						float f;
-						if (float.TryParse(top.Value, out f))
-							return (int)(f / 20.0f);
+						if (float.TryParse(top.Value, out f)) return (int)(f / 20.0f);
 					}
 				}
 			}
-
 			return 0;
 		}
 
 		internal void setMarginAttribute(XName xName, float value)
 		{
-			XElement body = mainDoc.Root.Element(XName.Get("body", DocX.w.NamespaceName));
-			XElement sectPr = body.Element(XName.Get("sectPr", DocX.w.NamespaceName));
+			XElement body = mainDoc.Root.Element(XName.Get("body", w.NamespaceName));
+			XElement sectPr = body.Element(XName.Get("sectPr", w.NamespaceName));
 			if (sectPr != null)
 			{
-				XElement pgMar = sectPr.Element(XName.Get("pgMar", DocX.w.NamespaceName));
+				XElement pgMar = sectPr.Element(XName.Get("pgMar", w.NamespaceName));
 				if (pgMar != null)
 				{
 					XAttribute top = pgMar.Attribute(xName);
@@ -2000,84 +4316,70 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
 		public BookmarkCollection Bookmarks
 		{
 			get
 			{
 				BookmarkCollection bookmarks = new BookmarkCollection();
-				foreach (Paragraph paragraph in Paragraphs)
-					bookmarks.AddRange(paragraph.GetBookmarks());
+				foreach (Paragraph paragraph in Paragraphs) bookmarks.AddRange(paragraph.GetBookmarks());
 				return bookmarks;
 			}
 		}
 
-		/// <summary>
-		/// Top margin value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.
-		/// </summary>
+		/// <summary>Top margin value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.</summary>
 		public float MarginTop
 		{
 			get
 			{
-				return getMarginAttribute(XName.Get("top", DocX.w.NamespaceName));
+				return getMarginAttribute(XName.Get("top", w.NamespaceName));
 			}
-
 			set
 			{
-				setMarginAttribute(XName.Get("top", DocX.w.NamespaceName), value);
+				setMarginAttribute(XName.Get("top", w.NamespaceName), value);
 			}
 		}
 
-		/// <summary>
-		/// Bottom margin value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.
-		/// </summary>
+		/// <summary>Bottom margin value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.</summary>
 		public float MarginBottom
 		{
 			get
 			{
-				return getMarginAttribute(XName.Get("bottom", DocX.w.NamespaceName));
+				return getMarginAttribute(XName.Get("bottom", w.NamespaceName));
 			}
-
 			set
 			{
-				setMarginAttribute(XName.Get("bottom", DocX.w.NamespaceName), value);
+				setMarginAttribute(XName.Get("bottom", w.NamespaceName), value);
 			}
 		}
 
-		/// <summary>
-		/// Left margin value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.
-		/// </summary>
+		/// <summary>Left margin value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.</summary>
 		public float MarginLeft
 		{
 			get
 			{
-				return getMarginAttribute(XName.Get("left", DocX.w.NamespaceName));
+				return getMarginAttribute(XName.Get("left", w.NamespaceName));
 			}
-
 			set
 			{
-				setMarginAttribute(XName.Get("left", DocX.w.NamespaceName), value);
+				setMarginAttribute(XName.Get("left", w.NamespaceName), value);
 			}
 		}
 
-		/// <summary>
-		/// Right margin value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.
-		/// </summary>
+		/// <summary>Right margin value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.</summary>
 		public float MarginRight
 		{
 			get
 			{
-				return getMarginAttribute(XName.Get("right", DocX.w.NamespaceName));
+				return getMarginAttribute(XName.Get("right", w.NamespaceName));
 			}
-
 			set
 			{
-				setMarginAttribute(XName.Get("right", DocX.w.NamespaceName), value);
+				setMarginAttribute(XName.Get("right", w.NamespaceName), value);
 			}
 		}
 
-		/// <summary>
-		/// Page width value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.
-		/// </summary>
+		/// <summary>Page width value in points. 1pt = 1/72 of an inch. Word internally writes docx using units = 1/20th of a point.</summary>
 		public float PageWidth
 		{
 			get
@@ -2275,6 +4577,9 @@ namespace Novacode
 			settings.Root.AddFirst(documentProtection);
 		}
 
+		/// <summary></summary>
+		/// <param name="er"></param>
+		/// <param name="strPassword"></param>
 		public void AddProtection(EditRestrictions er, string strPassword)
 		{
 			// http://blogs.msdn.com/b/vsod/archive/2010/04/05/how-to-set-the-editing-restrictions-in-word-using-open-xml-sdk-2-0.aspx
@@ -2446,6 +4751,7 @@ namespace Novacode
 			settings.Descendants(XName.Get("documentProtection", DocX.w.NamespaceName)).Remove();
 		}
 
+		/// <summary></summary>
 		public PageLayout PageLayout
 		{
 			get
@@ -2456,7 +4762,6 @@ namespace Novacode
 					Xml.SetElementValue(XName.Get("sectPr", DocX.w.NamespaceName), string.Empty);
 					sectPr = Xml.Element(XName.Get("sectPr", DocX.w.NamespaceName));
 				}
-
 				return new PageLayout(this, sectPr);
 			}
 		}
@@ -2729,21 +5034,16 @@ namespace Novacode
 			return null;
 		}
 
-
-
+		/// <summary></summary>
+		/// <returns></returns>
 		public List<Section> GetSections()
 		{
-
 			var allParas = Paragraphs;
-
 			var parasInASection = new List<Paragraph>();
 			var sections = new List<Section>();
-
 			foreach (var para in allParas)
 			{
-
 				var sectionInPara = para.Xml.Descendants().FirstOrDefault(s => s.Name.LocalName == "sectPr");
-
 				if (sectionInPara == null)
 				{
 					parasInASection.Add(para);
@@ -2755,25 +5055,27 @@ namespace Novacode
 					sections.Add(section);
 					parasInASection = new List<Paragraph>();
 				}
-
 			}
-
 			XElement body = mainDoc.Root.Element(XName.Get("body", DocX.w.NamespaceName));
 			XElement baseSectionXml = body.Element(XName.Get("sectPr", DocX.w.NamespaceName));
 			var baseSection = new Section(Document, baseSectionXml) { SectionParagraphs = parasInASection };
 			sections.Add(baseSection);
-
 			return sections;
 		}
 
-
 		// Get the word\settings.xml part
 		internal PackagePart settingsPart;
+
 		internal PackagePart endnotesPart;
+
 		internal PackagePart footnotesPart;
+
 		internal PackagePart stylesPart;
+
 		internal PackagePart stylesWithEffectsPart;
+
 		internal PackagePart numberingPart;
+
 		internal PackagePart fontTablePart;
 
 		#region Internal variables defined foreach DocX object
@@ -2803,10 +5105,8 @@ namespace Novacode
 		internal Stream stream;
 		#endregion
 
-		internal DocX(DocX document, XElement xml)
-			: base(document, xml)
+		internal DocX(DocX document, XElement xml) : base(document, xml)
 		{
-
 		}
 
 		/// <summary>
@@ -2928,9 +5228,7 @@ namespace Novacode
 			}
 		}
 
-		///<summary>
-		/// Returns the list of document core properties with corresponding values.
-		///</summary>
+		///<summary>Returns the list of document core properties with corresponding values</summary>
 		public Dictionary<string, string> CoreProperties
 		{
 			get
@@ -2939,9 +5237,7 @@ namespace Novacode
 				{
 					PackagePart docProps_Core = package.GetPart(new Uri("/docProps/core.xml", UriKind.Relative));
 					XDocument corePropDoc;
-					using (TextReader tr = new StreamReader(docProps_Core.GetStream(FileMode.Open, FileAccess.Read)))
-						corePropDoc = XDocument.Load(tr, LoadOptions.PreserveWhitespace);
-
+					using (TextReader tr = new StreamReader(docProps_Core.GetStream(FileMode.Open, FileAccess.Read))) corePropDoc = XDocument.Load(tr, LoadOptions.PreserveWhitespace);
 					// Get all of the core properties in this document
 					return (from docProperty in corePropDoc.Root.Elements()
 							select
@@ -2952,7 +5248,6 @@ namespace Novacode
 								docProperty.Name.LocalName),
 							  docProperty.Value)).ToDictionary(p => p.Key, v => v.Value);
 				}
-
 				return new Dictionary<string, string>();
 			}
 		}
@@ -3807,6 +6102,10 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="remote_document"></param>
+		/// <param name="pp"></param>
+		/// <param name="remote_mainDoc"></param>
 		protected void clonePackageRelationship(DocX remote_document, PackagePart pp, XDocument remote_mainDoc)
 		{
 			string url = pp.Uri.OriginalString.Replace("/", "");
@@ -3844,6 +6143,9 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="pp"></param>
+		/// <returns></returns>
 		protected PackagePart clonePackagePart(PackagePart pp)
 		{
 			PackagePart new_pp = package.CreatePart(pp.Uri, pp.ContentType, CompressionOption.Normal);
@@ -3864,22 +6166,19 @@ namespace Novacode
 			return new_pp;
 		}
 
+		/// <summary></summary>
+		/// <param name="stream"></param>
+		/// <returns></returns>
 		protected string GetMD5HashFromStream(Stream stream)
 		{
 			MD5 md5 = new MD5CryptoServiceProvider();
 			byte[] retVal = md5.ComputeHash(stream);
-
 			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < retVal.Length; i++)
-			{
-				sb.Append(retVal[i].ToString("x2"));
-			}
+			for (int i = 0; i < retVal.Length; i++) sb.Append(retVal[i].ToString("x2"));
 			return sb.ToString();
 		}
 
-		/// <summary>
-		/// Insert a new Table at the end of this document.
-		/// </summary>
+		/// <summary>Insert a new Table at the end of this document</summary>
 		/// <param name="columnCount">The number of columns to create.</param>
 		/// <param name="rowCount">The number of rows to create.</param>
 		/// <returns>A new Table.</returns>
@@ -3914,27 +6213,25 @@ namespace Novacode
 		/// </example>
 		public new Table InsertTable(int rowCount, int columnCount)
 		{
-			if (rowCount < 1 || columnCount < 1)
-				throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
-
+			if (rowCount < 1 || columnCount < 1) throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
 			Table t = base.InsertTable(rowCount, columnCount);
 			t.mainPart = mainPart;
 			return t;
 		}
 
+		/// <summary></summary>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public Table AddTable(int rowCount, int columnCount)
 		{
-			if (rowCount < 1 || columnCount < 1)
-				throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
-
+			if (rowCount < 1 || columnCount < 1) throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
 			Table t = new Table(this, HelperFunctions.CreateTable(rowCount, columnCount));
 			t.mainPart = mainPart;
 			return t;
 		}
 
-		/// <summary>
-		/// Create a new list with a list item.
-		/// </summary>
+		/// <summary>Create a new list with a list item</summary>
 		/// <param name="listText">The text of the first element in the created list.</param>
 		/// <param name="level">The indentation level of the element in the list.</param>
 		/// <param name="listType">The type of list to be created: Bulleted or Numbered.</param>
@@ -3951,9 +6248,7 @@ namespace Novacode
 			return AddListItem(new List(this, null), listText, level, listType, startNumber, trackChanges, continueNumbering);
 		}
 
-		/// <summary>
-		/// Add a list item to an already existing list.
-		/// </summary>
+		/// <summary>Add a list item to an already existing list</summary>
 		/// <param name="list">The list to add the new list item to.</param>
 		/// <param name="listText">The run text that should be in the new list item.</param>
 		/// <param name="level">The indentation level of the new list element.</param>
@@ -3971,38 +6266,41 @@ namespace Novacode
 			if (startNumber.HasValue && continueNumbering) throw new InvalidOperationException("Cannot specify a start number and at the same time continue numbering from another list");
 			var listToReturn = HelperFunctions.CreateItemInList(list, listText, level, listType, startNumber, trackChanges, continueNumbering);
 			var lastItem = listToReturn.Items.LastOrDefault();
-			if (lastItem != null)
-			{
-				lastItem.PackagePart = mainPart;
-			}
+			if (lastItem != null) lastItem.PackagePart = mainPart;
 			return listToReturn;
-
 		}
 
-		/// <summary>
-		/// Insert list into the document.
-		/// </summary>
-		/// <param name="list">The list to insert into the document.</param>
-		/// <returns>The list that was inserted into the document.</returns>
+		/// <summary>Insert list into the document</summary>
+		/// <param name="list">The list to insert into the document</param>
+		/// <returns>The list that was inserted into the document</returns>
 		public new List InsertList(List list)
 		{
 			base.InsertList(list);
 			return list;
 		}
+
+		/// <summary></summary>
+		/// <param name="list"></param>
+		/// <param name="fontFamily"></param>
+		/// <param name="fontSize"></param>
+		/// <returns></returns>
 		public new List InsertList(List list, Font fontFamily, double fontSize)
 		{
 			base.InsertList(list, fontFamily, fontSize);
 			return list;
 		}
+
+		/// <summary></summary>
+		/// <param name="list"></param>
+		/// <param name="fontSize"></param>
+		/// <returns></returns>
 		public new List InsertList(List list, double fontSize)
 		{
 			base.InsertList(list, fontSize);
 			return list;
 		}
 
-		/// <summary>
-		/// Insert a list at an index location in the document.
-		/// </summary>
+		/// <summary>Insert a list at an index location in the document</summary>
 		/// <param name="index">Index in document to insert the list.</param>
 		/// <param name="list">The list that was inserted into the document.</param>
 		/// <returns></returns>
@@ -4015,24 +6313,17 @@ namespace Novacode
 		internal XDocument AddStylesForList()
 		{
 			var wordStylesUri = new Uri("/word/styles.xml", UriKind.Relative);
-
 			// If the internal document contains no /word/styles.xml create one.
-			if (!package.PartExists(wordStylesUri))
-				HelperFunctions.AddDefaultStylesXml(package);
-
+			if (!package.PartExists(wordStylesUri)) HelperFunctions.AddDefaultStylesXml(package);
 			// Load the styles.xml into memory.
 			XDocument wordStyles;
-			using (TextReader tr = new StreamReader(package.GetPart(wordStylesUri).GetStream()))
-				wordStyles = XDocument.Load(tr);
-
-			bool listStyleExists =
-			(
-			  from s in wordStyles.Element(w + "styles").Elements()
-			  let styleId = s.Attribute(XName.Get("styleId", w.NamespaceName))
-			  where (styleId != null && styleId.Value == "ListParagraph")
-			  select s
+			using (TextReader tr = new StreamReader(package.GetPart(wordStylesUri).GetStream())) wordStyles = XDocument.Load(tr);
+			bool listStyleExists = (
+				from s in wordStyles.Element(w + "styles").Elements()
+				let styleId = s.Attribute(XName.Get("styleId", w.NamespaceName))
+				where (styleId != null && styleId.Value == "ListParagraph")
+				select s
 			).Any();
-
 			if (!listStyleExists)
 			{
 				var style = new XElement
@@ -4056,18 +6347,13 @@ namespace Novacode
 						)
 				);
 				wordStyles.Element(w + "styles").Add(style);
-
-				// Save the styles document.
-				using (TextWriter tw = new StreamWriter(new PackagePartStream(package.GetPart(wordStylesUri).GetStream())))
-					wordStyles.Save(tw);
+				// Save the styles document
+				using (TextWriter tw = new StreamWriter(new PackagePartStream(package.GetPart(wordStylesUri).GetStream()))) wordStyles.Save(tw);
 			}
-
 			return wordStyles;
 		}
 
-		/// <summary>
-		/// Insert a Table into this document. The Table's source can be a completely different document.
-		/// </summary>
+		/// <summary>Insert a Table into this document. The Table's source can be a completely different document.</summary>
 		/// <param name="t">The Table to insert.</param>
 		/// <param name="index">The index to insert this Table at.</param>
 		/// <returns>The Table now associated with this document.</returns>
@@ -6053,6 +8339,8 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph()
 		{
 			Paragraph p = base.InsertParagraph();
@@ -6060,6 +8348,11 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, string text, bool trackChanges)
 		{
 			Paragraph p = base.InsertParagraph(index, text, trackChanges);
@@ -6067,18 +8360,31 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(Paragraph p)
 		{
 			p.PackagePart = mainPart;
 			return base.InsertParagraph(p);
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, Paragraph p)
 		{
 			p.PackagePart = mainPart;
 			return base.InsertParagraph(index, p);
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, string text, bool trackChanges, Formatting formatting)
 		{
 			Paragraph p = base.InsertParagraph(index, text, trackChanges, formatting);
@@ -6086,6 +8392,9 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text)
 		{
 			Paragraph p = base.InsertParagraph(text);
@@ -6093,6 +8402,10 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text, bool trackChanges)
 		{
 			Paragraph p = base.InsertParagraph(text, trackChanges);
@@ -6100,6 +8413,11 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text, bool trackChanges, Formatting formatting)
 		{
 			Paragraph p = base.InsertParagraph(text, trackChanges, formatting);
@@ -6108,9 +8426,12 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public Paragraph[] InsertParagraphs(string text)
 		{
-			String[] textArray = text.Split('\n');
+			string[] textArray = text.Split('\n');
 			List<Paragraph> paragraphs = new List<Paragraph>();
 			foreach (var textForParagraph in textArray)
 			{
@@ -6121,69 +8442,67 @@ namespace Novacode
 			return paragraphs.ToArray();
 		}
 
+		/// <summary></summary>
 		public override ReadOnlyCollection<Content> Contents
 		{
 			get
 			{
 				ReadOnlyCollection<Content> l = base.Contents;
-				foreach (var content in l)
-				{
-					content.PackagePart = mainPart;
-				}
+				foreach (var content in l) content.PackagePart = mainPart;
 				return l;
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="el"></param>
 		public void SetContent(XElement el)
 		{
 			foreach (XElement e in el.Elements())
 			{
-				(from d in Document.Contents
-				 where d.Name == e.Name
-				 select d).First().SetText(e.Value);
+				(from d in Document.Contents where d.Name == e.Name select d).First().SetText(e.Value);
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="dict"></param>
 		public void SetContent(Dictionary<string, string> dict)
 		{
 			foreach (KeyValuePair<string, string> item in dict)
 			{
-				(from d in Document.Contents
-				 where d.Name == item.Key
-				 select d).First().SetText(item.Value);
+				(from d in Document.Contents where d.Name == item.Key select d).First().SetText(item.Value);
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="path"></param>
 		public void SetContent(string path)
 		{
 			XDocument doc = XDocument.Load(path);
 			SetContent(doc);
 		}
 
+		/// <summary></summary>
+		/// <param name="xmlDoc"></param>
 		public void SetContent(XDocument xmlDoc)
 		{
-
 			foreach (XElement e in xmlDoc.ElementsAfterSelf())
 			{
-				(from d in Document.Contents
-				 where d.Name == e.Name
-				 select d).First().SetText(e.Value);
+				(from d in Document.Contents where d.Name == e.Name select d).First().SetText(e.Value);
 			}
 		}
 
+		/// <summary></summary>
 		public override ReadOnlyCollection<Paragraph> Paragraphs
 		{
 			get
 			{
 				ReadOnlyCollection<Paragraph> l = base.Paragraphs;
-				foreach (var paragraph in l)
-				{
-					paragraph.PackagePart = mainPart;
-				}
+				foreach (var paragraph in l) paragraph.PackagePart = mainPart;
 				return l;
 			}
 		}
 
+		/// <summary></summary>
 		public override List<List> Lists
 		{
 			get
@@ -6194,6 +8513,7 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
 		public override List<Table> Tables
 		{
 			get
@@ -6205,45 +8525,33 @@ namespace Novacode
 		}
 
 
-		/// <summary>
-		/// Create an equation and insert it in the new paragraph
-		/// </summary>        
-		public override Paragraph InsertEquation(String equation)
+		/// <summary>Create an equation and insert it in the new paragraph</summary>
+		public override Paragraph InsertEquation(string equation)
 		{
 			Paragraph p = base.InsertEquation(equation);
 			p.PackagePart = mainPart;
 			return p;
 		}
 
-		/// <summary>
-		/// Insert a chart in document
-		/// </summary>
+		/// <summary>Insert a chart in document</summary>
 		public void InsertChart(Chart chart)
 		{
-			// Create a new chart part uri.
-			String chartPartUriPath = String.Empty;
-			Int32 chartIndex = 1;
+			// Create a new chart part uri
+			string chartPartUriPath = string.Empty;
+			int chartIndex = 1;
 			do
 			{
-				chartPartUriPath = String.Format
-				(
-					"/word/charts/chart{0}.xml",
-					chartIndex
-				);
+				chartPartUriPath = string.Format("/word/charts/chart{0}.xml", chartIndex);
 				chartIndex++;
-			} while (package.PartExists(new Uri(chartPartUriPath, UriKind.Relative)));
-
-			// Create chart part.
+			}
+			while (package.PartExists(new Uri(chartPartUriPath, UriKind.Relative)));
+			// Create chart part
 			PackagePart chartPackagePart = package.CreatePart(new Uri(chartPartUriPath, UriKind.Relative), "application/vnd.openxmlformats-officedocument.drawingml.chart+xml", CompressionOption.Normal);
-
 			// Create a new chart relationship
-			String relID = GetNextFreeRelationshipID();
+			string relID = GetNextFreeRelationshipID();
 			PackageRelationship rel = mainPart.CreateRelationship(chartPackagePart.Uri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/chart", relID);
-
 			// Save a chart info the chartPackagePart
-			using (TextWriter tw = new StreamWriter(new PackagePartStream(chartPackagePart.GetStream(FileMode.Create, FileAccess.Write))))
-				chart.Xml.Save(tw);
-
+			using (TextWriter tw = new StreamWriter(new PackagePartStream(chartPackagePart.GetStream(FileMode.Create, FileAccess.Write)))) chart.Xml.Save(tw);
 			// Insert a new chart into a paragraph.
 			Paragraph p = InsertParagraph();
 			XElement chartElement = new XElement(
@@ -6271,20 +8579,14 @@ namespace Novacode
 			p.Xml.Add(chartElement);
 		}
 
-		/// <summary>
-		/// Inserts a default TOC into the current document.
-		/// Title: Table of contents
-		/// Swithces will be: TOC \h \o '1-3' \u \z
-		/// </summary>
+		/// <summary>Inserts a default TOC into the current document. Title: Table of contents. Swithces will be: TOC \h \o '1-3' \u \z</summary>
 		/// <returns>The inserted TableOfContents</returns>
 		public TableOfContents InsertDefaultTableOfContents()
 		{
 			return InsertTableOfContents("Table of contents", TableOfContentsSwitches.O | TableOfContentsSwitches.H | TableOfContentsSwitches.Z | TableOfContentsSwitches.U);
 		}
 
-		/// <summary>
-		/// Inserts a TOC into the current document.
-		/// </summary>
+		/// <summary>Inserts a TOC into the current document</summary>
 		/// <param name="title">The title of the TOC</param>
 		/// <param name="switches">Switches to be applied, see: http://officeopenxml.com/WPtableOfContents.php </param>
 		/// <param name="headerStyle">Lets you set the style name of the TOC header</param>
@@ -6298,9 +8600,7 @@ namespace Novacode
 			return toc;
 		}
 
-		/// <summary>
-		/// Inserts at TOC into the current document before the provided <paramref name="reference"/>
-		/// </summary>
+		/// <summary>Inserts at TOC into the current document before the provided <paramref name="reference"/></summary>
 		/// <param name="reference">The paragraph to use as reference</param>
 		/// <param name="title">The title of the TOC</param>
 		/// <param name="switches">Switches to be applied, see: http://officeopenxml.com/WPtableOfContents.php </param>
@@ -6314,8 +8614,6 @@ namespace Novacode
 			reference.Xml.AddBeforeSelf(toc.Xml);
 			return toc;
 		}
-
-		#region IDisposable Members
 
 		/// <summary>
 		/// Releases all resources used by this document.
@@ -6348,11 +8646,16 @@ namespace Novacode
 			package.Close();
 		}
 
-		#endregion
 	}
 
+	/// <summary></summary>
 	public static class ExtensionsHeadings
 	{
+
+		/// <summary></summary>
+		/// <param name="paragraph"></param>
+		/// <param name="headingType"></param>
+		/// <returns></returns>
 		public static Paragraph Heading(this Paragraph paragraph, HeadingType headingType)
 		{
 			string StyleName = headingType.EnumDescription();
@@ -6360,22 +8663,16 @@ namespace Novacode
 			return paragraph;
 		}
 
+		/// <summary></summary>
+		/// <param name="enumValue"></param>
+		/// <returns></returns>
 		public static string EnumDescription(this Enum enumValue)
 		{
-			if (enumValue == null || enumValue.ToString() == "0")
-			{
-				return string.Empty;
-			}
+			if (enumValue == null || enumValue.ToString() == "0") return string.Empty;
 			FieldInfo enumInfo = enumValue.GetType().GetField(enumValue.ToString());
 			DescriptionAttribute[] enumAttributes = (DescriptionAttribute[])enumInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
-			if (enumAttributes.Length > 0)
-			{
-				return enumAttributes[0].Description;
-			}
-			else
-			{
-				return enumValue.ToString();
-			}
+			if (enumAttributes.Length > 0) return enumAttributes[0].Description;
+			return enumValue.ToString();
 		}
 
 		/// <summary>
@@ -6387,34 +8684,34 @@ namespace Novacode
 		/// <returns></returns>
 		public static bool HasFlag(this Enum variable, Enum value)
 		{
-			if (variable == null)
-				return false;
-
-			if (value == null)
-				throw new ArgumentNullException(nameof(value));
-
+			if (variable == null) return false;
+			if (value == null) throw new ArgumentNullException(nameof(value));
 			// Not as good as the .NET 4 version of this function, but should be good enough
-			if (!Enum.IsDefined(variable.GetType(), value))
-			{
-				throw new ArgumentException(string.Format(
-					"Enumeration type mismatch.  The flag is of type '{0}', was expecting '{1}'.",
-					value.GetType(), variable.GetType()));
-			}
-
+			if (!Enum.IsDefined(variable.GetType(), value)) throw new ArgumentException(string.Format("Enumeration type mismatch.  The flag is of type '{0}', was expecting '{1}'.", value.GetType(), variable.GetType()));
 			ulong num = Convert.ToUInt64(value);
 			return ((Convert.ToUInt64(variable) & num) == num);
-
 		}
+
 	}
 
-	/// <summary>
-	/// All DocX types are derived from DocXElement. 
-	/// This class contains properties which every element of a DocX must contain.
-	/// </summary>
+	/// <summary>All DocX types are derived from DocXElement. This class contains properties which every element of a DocX must contain.</summary>
 	public abstract class DocXElement
 	{
+
 		internal PackagePart mainPart;
-		public PackagePart PackagePart { get { return mainPart; } set { mainPart = value; } }
+
+		/// <summary></summary>
+		public PackagePart PackagePart
+		{
+			get
+			{
+				return mainPart;
+			}
+			set
+			{
+				mainPart = value;
+			}
+		}
 
 		/// <summary>
 		/// This is the actual Xml that gives this element substance. 
@@ -6425,13 +8722,22 @@ namespace Novacode
 		///     </r>
 		/// </p>
 		/// </summary>
+		public XElement Xml
+		{
+			get;
+			set;
+		}
 
-		public XElement Xml { get; set; }
 		/// <summary>
 		/// This is a reference to the DocX object that this element belongs to.
 		/// Every DocX element is connected to a document.
 		/// </summary>
-		internal DocX Document { get; set; }
+		internal DocX Document
+		{
+			get;
+			set;
+		}
+
 		/// <summary>
 		/// Store both the document and xml so that they can be accessed by derived types.
 		/// </summary>
@@ -6439,19 +8745,24 @@ namespace Novacode
 		/// <param name="xml">The Xml that gives this element substance</param>
 		public DocXElement(DocX document, XElement xml)
 		{
-			this.Document = document;
-			this.Xml = xml;
+			Document = document;
+			Xml = xml;
 		}
+
 	}
 
-	/// <summary>
-	/// This class provides functions for inserting new DocXElements before or after the current DocXElement.
-	/// Only certain DocXElements can support these functions without creating invalid documents, at the moment these are Paragraphs and Table.
-	/// </summary>
+	/// <summary>This class provides functions for inserting new DocXElements before or after the current DocXElement. Only certain DocXElements can support these functions without creating invalid documents, at the moment these are Paragraphs and Table.</summary>
 	public abstract class InsertBeforeOrAfter : DocXElement
 	{
-		public InsertBeforeOrAfter(DocX document, XElement xml) : base(document, xml) { }
 
+		/// <summary></summary>
+		/// <param name="document"></param>
+		/// <param name="xml"></param>
+		public InsertBeforeOrAfter(DocX document, XElement xml) : base(document, xml)
+		{
+		}
+
+		/// <summary></summary>
 		public virtual void InsertPageBreakBeforeSelf()
 		{
 			XElement p = new XElement
@@ -6467,10 +8778,10 @@ namespace Novacode
 							)
 					)
 			);
-
 			Xml.AddBeforeSelf(p);
 		}
 
+		/// <summary></summary>
 		public virtual void InsertPageBreakAfterSelf()
 		{
 			XElement p = new XElement
@@ -6486,25 +8797,27 @@ namespace Novacode
 							)
 					)
 			);
-
 			Xml.AddAfterSelf(p);
 		}
 
+		/// <summary></summary>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraphBeforeSelf(Paragraph p)
 		{
 			Xml.AddBeforeSelf(p.Xml);
 			XElement newlyInserted = Xml.ElementsBeforeSelf().First();
-
 			p.Xml = newlyInserted;
-
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraphAfterSelf(Paragraph p)
 		{
 			Xml.AddAfterSelf(p.Xml);
 			XElement newlyInserted = Xml.ElementsAfterSelf().First();
-
 			//Dmitchern
 			if (this as Paragraph != null)
 			{
@@ -6517,1094 +8830,145 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraphBeforeSelf(string text)
 		{
 			return InsertParagraphBeforeSelf(text, false, new Formatting());
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraphAfterSelf(string text)
 		{
 			return InsertParagraphAfterSelf(text, false, new Formatting());
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraphBeforeSelf(string text, bool trackChanges)
 		{
 			return InsertParagraphBeforeSelf(text, trackChanges, new Formatting());
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraphAfterSelf(string text, bool trackChanges)
 		{
 			return InsertParagraphAfterSelf(text, trackChanges, new Formatting());
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraphBeforeSelf(string text, bool trackChanges, Formatting formatting)
 		{
 			XElement newParagraph = new XElement
 			(
 				XName.Get("p", DocX.w.NamespaceName), new XElement(XName.Get("pPr", DocX.w.NamespaceName)), HelperFunctions.FormatInput(text, formatting.Xml)
 			);
-
-			if (trackChanges)
-				newParagraph = Paragraph.CreateEdit(EditType.ins, DateTime.Now, newParagraph);
-
+			if (trackChanges) newParagraph = Paragraph.CreateEdit(EditType.ins, DateTime.Now, newParagraph);
 			Xml.AddBeforeSelf(newParagraph);
 			XElement newlyInserted = Xml.ElementsBeforeSelf().Last();
-
 			Paragraph p = new Paragraph(Document, newlyInserted, -1);
-
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public virtual Paragraph InsertParagraphAfterSelf(string text, bool trackChanges, Formatting formatting)
 		{
 			XElement newParagraph = new XElement
 			(
 				XName.Get("p", DocX.w.NamespaceName), new XElement(XName.Get("pPr", DocX.w.NamespaceName)), HelperFunctions.FormatInput(text, formatting.Xml)
 			);
-
-			if (trackChanges)
-				newParagraph = Paragraph.CreateEdit(EditType.ins, DateTime.Now, newParagraph);
-
+			if (trackChanges) newParagraph = Paragraph.CreateEdit(EditType.ins, DateTime.Now, newParagraph);
 			Xml.AddAfterSelf(newParagraph);
 			XElement newlyInserted = Xml.ElementsAfterSelf().First();
-
 			Paragraph p = new Paragraph(Document, newlyInserted, -1);
-
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public virtual Table InsertTableAfterSelf(int rowCount, int columnCount)
 		{
 			XElement newTable = HelperFunctions.CreateTable(rowCount, columnCount);
 			Xml.AddAfterSelf(newTable);
 			XElement newlyInserted = Xml.ElementsAfterSelf().First();
-
 			return new Table(Document, newlyInserted) { mainPart = mainPart };
 		}
 
+		/// <summary></summary>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		public virtual Table InsertTableAfterSelf(Table t)
 		{
 			Xml.AddAfterSelf(t.Xml);
 			XElement newlyInserted = Xml.ElementsAfterSelf().First();
 			//Dmitchern
-			return new Table(Document, newlyInserted) { mainPart = mainPart }; //return new table, dont affect parameter table
-
-			//t.Xml = newlyInserted;
-			//return t;
+			//return new table, dont affect parameter table
+			return new Table(Document, newlyInserted) { mainPart = mainPart };
 		}
 
+		/// <summary></summary>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public virtual Table InsertTableBeforeSelf(int rowCount, int columnCount)
 		{
 			XElement newTable = HelperFunctions.CreateTable(rowCount, columnCount);
 			Xml.AddBeforeSelf(newTable);
 			XElement newlyInserted = Xml.ElementsBeforeSelf().Last();
-
 			return new Table(Document, newlyInserted) { mainPart = mainPart };
 		}
 
+		/// <summary></summary>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		public virtual Table InsertTableBeforeSelf(Table t)
 		{
 			Xml.AddBeforeSelf(t.Xml);
 			XElement newlyInserted = Xml.ElementsBeforeSelf().Last();
-
 			//Dmitchern
-			return new Table(Document, newlyInserted) { mainPart = mainPart }; //return new table, dont affect parameter table
-
-			//t.Xml = newlyInserted;
-			//return t;
+			//return new table, dont affect parameter table
+			return new Table(Document, newlyInserted) { mainPart = mainPart };
 		}
+
 	}
 
+	/// <summary></summary>
 	public static class XmlTemplateBases
 	{
-		#region TocXml
-		public const string TocXmlBase = @"<w:sdt xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main'>
-                  <w:sdtPr>
-                    <w:docPartObj>
-                      <w:docPartGallery w:val='Table of Contents'/>
-                      <w:docPartUnique/>
-                    </w:docPartObj>\
-                  </w:sdtPr>
-                  <w:sdtEndPr>
-                    <w:rPr>
-                      <w:rFonts w:asciiTheme='minorHAnsi' w:cstheme='minorBidi' w:eastAsiaTheme='minorHAnsi' w:hAnsiTheme='minorHAnsi'/>
-                      <w:color w:val='auto'/>
-                      <w:sz w:val='22'/>
-                      <w:szCs w:val='22'/>
-                      <w:lang w:eastAsia='en-US'/>
-                    </w:rPr>
-                  </w:sdtEndPr>
-                  <w:sdtContent>
-                    <w:p>
-                      <w:pPr>
-                        <w:pStyle w:val='{0}'/>
-                      </w:pPr>
-                      <w:r>
-                        <w:t>{1}</w:t>
-                      </w:r>
-                    </w:p>
-                    <w:p>
-                      <w:pPr>
-                        <w:pStyle w:val='TOC1'/>
-                        <w:tabs>
-                          <w:tab w:val='right' w:leader='dot' w:pos='{2}'/>
-                        </w:tabs>
-                        <w:rPr>
-                          <w:noProof/>
-                        </w:rPr>
-                      </w:pPr>
-                      <w:r>
-                        <w:fldChar w:fldCharType='begin' w:dirty='true'/>
-                      </w:r>
-                      <w:r>
-                        <w:instrText xml:space='preserve'> {3} </w:instrText>
-                      </w:r>
-                      <w:r>
-                        <w:fldChar w:fldCharType='separate'/>
-                      </w:r>
-                    </w:p>
-                    <w:p>
-                      <w:r>
-                        <w:rPr>
-                          <w:b/>
-                          <w:bCs/>
-                          <w:noProof/>
-                        </w:rPr>
-                        <w:fldChar w:fldCharType='end'/>
-                      </w:r>
-                    </w:p>
-                  </w:sdtContent>
-                </w:sdt>
-            ";
-		public const string TocHeadingStyleBase = @"<w:style w:type='paragraph' w:styleId='{0}' xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main'>
-            <w:name w:val='TOC Heading'/>
-            <w:basedOn w:val='Heading1'/>
-            <w:next w:val='Normal'/>
-            <w:uiPriority w:val='39'/>
-            <w:semiHidden/>
-            <w:unhideWhenUsed/>
-            <w:qFormat/>
-            <w:rsid w:val='00E67AA6'/>
-            <w:pPr>
-              <w:outlineLvl w:val='9'/>
-            </w:pPr>
-            <w:rPr>
-              <w:lang w:eastAsia='nb-NO'/>
-            </w:rPr>
-          </w:style>
-        ";
-		public const string TocElementStyleBase = @"  <w:style w:type='paragraph' w:styleId='{0}' xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main'>
-            <w:name w:val='{1}' />
-            <w:basedOn w:val='Normal' />
-            <w:next w:val='Normal' />
-            <w:autoRedefine />
-            <w:uiPriority w:val='39' />
-            <w:unhideWhenUsed />
-            <w:pPr>
-              <w:spacing w:after='100' />
-              <w:ind w:left='440' />
-            </w:pPr>
-          </w:style>
-        ";
-		public const string TocHyperLinkStyleBase = @"  <w:style w:type='character' w:styleId='Hyperlink' xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main'>
-            <w:name w:val='Hyperlink' />
-            <w:basedOn w:val='Normal' />
-            <w:uiPriority w:val='99' />
-            <w:unhideWhenUsed />
-            <w:rPr>
-              <w:color w:val='0000FF' w:themeColor='hyperlink' />
-              <w:u w:val='single' />
-            </w:rPr>
-          </w:style>
-        ";
-		#endregion
-	}
 
-	public enum ListItemType
-	{
-		Bulleted,
-		Numbered
-	}
+		/// <summary></summary>
+		public const string TocXmlBase = @"<w:sdt xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main'><w:sdtPr><w:docPartObj><w:docPartGallery w:val='Table of Contents'/><w:docPartUnique/></w:docPartObj>\</w:sdtPr><w:sdtEndPr><w:rPr><w:rFonts w:asciiTheme='minorHAnsi' w:cstheme='minorBidi' w:eastAsiaTheme='minorHAnsi' w:hAnsiTheme='minorHAnsi'/><w:color w:val='auto'/><w:sz w:val='22'/><w:szCs w:val='22'/><w:lang w:eastAsia='en-US'/></w:rPr></w:sdtEndPr><w:sdtContent><w:p><w:pPr><w:pStyle w:val='{0}'/></w:pPr><w:r><w:t>{1}</w:t></w:r></w:p><w:p><w:pPr><w:pStyle w:val='TOC1'/><w:tabs><w:tab w:val='right' w:leader='dot' w:pos='{2}'/></w:tabs><w:rPr><w:noProof/></w:rPr></w:pPr><w:r><w:fldChar w:fldCharType='begin' w:dirty='true'/></w:r><w:r><w:instrText xml:space='preserve'> {3} </w:instrText></w:r><w:r><w:fldChar w:fldCharType='separate'/></w:r></w:p><w:p><w:r><w:rPr><w:b/><w:bCs/><w:noProof/></w:rPr><w:fldChar w:fldCharType='end'/></w:r></w:p></w:sdtContent></w:sdt>";
 
-	public enum SectionBreakType
-	{
-		defaultNextPage,
-		evenPage,
-		oddPage,
-		continuous
-	}
+		/// <summary></summary>
+		public const string TocHeadingStyleBase = @"<w:style w:type='paragraph' w:styleId='{0}' xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main'><w:name w:val='TOC Heading'/><w:basedOn w:val='Heading1'/><w:next w:val='Normal'/><w:uiPriority w:val='39'/><w:semiHidden/><w:unhideWhenUsed/><w:qFormat/><w:rsid w:val='00E67AA6'/><w:pPr><w:outlineLvl w:val='9'/></w:pPr><w:rPr><w:lang w:eastAsia='nb-NO'/></w:rPr></w:style>";
 
+		/// <summary></summary>
+		public const string TocElementStyleBase = @"<w:style w:type='paragraph' w:styleId='{0}' xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main'><w:name w:val='{1}' /><w:basedOn w:val='Normal' /><w:next w:val='Normal' /><w:autoRedefine /><w:uiPriority w:val='39' /><w:unhideWhenUsed /><w:pPr><w:spacing w:after='100' /><w:ind w:left='440' /></w:pPr></w:style>";
 
-	public enum ContainerType
-	{
-		None,
-		TOC,
-		Section,
-		Cell,
-		Table,
-		Header,
-		Footer,
-		Paragraph,
-		Body
-	}
-
-	public enum PageNumberFormat
-	{
-		normal,
-		roman
-	}
-
-	public enum BorderSize
-	{
-		one,
-		two,
-		three,
-		four,
-		five,
-		six,
-		seven,
-		eight,
-		nine
-	}
-
-	public enum EditRestrictions
-	{
-		none,
-		readOnly,
-		forms,
-		comments,
-		trackedChanges
-	}
-
-	/// <summary>
-	/// Table Cell Border styles
-	/// Added by lckuiper @ 20101117
-	/// source: http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tablecellborders.aspx
-	/// </summary>
-	public enum BorderStyle
-	{
-		Tcbs_none = 0,
-		Tcbs_single,
-		Tcbs_thick,
-		Tcbs_double,
-		Tcbs_dotted,
-		Tcbs_dashed,
-		Tcbs_dotDash,
-		Tcbs_dotDotDash,
-		Tcbs_triple,
-		Tcbs_thinThickSmallGap,
-		Tcbs_thickThinSmallGap,
-		Tcbs_thinThickThinSmallGap,
-		Tcbs_thinThickMediumGap,
-		Tcbs_thickThinMediumGap,
-		Tcbs_thinThickThinMediumGap,
-		Tcbs_thinThickLargeGap,
-		Tcbs_thickThinLargeGap,
-		Tcbs_thinThickThinLargeGap,
-		Tcbs_wave,
-		Tcbs_doubleWave,
-		Tcbs_dashSmallGap,
-		Tcbs_dashDotStroked,
-		Tcbs_threeDEmboss,
-		Tcbs_threeDEngrave,
-		Tcbs_outset,
-		Tcbs_inset,
-		Tcbs_nil
-	}
-
-	/// <summary>
-	/// Table Cell Border Types
-	/// Added by lckuiper @ 20101117
-	/// source: http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tablecellborders.aspx
-	/// </summary>
-	public enum TableCellBorderType
-	{
-		Top,
-		Bottom,
-		Left,
-		Right,
-		InsideH,
-		InsideV,
-		TopLeftToBottomRight,
-		TopRightToBottomLeft
-	}
-
-	/// <summary>
-	/// Table Border Types
-	/// Added by lckuiper @ 20101117
-	/// source: http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tableborders.aspx
-	/// </summary>
-	public enum TableBorderType
-	{
-		Top,
-		Bottom,
-		Left,
-		Right,
-		InsideH,
-		InsideV
-	}
-
-	// Patch 7398 added by lckuiper on Nov 16th 2010 @ 2:23 PM
-	public enum VerticalAlignment
-	{
-		Top,
-		Center,
-		Bottom
-	};
-
-	public enum Orientation
-	{
-		Portrait,
-		Landscape
-	};
-
-	public enum XmlDocument
-	{
-		Main,
-		HeaderOdd,
-		HeaderEven,
-		HeaderFirst,
-		FooterOdd,
-		FooterEven,
-		FooterFirst
-	};
-
-	public enum MatchFormattingOptions
-	{
-		ExactMatch,
-		SubsetMatch
-	};
-
-	public enum Script
-	{
-		superscript,
-		subscript,
-		none
-	}
-
-	public enum Highlight
-	{
-		yellow,
-		green,
-		cyan,
-		magenta,
-		blue,
-		red,
-		darkBlue,
-		darkCyan,
-		darkGreen,
-		darkMagenta,
-		darkRed,
-		darkYellow,
-		darkGray,
-		lightGray,
-		black,
-		none
-	};
-
-	public enum UnderlineStyle
-	{
-		none = 0,
-		singleLine = 1,
-		words = 2,
-		doubleLine = 3,
-		dotted = 4,
-		thick = 6,
-		dash = 7,
-		dotDash = 9,
-		dotDotDash = 10,
-		wave = 11,
-		dottedHeavy = 20,
-		dashedHeavy = 23,
-		dashDotHeavy = 25,
-		dashDotDotHeavy = 26,
-		dashLongHeavy = 27,
-		dashLong = 39,
-		wavyDouble = 43,
-		wavyHeavy = 55,
-	};
-
-	public enum StrikeThrough
-	{
-		none,
-		strike,
-		doubleStrike
-	};
-
-	public enum Misc
-	{
-		none,
-		shadow,
-		outline,
-		outlineShadow,
-		emboss,
-		engrave
-	};
-
-	/// <summary>
-	/// Change the caps style of text, for use with Append and AppendLine.
-	/// </summary>
-	public enum CapsStyle
-	{
-		/// <summary>
-		/// No caps, make all characters are lowercase.
-		/// </summary>
-		none,
-
-		/// <summary>
-		/// All caps, make every character uppercase.
-		/// </summary>
-		caps,
-
-		/// <summary>
-		/// Small caps, make all characters capital but with a small font size.
-		/// </summary>
-		smallCaps
-	};
-
-	/// <summary>
-	/// Designs\Styles that can be applied to a table.
-	/// </summary>
-	public enum TableDesign
-	{
-		Custom,
-		TableNormal,
-		TableGrid,
-		LightShading,
-		LightShadingAccent1,
-		LightShadingAccent2,
-		LightShadingAccent3,
-		LightShadingAccent4,
-		LightShadingAccent5,
-		LightShadingAccent6,
-		LightList,
-		LightListAccent1,
-		LightListAccent2,
-		LightListAccent3,
-		LightListAccent4,
-		LightListAccent5,
-		LightListAccent6,
-		LightGrid,
-		LightGridAccent1,
-		LightGridAccent2,
-		LightGridAccent3,
-		LightGridAccent4,
-		LightGridAccent5,
-		LightGridAccent6,
-		MediumShading1,
-		MediumShading1Accent1,
-		MediumShading1Accent2,
-		MediumShading1Accent3,
-		MediumShading1Accent4,
-		MediumShading1Accent5,
-		MediumShading1Accent6,
-		MediumShading2,
-		MediumShading2Accent1,
-		MediumShading2Accent2,
-		MediumShading2Accent3,
-		MediumShading2Accent4,
-		MediumShading2Accent5,
-		MediumShading2Accent6,
-		MediumList1,
-		MediumList1Accent1,
-		MediumList1Accent2,
-		MediumList1Accent3,
-		MediumList1Accent4,
-		MediumList1Accent5,
-		MediumList1Accent6,
-		MediumList2,
-		MediumList2Accent1,
-		MediumList2Accent2,
-		MediumList2Accent3,
-		MediumList2Accent4,
-		MediumList2Accent5,
-		MediumList2Accent6,
-		MediumGrid1,
-		MediumGrid1Accent1,
-		MediumGrid1Accent2,
-		MediumGrid1Accent3,
-		MediumGrid1Accent4,
-		MediumGrid1Accent5,
-		MediumGrid1Accent6,
-		MediumGrid2,
-		MediumGrid2Accent1,
-		MediumGrid2Accent2,
-		MediumGrid2Accent3,
-		MediumGrid2Accent4,
-		MediumGrid2Accent5,
-		MediumGrid2Accent6,
-		MediumGrid3,
-		MediumGrid3Accent1,
-		MediumGrid3Accent2,
-		MediumGrid3Accent3,
-		MediumGrid3Accent4,
-		MediumGrid3Accent5,
-		MediumGrid3Accent6,
-		DarkList,
-		DarkListAccent1,
-		DarkListAccent2,
-		DarkListAccent3,
-		DarkListAccent4,
-		DarkListAccent5,
-		DarkListAccent6,
-		ColorfulShading,
-		ColorfulShadingAccent1,
-		ColorfulShadingAccent2,
-		ColorfulShadingAccent3,
-		ColorfulShadingAccent4,
-		ColorfulShadingAccent5,
-		ColorfulShadingAccent6,
-		ColorfulList,
-		ColorfulListAccent1,
-		ColorfulListAccent2,
-		ColorfulListAccent3,
-		ColorfulListAccent4,
-		ColorfulListAccent5,
-		ColorfulListAccent6,
-		ColorfulGrid,
-		ColorfulGridAccent1,
-		ColorfulGridAccent2,
-		ColorfulGridAccent3,
-		ColorfulGridAccent4,
-		ColorfulGridAccent5,
-		ColorfulGridAccent6,
-		None
-	};
-
-	/// <summary>How a Table should auto resize</summary>
-	public enum AutoFit
-	{
-		/// <summary>
-		/// Autofit to Table contents.
-		/// </summary>
-		Contents,
-
-		/// <summary>
-		/// Autofit to Window.
-		/// </summary>
-		Window,
-
-		/// <summary>
-		/// Autofit to Column width.
-		/// </summary>
-		ColumnWidth,
-		/// <summary>
-		///  Autofit to Fixed column width
-		/// </summary>
-		Fixed
-	};
-
-	public enum RectangleShapes
-	{
-		rect,
-		roundRect,
-		snip1Rect,
-		snip2SameRect,
-		snip2DiagRect,
-		snipRoundRect,
-		round1Rect,
-		round2SameRect,
-		round2DiagRect
-	};
-
-	public enum BasicShapes
-	{
-		ellipse,
-		triangle,
-		rtTriangle,
-		parallelogram,
-		trapezoid,
-		diamond,
-		pentagon,
-		hexagon,
-		heptagon,
-		octagon,
-		decagon,
-		dodecagon,
-		pie,
-		chord,
-		teardrop,
-		frame,
-		halfFrame,
-		corner,
-		diagStripe,
-		plus,
-		plaque,
-		can,
-		cube,
-		bevel,
-		donut,
-		noSmoking,
-		blockArc,
-		foldedCorner,
-		smileyFace,
-		heart,
-		lightningBolt,
-		sun,
-		moon,
-		cloud,
-		arc,
-		backetPair,
-		bracePair,
-		leftBracket,
-		rightBracket,
-		leftBrace,
-		rightBrace
-	};
-
-	public enum BlockArrowShapes
-	{
-		rightArrow,
-		leftArrow,
-		upArrow,
-		downArrow,
-		leftRightArrow,
-		upDownArrow,
-		quadArrow,
-		leftRightUpArrow,
-		bentArrow,
-		uturnArrow,
-		leftUpArrow,
-		bentUpArrow,
-		curvedRightArrow,
-		curvedLeftArrow,
-		curvedUpArrow,
-		curvedDownArrow,
-		stripedRightArrow,
-		notchedRightArrow,
-		homePlate,
-		chevron,
-		rightArrowCallout,
-		downArrowCallout,
-		leftArrowCallout,
-		upArrowCallout,
-		leftRightArrowCallout,
-		quadArrowCallout,
-		circularArrow
-	};
-
-	public enum EquationShapes
-	{
-		mathPlus,
-		mathMinus,
-		mathMultiply,
-		mathDivide,
-		mathEqual,
-		mathNotEqual
-	};
-
-	public enum FlowchartShapes
-	{
-		flowChartProcess,
-		flowChartAlternateProcess,
-		flowChartDecision,
-		flowChartInputOutput,
-		flowChartPredefinedProcess,
-		flowChartInternalStorage,
-		flowChartDocument,
-		flowChartMultidocument,
-		flowChartTerminator,
-		flowChartPreparation,
-		flowChartManualInput,
-		flowChartManualOperation,
-		flowChartConnector,
-		flowChartOffpageConnector,
-		flowChartPunchedCard,
-		flowChartPunchedTape,
-		flowChartSummingJunction,
-		flowChartOr,
-		flowChartCollate,
-		flowChartSort,
-		flowChartExtract,
-		flowChartMerge,
-		flowChartOnlineStorage,
-		flowChartDelay,
-		flowChartMagneticTape,
-		flowChartMagneticDisk,
-		flowChartMagneticDrum,
-		flowChartDisplay
-	};
-
-	public enum StarAndBannerShapes
-	{
-		irregularSeal1,
-		irregularSeal2,
-		star4,
-		star5,
-		star6,
-		star7,
-		star8,
-		star10,
-		star12,
-		star16,
-		star24,
-		star32,
-		ribbon,
-		ribbon2,
-		ellipseRibbon,
-		ellipseRibbon2,
-		verticalScroll,
-		horizontalScroll,
-		wave,
-		doubleWave
-	};
-
-	public enum CalloutShapes
-	{
-		wedgeRectCallout,
-		wedgeRoundRectCallout,
-		wedgeEllipseCallout,
-		cloudCallout,
-		borderCallout1,
-		borderCallout2,
-		borderCallout3,
-		accentCallout1,
-		accentCallout2,
-		accentCallout3,
-		callout1,
-		callout2,
-		callout3,
-		accentBorderCallout1,
-		accentBorderCallout2,
-		accentBorderCallout3
-	};
-
-	/// <summary>Text alignment of a Paragraph</summary>
-	public enum Alignment
-	{
-		/// <summary>
-		/// Align Paragraph to the left.
-		/// </summary>
-		left,
-
-		/// <summary>
-		/// Align Paragraph as centered.
-		/// </summary>
-		center,
-
-		/// <summary>
-		/// Align Paragraph to the right.
-		/// </summary>
-		right,
-
-		/// <summary>
-		/// (Justified) Align Paragraph to both the left and right margins, adding extra space between content as necessary.
-		/// </summary>
-		both
-	};
-
-	public enum Direction
-	{
-		LeftToRight,
-		RightToLeft
-	};
-
-	/// <summary>Paragraph edit types</summary>
-	internal enum EditType
-	{
-		/// <summary>
-		/// A ins is a tracked insertion
-		/// </summary>
-		ins,
-
-		/// <summary>
-		/// A del is  tracked deletion
-		/// </summary>
-		del
-	}
-
-	/// <summary>Custom property types</summary>
-	internal enum CustomPropertyType
-	{
-		/// <summary>
-		/// System.String
-		/// </summary>
-		Text,
-
-		/// <summary>
-		/// System.DateTime
-		/// </summary>
-		Date,
-
-		/// <summary>
-		/// System.Int32
-		/// </summary>
-		NumberInteger,
-
-		/// <summary>
-		/// System.Double
-		/// </summary>
-		NumberDecimal,
-
-		/// <summary>
-		/// System.Boolean
-		/// </summary>
-		YesOrNo
-	}
-
-	/// <summary>Text types in a Run</summary>
-	public enum RunTextType
-	{
-		/// <summary>
-		/// System.String
-		/// </summary>
-		Text,
-
-		/// <summary>
-		/// System.String
-		/// </summary>
-		DelText,
-	}
-
-	public enum LineSpacingType
-	{
-		Line,
-		Before,
-		After
-	}
-
-	public enum LineSpacingTypeAuto
-	{
-		AutoBefore,
-		AutoAfter,
-		Auto,
-		None
-	}
-
-	/// <summary>Cell margin for all sides of the table cell</summary>
-	public enum TableCellMarginType
-	{
-		/// <summary>
-		/// The left cell margin.
-		/// </summary>
-		left,
-		/// <summary>
-		/// The right cell margin.
-		/// </summary>
-		right,
-		/// <summary>
-		/// The bottom cell margin.
-		/// </summary>
-		bottom,
-		/// <summary>
-		/// The top cell margin.
-		/// </summary>
-		top
-	}
-
-	public enum HeadingType
-	{
-		[Description("Heading1")]
-		Heading1,
-
-		[Description("Heading2")]
-		Heading2,
-
-		[Description("Heading3")]
-		Heading3,
-
-		[Description("Heading4")]
-		Heading4,
-
-		[Description("Heading5")]
-		Heading5,
-
-		[Description("Heading6")]
-		Heading6,
-
-		[Description("Heading7")]
-		Heading7,
-
-		[Description("Heading8")]
-		Heading8,
-
-		[Description("Heading9")]
-		Heading9,
-
-
-		/*		 
-		 * The Character Based Headings below do not work in the same way as the headings 1-9 above, but appear on the same list in word. 
-		 * I have kept them here for reference in case somebody else things its just a matter of adding them in to gain extra headings
-		 */
-		#region Other character (NOT paragraph) based Headings
-		//[Description("NoSpacing")]
-		//NoSpacing,
-
-		//[Description("Title")]
-		//Title,
-
-		//[Description("Subtitle")]
-		//Subtitle,
-
-		//[Description("Quote")]
-		//Quote,
-
-		//[Description("IntenseQuote")]
-		//IntenseQuote,
-
-		//[Description("Emphasis")]
-		//Emphasis,
-
-		//[Description("IntenseEmphasis")]
-		//IntenseEmphasis,
-
-		//[Description("Strong")]
-		//Strong,
-
-		//[Description("ListParagraph")]
-		//ListParagraph,
-
-		//[Description("SubtleReference")]
-		//SubtleReference,
-
-		//[Description("IntenseReference")]
-		//IntenseReference,
-
-		//[Description("BookTitle")]
-		//BookTitle, 
-		#endregion
-
+		/// <summary></summary>
+		public const string TocHyperLinkStyleBase = @"<w:style w:type='character' w:styleId='Hyperlink' xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main'><w:name w:val='Hyperlink' /><w:basedOn w:val='Normal' /><w:uiPriority w:val='99' /><w:unhideWhenUsed /><w:rPr><w:color w:val='0000FF' w:themeColor='hyperlink' /><w:u w:val='single' /></w:rPr></w:style>";
 
 	}
 
-	public enum TextDirection
-	{
-		btLr,
-		right
-	};
-
-	/// <summary>Represents the switches set on a TOC</summary>
-	[Flags]
-	public enum TableOfContentsSwitches
-	{
-		None = 0 << 0,
-		[Description("\\a")]
-		A = 1 << 0,
-		[Description("\\b")]
-		B = 1 << 1,
-		[Description("\\c")]
-		C = 1 << 2,
-		[Description("\\d")]
-		D = 1 << 3,
-		[Description("\\f")]
-		F = 1 << 4,
-		[Description("\\h")]
-		H = 1 << 5,
-		[Description("\\l")]
-		L = 1 << 6,
-		[Description("\\n")]
-		N = 1 << 7,
-		[Description("\\o")]
-		O = 1 << 8,
-		[Description("\\p")]
-		P = 1 << 9,
-		[Description("\\s")]
-		S = 1 << 10,
-		[Description("\\t")]
-		T = 1 << 11,
-		[Description("\\u")]
-		U = 1 << 12,
-		[Description("\\w")]
-		W = 1 << 13,
-		[Description("\\x")]
-		X = 1 << 14,
-		[Description("\\z")]
-		Z = 1 << 15,
-	}
-
-	internal static class Extensions
-	{
-		internal static string ToHex(this Color source)
-		{
-			byte red = source.R;
-			byte green = source.G;
-			byte blue = source.B;
-
-			string redHex = red.ToString("X");
-			if (redHex.Length < 2)
-				redHex = "0" + redHex;
-
-			string blueHex = blue.ToString("X");
-			if (blueHex.Length < 2)
-				blueHex = "0" + blueHex;
-
-			string greenHex = green.ToString("X");
-			if (greenHex.Length < 2)
-				greenHex = "0" + greenHex;
-
-			return string.Format("{0}{1}{2}", redHex, greenHex, blueHex);
-		}
-
-		public static void Flatten(this XElement e, XName name, List<XElement> flat)
-		{
-			// Add this element (without its children) to the flat list.
-			XElement clone = CloneElement(e);
-			clone.Elements().Remove();
-
-			// Filter elements using XName.
-			if (clone.Name == name)
-				flat.Add(clone);
-
-			// Process the children.
-			if (e.HasElements)
-				foreach (XElement elem in e.Elements(name)) // Filter elements using XName
-					elem.Flatten(name, flat);
-		}
-
-		static XElement CloneElement(XElement element)
-		{
-			return new XElement(element.Name,
-				element.Attributes(),
-				element.Nodes().Select(n =>
-				{
-					XElement e = n as XElement;
-					if (e != null)
-						return CloneElement(e);
-					return n;
-				}
-				)
-			);
-		}
-
-		public static string GetAttribute(this XElement el, XName name, string defaultValue = "")
-		{
-			var attr = el.Attribute(name);
-			if (attr != null)
-				return attr.Value;
-			return defaultValue;
-		}
-
-		/// <summary>
-		/// Sets margin for all the pages in a Dox document in Inches. (Written by Shashwat Tripathi)
-		/// </summary>
-		/// <param name="document"></param>
-		/// <param name="top">Margin from the Top. Leave -1 for no change</param>
-		/// <param name="bottom">Margin from the Bottom. Leave -1 for no change</param>
-		/// <param name="right">Margin from the Right. Leave -1 for no change</param>
-		/// <param name="left">Margin from the Left. Leave -1 for no change</param>
-		public static void SetMargin(this DocX document, float top, float bottom, float right, float left)
-		{
-			XNamespace ab = "http://schemas.openxmlformats.org/wordprocessingml/2006/main";
-			var tempElement = document.PageLayout.Xml.Descendants(ab + "pgMar");
-			var e = tempElement.GetEnumerator();
-
-			foreach (var item in tempElement)
-			{
-				if (left != -1)
-					item.SetAttributeValue(ab + "left", (1440 * left) / 1);
-				if (right != -1)
-					item.SetAttributeValue(ab + "right", (1440 * right) / 1);
-				if (top != -1)
-					item.SetAttributeValue(ab + "top", (1440 * top) / 1);
-				if (bottom != -1)
-					item.SetAttributeValue(ab + "bottom", (1440 * bottom) / 1);
-			}
-		}
-	}
-
-	/// <summary>
-	/// Represents a font family
-	/// </summary>
+	/// <summary>Represents a font family</summary>
 	public sealed class Font
 	{
 		/// <summary>
@@ -7636,15 +9000,17 @@ namespace Novacode
 		}
 	}
 
+	/// <summary></summary>
 	public class Footer : Container, IParagraphContainer
 	{
+
+		/// <summary></summary>
 		public bool PageNumbers
 		{
 			get
 			{
 				return false;
 			}
-
 			set
 			{
 				XElement e = XElement.Parse
@@ -7684,6 +9050,8 @@ namespace Novacode
 			this.mainPart = mainPart;
 		}
 
+		/// <summary></summary>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph()
 		{
 			Paragraph p = base.InsertParagraph();
@@ -7691,6 +9059,11 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, string text, bool trackChanges)
 		{
 			Paragraph p = base.InsertParagraph(index, text, trackChanges);
@@ -7698,18 +9071,31 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(Paragraph p)
 		{
 			p.PackagePart = mainPart;
 			return base.InsertParagraph(p);
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, Paragraph p)
 		{
 			p.PackagePart = mainPart;
 			return base.InsertParagraph(index, p);
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, string text, bool trackChanges, Formatting formatting)
 		{
 			Paragraph p = base.InsertParagraph(index, text, trackChanges, formatting);
@@ -7717,6 +9103,9 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text)
 		{
 			Paragraph p = base.InsertParagraph(text);
@@ -7724,6 +9113,10 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text, bool trackChanges)
 		{
 			Paragraph p = base.InsertParagraph(text, trackChanges);
@@ -7731,34 +9124,40 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text, bool trackChanges, Formatting formatting)
 		{
 			Paragraph p = base.InsertParagraph(text, trackChanges, formatting);
 			p.PackagePart = mainPart;
-
 			return p;
 		}
 
-		public override Paragraph InsertEquation(String equation)
+		/// <summary></summary>
+		/// <param name="equation"></param>
+		/// <returns></returns>
+		public override Paragraph InsertEquation(string equation)
 		{
 			Paragraph p = base.InsertEquation(equation);
 			p.PackagePart = mainPart;
 			return p;
 		}
 
+		/// <summary></summary>
 		public override ReadOnlyCollection<Paragraph> Paragraphs
 		{
 			get
 			{
 				ReadOnlyCollection<Paragraph> l = base.Paragraphs;
-				foreach (var paragraph in l)
-				{
-					paragraph.mainPart = mainPart;
-				}
+				foreach (var paragraph in l) paragraph.mainPart = mainPart;
 				return l;
 			}
 		}
 
+		/// <summary></summary>
 		public override List<Table> Tables
 		{
 			get
@@ -7768,102 +9167,148 @@ namespace Novacode
 				return l;
 			}
 		}
+
+		/// <summary></summary>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public new Table InsertTable(int rowCount, int columnCount)
 		{
-			if (rowCount < 1 || columnCount < 1)
-				throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
-
+			if (rowCount < 1 || columnCount < 1) throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
 			Table t = base.InsertTable(rowCount, columnCount);
 			t.mainPart = mainPart;
 			return t;
 		}
+
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		public new Table InsertTable(int index, Table t)
 		{
 			Table t2 = base.InsertTable(index, t);
 			t2.mainPart = mainPart;
 			return t2;
 		}
+
+		/// <summary></summary>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		public new Table InsertTable(Table t)
 		{
 			t = base.InsertTable(t);
 			t.mainPart = mainPart;
 			return t;
 		}
+
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public new Table InsertTable(int index, int rowCount, int columnCount)
 		{
-			if (rowCount < 1 || columnCount < 1)
-				throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
-
+			if (rowCount < 1 || columnCount < 1) throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
 			Table t = base.InsertTable(index, rowCount, columnCount);
 			t.mainPart = mainPart;
 			return t;
 		}
+
 	}
 
+	/// <summary></summary>
 	public class Footers
 	{
+
 		internal Footers()
 		{
-
 		}
 
+		/// <summary></summary>
 		public Footer odd;
+
+		/// <summary></summary>
 		public Footer even;
+
+		/// <summary></summary>
 		public Footer first;
+
 	}
 
+	/// <summary></summary>
 	public class FormattedText : IComparable
 	{
+
+		/// <summary></summary>
 		public FormattedText()
 		{
-
 		}
 
+		/// <summary></summary>
 		public int index;
+
+		/// <summary></summary>
 		public string text;
+
+		/// <summary></summary>
 		public Formatting formatting;
 
+		/// <summary></summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
 		public int CompareTo(object obj)
 		{
 			FormattedText other = (FormattedText)obj;
 			FormattedText tf = this;
-
-			if (other.formatting == null || tf.formatting == null)
-				return -1;
-
+			if (other.formatting == null || tf.formatting == null) return -1;
 			return tf.formatting.CompareTo(other.formatting);
 		}
+
 	}
 
-	/// <summary>
-	/// A text formatting.
-	/// </summary>
+	/// <summary>A text formatting</summary>
 	public class Formatting : IComparable
 	{
+
 		private XElement rPr;
+
 		private bool? hidden;
+
 		private bool? bold;
+
 		private bool? italic;
+
 		private StrikeThrough? strikethrough;
+
 		private Script? script;
+
 		private Highlight? highlight;
+
 		private double? size;
+
 		private Color? fontColor;
+
 		private Color? underlineColor;
+
 		private UnderlineStyle? underlineStyle;
+
 		private Misc? misc;
+
 		private CapsStyle? capsStyle;
+
 		private Font fontFamily;
+
 		private int? percentageScale;
+
 		private int? kerning;
+
 		private int? position;
+
 		private double? spacing;
 
 		private CultureInfo language;
 
-		/// <summary>
-		/// A text formatting.
-		/// </summary>
+		/// <summary>A text formatting</summary>
 		public Formatting()
 		{
 			capsStyle = Novacode.CapsStyle.none;
@@ -7872,32 +9317,25 @@ namespace Novacode
 			highlight = Novacode.Highlight.none;
 			underlineStyle = Novacode.UnderlineStyle.none;
 			misc = Novacode.Misc.none;
-
 			// Use current culture by default
 			language = CultureInfo.CurrentCulture;
-
 			rPr = new XElement(XName.Get("rPr", DocX.w.NamespaceName));
 		}
 
-		/// <summary>
-		/// Text language
-		/// </summary>
+		/// <summary>Text language</summary>
 		public CultureInfo Language
 		{
 			get
 			{
 				return language;
 			}
-
 			set
 			{
 				language = value;
 			}
 		}
 
-		/// <summary>
-		/// Returns a new identical instance of Formatting.
-		/// </summary>
+		/// <summary>Returns a new identical instance of Formatting</summary>
 		/// <returns></returns>
 		public Formatting Clone()
 		{
@@ -7923,6 +9361,9 @@ namespace Novacode
 			return newf;
 		}
 
+		/// <summary></summary>
+		/// <param name="rPr"></param>
+		/// <returns></returns>
 		public static Formatting Parse(XElement rPr)
 		{
 			Formatting formatting = new Formatting();
@@ -8311,77 +9752,46 @@ namespace Novacode
 		/// -->
 		public Font FontFamily { get { return fontFamily; } set { fontFamily = value; } }
 
+		/// <summary></summary>
+		/// <param name="obj"></param>
+		/// <returns></returns>
 		public int CompareTo(object obj)
 		{
 			Formatting other = (Formatting)obj;
-
-			if (other.hidden != this.hidden)
-				return -1;
-
-			if (other.bold != this.bold)
-				return -1;
-
-			if (other.italic != this.italic)
-				return -1;
-
-			if (other.strikethrough != this.strikethrough)
-				return -1;
-
-			if (other.script != this.script)
-				return -1;
-
-			if (other.highlight != this.highlight)
-				return -1;
-
-			if (other.size != this.size)
-				return -1;
-
-			if (other.fontColor != this.fontColor)
-				return -1;
-
-			if (other.underlineColor != this.underlineColor)
-				return -1;
-
-			if (other.underlineStyle != this.underlineStyle)
-				return -1;
-
-			if (other.misc != this.misc)
-				return -1;
-
-			if (other.capsStyle != this.capsStyle)
-				return -1;
-
-			if (other.fontFamily != this.fontFamily)
-				return -1;
-
-			if (other.percentageScale != this.percentageScale)
-				return -1;
-
-			if (other.kerning != this.kerning)
-				return -1;
-
-			if (other.position != this.position)
-				return -1;
-
-			if (other.spacing != this.spacing)
-				return -1;
-
-			if (!other.language.Equals(this.language))
-				return -1;
-
+			if (other.hidden != this.hidden) return -1;
+			if (other.bold != this.bold) return -1;
+			if (other.italic != this.italic) return -1;
+			if (other.strikethrough != this.strikethrough) return -1;
+			if (other.script != this.script) return -1;
+			if (other.highlight != this.highlight) return -1;
+			if (other.size != this.size) return -1;
+			if (other.fontColor != this.fontColor) return -1;
+			if (other.underlineColor != this.underlineColor) return -1;
+			if (other.underlineStyle != this.underlineStyle) return -1;
+			if (other.misc != this.misc) return -1;
+			if (other.capsStyle != this.capsStyle) return -1;
+			if (other.fontFamily != this.fontFamily) return -1;
+			if (other.percentageScale != this.percentageScale) return -1;
+			if (other.kerning != this.kerning) return -1;
+			if (other.position != this.position) return -1;
+			if (other.spacing != this.spacing) return -1;
+			if (!other.language.Equals(this.language)) return -1;
 			return 0;
 		}
+
 	}
 
+	/// <summary></summary>
 	public class Header : Container, IParagraphContainer
 	{
+
+		/// <summary></summary>
 		public bool PageNumbers
 		{
 			get
 			{
 				return false;
 			}
-
 			set
 			{
 				XElement e = XElement.Parse
@@ -8411,13 +9821,12 @@ namespace Novacode
                     </w:sdtContent>
                   </w:sdt>"
 			   );
-
 				Xml.AddFirst(e);
-
 				PageNumberParagraph = new Paragraph(Document, e.Descendants(XName.Get("p", DocX.w.NamespaceName)).SingleOrDefault(), 0);
 			}
 		}
 
+		/// <summary></summary>
 		public Paragraph PageNumberParagraph;
 
 		internal Header(DocX document, XElement xml, PackagePart mainPart) : base(document, xml)
@@ -8425,6 +9834,8 @@ namespace Novacode
 			this.mainPart = mainPart;
 		}
 
+		/// <summary></summary>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph()
 		{
 			Paragraph p = base.InsertParagraph();
@@ -8432,6 +9843,11 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, string text, bool trackChanges)
 		{
 			Paragraph p = base.InsertParagraph(index, text, trackChanges);
@@ -8439,18 +9855,31 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(Paragraph p)
 		{
 			p.PackagePart = mainPart;
 			return base.InsertParagraph(p);
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="p"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, Paragraph p)
 		{
 			p.PackagePart = mainPart;
 			return base.InsertParagraph(index, p);
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(int index, string text, bool trackChanges, Formatting formatting)
 		{
 			Paragraph p = base.InsertParagraph(index, text, trackChanges, formatting);
@@ -8458,6 +9887,9 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text)
 		{
 			Paragraph p = base.InsertParagraph(text);
@@ -8465,6 +9897,10 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text, bool trackChanges)
 		{
 			Paragraph p = base.InsertParagraph(text, trackChanges);
@@ -8472,35 +9908,40 @@ namespace Novacode
 			return p;
 		}
 
+		/// <summary></summary>
+		/// <param name="text"></param>
+		/// <param name="trackChanges"></param>
+		/// <param name="formatting"></param>
+		/// <returns></returns>
 		public override Paragraph InsertParagraph(string text, bool trackChanges, Formatting formatting)
 		{
 			Paragraph p = base.InsertParagraph(text, trackChanges, formatting);
 			p.PackagePart = mainPart;
-
 			return p;
 		}
 
-		public override Paragraph InsertEquation(String equation)
+		/// <summary></summary>
+		/// <param name="equation"></param>
+		/// <returns></returns>
+		public override Paragraph InsertEquation(string equation)
 		{
 			Paragraph p = base.InsertEquation(equation);
 			p.PackagePart = mainPart;
 			return p;
 		}
 
-
+		/// <summary></summary>
 		public override ReadOnlyCollection<Paragraph> Paragraphs
 		{
 			get
 			{
 				ReadOnlyCollection<Paragraph> l = base.Paragraphs;
-				foreach (var paragraph in l)
-				{
-					paragraph.mainPart = mainPart;
-				}
+				foreach (var paragraph in l) paragraph.mainPart = mainPart;
 				return l;
 			}
 		}
 
+		/// <summary></summary>
 		public override List<Table> Tables
 		{
 			get
@@ -8511,6 +9952,7 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
 		public List<Image> Images
 		{
 			get
@@ -8528,32 +9970,48 @@ namespace Novacode
 				return new List<Image>();
 			}
 		}
+
+		/// <summary></summary>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public new Table InsertTable(int rowCount, int columnCount)
 		{
-			if (rowCount < 1 || columnCount < 1)
-				throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
-
+			if (rowCount < 1 || columnCount < 1) throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
 			Table t = base.InsertTable(rowCount, columnCount);
 			t.mainPart = mainPart;
 			return t;
 		}
+
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		public new Table InsertTable(int index, Table t)
 		{
 			Table t2 = base.InsertTable(index, t);
 			t2.mainPart = mainPart;
 			return t2;
 		}
+
+		/// <summary></summary>
+		/// <param name="t"></param>
+		/// <returns></returns>
 		public new Table InsertTable(Table t)
 		{
 			t = base.InsertTable(t);
 			t.mainPart = mainPart;
 			return t;
 		}
+
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public new Table InsertTable(int index, int rowCount, int columnCount)
 		{
-			if (rowCount < 1 || columnCount < 1)
-				throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
-
+			if (rowCount < 1 || columnCount < 1) throw new ArgumentOutOfRangeException("Row and Column count must be greater than zero.");
 			Table t = base.InsertTable(index, rowCount, columnCount);
 			t.mainPart = mainPart;
 			return t;
@@ -8561,737 +10019,31 @@ namespace Novacode
 
 	}
 
+	/// <summary></summary>
 	public class Headers
 	{
+
 		internal Headers()
 		{
 		}
 
+		/// <summary></summary>
 		public Header odd;
+
+		/// <summary></summary>
 		public Header even;
+
+		/// <summary></summary>
 		public Header first;
-	}
-
-	internal static class HelperFunctions
-	{
-		public const string DOCUMENT_DOCUMENTTYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml";
-		public const string TEMPLATE_DOCUMENTTYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.template.main+xml";
-
-		public static bool IsNullOrWhiteSpace(this string value)
-		{
-			if (value == null) return true;
-			return string.IsNullOrEmpty(value.Trim());
-		}
-
-		/// <summary>
-		/// Checks whether 'toCheck' has all children that 'desired' has and values of 'val' attributes are the same
-		/// </summary>
-		/// <param name="desired"></param>
-		/// <param name="toCheck"></param>
-		/// <param name="fo">Matching options whether check if desired attributes are inder a, or a has exactly and only these attributes as b has.</param>
-		/// <returns></returns>
-		internal static bool ContainsEveryChildOf(XElement desired, XElement toCheck, MatchFormattingOptions fo)
-		{
-			foreach (XElement e in desired.Elements())
-			{
-				// If a formatting property has the same name and 'val' attribute's value, its considered to be equivalent.
-				if (!toCheck.Elements(e.Name).Where(bElement => bElement.GetAttribute(XName.Get("val", DocX.w.NamespaceName)) == e.GetAttribute(XName.Get("val", DocX.w.NamespaceName))).Any())
-					return false;
-			}
-
-			// If the formatting has to be exact, no additionaly formatting must exist.
-			if (fo == MatchFormattingOptions.ExactMatch)
-				return desired.Elements().Count() == toCheck.Elements().Count();
-
-			return true;
-		}
-		internal static void CreateRelsPackagePart(DocX Document, Uri uri)
-		{
-			PackagePart pp = Document.package.CreatePart(uri, "application/vnd.openxmlformats-package.relationships+xml", CompressionOption.Maximum);
-			using (TextWriter tw = new StreamWriter(new PackagePartStream(pp.GetStream())))
-			{
-				XDocument d = new XDocument
-				(
-					new XDeclaration("1.0", "UTF-8", "yes"),
-					new XElement(XName.Get("Relationships", DocX.rel.NamespaceName))
-				);
-				var root = d.Root;
-				d.Save(tw);
-			}
-		}
-
-		internal static int GetSize(XElement Xml)
-		{
-			switch (Xml.Name.LocalName)
-			{
-				case "tab":
-					return 1;
-				case "br":
-					return 1;
-				case "t":
-					goto case "delText";
-				case "delText":
-					return Xml.Value.Length;
-				case "tr":
-					goto case "br";
-				case "tc":
-					goto case "br";
-				default:
-					return 0;
-			}
-		}
-
-		internal static string GetText(XElement e)
-		{
-			StringBuilder sb = new StringBuilder();
-			GetTextRecursive(e, ref sb);
-			return sb.ToString();
-		}
-
-		internal static void GetTextRecursive(XElement Xml, ref StringBuilder sb)
-		{
-			sb.Append(ToText(Xml));
-
-			if (Xml.HasElements)
-				foreach (XElement e in Xml.Elements())
-					GetTextRecursive(e, ref sb);
-		}
-
-		internal static List<FormattedText> GetFormattedText(XElement e)
-		{
-			List<FormattedText> alist = new List<FormattedText>();
-			GetFormattedTextRecursive(e, ref alist);
-			return alist;
-		}
-
-		internal static void GetFormattedTextRecursive(XElement Xml, ref List<FormattedText> alist)
-		{
-			FormattedText ft = ToFormattedText(Xml);
-			FormattedText last = null;
-
-			if (ft != null)
-			{
-				if (alist.Count() > 0)
-					last = alist.Last();
-
-				if (last != null && last.CompareTo(ft) == 0)
-				{
-					// Update text of last entry.
-					last.text += ft.text;
-				}
-				else
-				{
-					if (last != null)
-						ft.index = last.index + last.text.Length;
-
-					alist.Add(ft);
-				}
-			}
-
-			if (Xml.HasElements)
-				foreach (XElement e in Xml.Elements())
-					GetFormattedTextRecursive(e, ref alist);
-		}
-
-		internal static FormattedText ToFormattedText(XElement e)
-		{
-			// The text representation of e.
-			String text = ToText(e);
-			if (text == String.Empty)
-				return null;
-
-			// e is a w:t element, it must exist inside a w:r element or a w:tabs, lets climb until we find it.
-			while (!e.Name.Equals(XName.Get("r", DocX.w.NamespaceName)) &&
-				   !e.Name.Equals(XName.Get("tabs", DocX.w.NamespaceName)))
-				e = e.Parent;
-
-			// e is a w:r element, lets find the rPr element.
-			XElement rPr = e.Element(XName.Get("rPr", DocX.w.NamespaceName));
-
-			FormattedText ft = new FormattedText();
-			ft.text = text;
-			ft.index = 0;
-			ft.formatting = null;
-
-			// Return text with formatting.
-			if (rPr != null)
-				ft.formatting = Formatting.Parse(rPr);
-
-			return ft;
-		}
-
-		internal static string ToText(XElement e)
-		{
-			switch (e.Name.LocalName)
-			{
-				case "tab":
-					return "\t";
-				case "br":
-					return "\n";
-				case "t":
-					goto case "delText";
-				case "delText":
-					{
-						if (e.Parent != null && e.Parent.Name.LocalName == "r")
-						{
-							XElement run = e.Parent;
-							var rPr = run.Elements().FirstOrDefault(a => a.Name.LocalName == "rPr");
-							if (rPr != null)
-							{
-								var caps = rPr.Elements().FirstOrDefault(a => a.Name.LocalName == "caps");
-
-								if (caps != null)
-									return e.Value.ToUpper();
-							}
-						}
-
-						return e.Value;
-					}
-				case "tr":
-					goto case "br";
-				case "tc":
-					goto case "tab";
-				default: return "";
-			}
-		}
-
-		internal static XElement CloneElement(XElement element)
-		{
-			return new XElement
-			(
-				element.Name,
-				element.Attributes(),
-				element.Nodes().Select
-				(
-					n =>
-					{
-						XElement e = n as XElement;
-						if (e != null)
-							return CloneElement(e);
-						return n;
-					}
-				)
-			);
-		}
-
-		internal static PackagePart CreateOrGetSettingsPart(Package package)
-		{
-			PackagePart settingsPart;
-
-			Uri settingsUri = new Uri("/word/settings.xml", UriKind.Relative);
-			if (!package.PartExists(settingsUri))
-			{
-				settingsPart = package.CreatePart(settingsUri, "application/vnd.openxmlformats-officedocument.wordprocessingml.settings+xml", CompressionOption.Maximum);
-
-				PackagePart mainDocumentPart = package.GetParts().Single(p => p.ContentType.Equals(DOCUMENT_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase) ||
-																			  p.ContentType.Equals(TEMPLATE_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase));
-
-				mainDocumentPart.CreateRelationship(settingsUri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings");
-
-				XDocument settings = XDocument.Parse
-				(@"<?xml version='1.0' encoding='utf-8' standalone='yes'?>
-                <w:settings xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:r='http://schemas.openxmlformats.org/officeDocument/2006/relationships' xmlns:m='http://schemas.openxmlformats.org/officeDocument/2006/math' xmlns:v='urn:schemas-microsoft-com:vml' xmlns:w10='urn:schemas-microsoft-com:office:word' xmlns:w='http://schemas.openxmlformats.org/wordprocessingml/2006/main' xmlns:sl='http://schemas.openxmlformats.org/schemaLibrary/2006/main'>
-                  <w:zoom w:percent='100' />
-                  <w:defaultTabStop w:val='720' />
-                  <w:characterSpacingControl w:val='doNotCompress' />
-                  <w:compat />
-                  <w:rsids>
-                    <w:rsidRoot w:val='00217F62' />
-                    <w:rsid w:val='001915A3' />
-                    <w:rsid w:val='00217F62' />
-                    <w:rsid w:val='00A906D8' />
-                    <w:rsid w:val='00AB5A74' />
-                    <w:rsid w:val='00F071AE' />
-                  </w:rsids>
-                  <m:mathPr>
-                    <m:mathFont m:val='Cambria Math' />
-                    <m:brkBin m:val='before' />
-                    <m:brkBinSub m:val='--' />
-                    <m:smallFrac m:val='off' />
-                    <m:dispDef />
-                    <m:lMargin m:val='0' />
-                    <m:rMargin m:val='0' />
-                    <m:defJc m:val='centerGroup' />
-                    <m:wrapIndent m:val='1440' />
-                    <m:intLim m:val='subSup' />
-                    <m:naryLim m:val='undOvr' />
-                  </m:mathPr>
-                  <w:themeFontLang w:val='en-IE' w:bidi='ar-SA' />
-                  <w:clrSchemeMapping w:bg1='light1' w:t1='dark1' w:bg2='light2' w:t2='dark2' w:accent1='accent1' w:accent2='accent2' w:accent3='accent3' w:accent4='accent4' w:accent5='accent5' w:accent6='accent6' w:hyperlink='hyperlink' w:followedHyperlink='followedHyperlink' />
-                  <w:shapeDefaults>
-                    <o:shapedefaults v:ext='edit' spidmax='2050' />
-                    <o:shapelayout v:ext='edit'>
-                      <o:idmap v:ext='edit' data='1' />
-                    </o:shapelayout>
-                  </w:shapeDefaults>
-                  <w:decimalSymbol w:val='.' />
-                  <w:listSeparator w:val=',' />
-                </w:settings>"
-				);
-
-				XElement themeFontLang = settings.Root.Element(XName.Get("themeFontLang", DocX.w.NamespaceName));
-				themeFontLang.SetAttributeValue(XName.Get("val", DocX.w.NamespaceName), CultureInfo.CurrentCulture);
-
-				// Save the settings document.
-				using (TextWriter tw = new StreamWriter(new PackagePartStream(settingsPart.GetStream())))
-					settings.Save(tw);
-			}
-			else
-				settingsPart = package.GetPart(settingsUri);
-			return settingsPart;
-		}
-
-		internal static void CreateCustomPropertiesPart(DocX document)
-		{
-			PackagePart customPropertiesPart = document.package.CreatePart(new Uri("/docProps/custom.xml", UriKind.Relative), "application/vnd.openxmlformats-officedocument.custom-properties+xml", CompressionOption.Maximum);
-
-			XDocument customPropDoc = new XDocument
-			(
-				new XDeclaration("1.0", "UTF-8", "yes"),
-				new XElement
-				(
-					XName.Get("Properties", DocX.customPropertiesSchema.NamespaceName),
-					new XAttribute(XNamespace.Xmlns + "vt", DocX.customVTypesSchema)
-				)
-			);
-
-			using (TextWriter tw = new StreamWriter(new PackagePartStream(customPropertiesPart.GetStream(FileMode.Create, FileAccess.Write))))
-				customPropDoc.Save(tw, SaveOptions.None);
-
-			document.package.CreateRelationship(customPropertiesPart.Uri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/custom-properties");
-		}
-
-		internal static XDocument DecompressXMLResource(string manifest_resource_name)
-		{
-			// XDocument to load the compressed Xml resource into.
-			XDocument document;
-
-			// Get a reference to the executing assembly.
-			Assembly assembly = Assembly.GetExecutingAssembly();
-
-			// Open a Stream to the embedded resource.
-			Stream stream = assembly.GetManifestResourceStream(manifest_resource_name);
-
-			// Decompress the embedded resource.
-			using (GZipStream zip = new GZipStream(stream, CompressionMode.Decompress))
-			{
-				// Load this decompressed embedded resource into an XDocument using a TextReader.
-				using (TextReader sr = new StreamReader(zip))
-				{
-					document = XDocument.Load(sr);
-				}
-			}
-
-			// Return the decompressed Xml as an XDocument.
-			return document;
-		}
-
-
-		/// <summary>
-		/// If this document does not contain a /word/numbering.xml add the default one generated by Microsoft Word 
-		/// when the default bullet, numbered and multilevel lists are added to a blank document
-		/// </summary>
-		/// <param name="package"></param>
-		/// <returns></returns>
-		internal static XDocument AddDefaultNumberingXml(Package package)
-		{
-			XDocument numberingDoc;
-			// Create the main document part for this package
-			PackagePart wordNumbering = package.CreatePart(new Uri("/word/numbering.xml", UriKind.Relative), "application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml", CompressionOption.Maximum);
-
-			numberingDoc = DecompressXMLResource("Novacode.Resources.numbering.xml.gz");
-
-			// Save /word/numbering.xml
-			using (TextWriter tw = new StreamWriter(new PackagePartStream(wordNumbering.GetStream(FileMode.Create, FileAccess.Write))))
-				numberingDoc.Save(tw, SaveOptions.None);
-
-			PackagePart mainDocumentPart = package.GetParts().Single(p => p.ContentType.Equals(DOCUMENT_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase) ||
-																		  p.ContentType.Equals(TEMPLATE_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase));
-
-			mainDocumentPart.CreateRelationship(wordNumbering.Uri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/numbering");
-			return numberingDoc;
-		}
-
-
-
-		/// <summary>
-		/// If this document does not contain a /word/styles.xml add the default one generated by Microsoft Word.
-		/// </summary>
-		/// <param name="package"></param>
-		/// <returns></returns>
-		internal static XDocument AddDefaultStylesXml(Package package)
-		{
-			XDocument stylesDoc;
-			// Create the main document part for this package
-			PackagePart word_styles = package.CreatePart(new Uri("/word/styles.xml", UriKind.Relative), "application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml", CompressionOption.Maximum);
-
-			stylesDoc = HelperFunctions.DecompressXMLResource("Novacode.Resources.default_styles.xml.gz");
-			XElement lang = stylesDoc.Root.Element(XName.Get("docDefaults", DocX.w.NamespaceName)).Element(XName.Get("rPrDefault", DocX.w.NamespaceName)).Element(XName.Get("rPr", DocX.w.NamespaceName)).Element(XName.Get("lang", DocX.w.NamespaceName));
-			lang.SetAttributeValue(XName.Get("val", DocX.w.NamespaceName), CultureInfo.CurrentCulture);
-
-			// Save /word/styles.xml
-			using (TextWriter tw = new StreamWriter(new PackagePartStream(word_styles.GetStream(FileMode.Create, FileAccess.Write))))
-				stylesDoc.Save(tw, SaveOptions.None);
-
-			PackagePart mainDocumentPart = package.GetParts().Where
-			(
-				p => p.ContentType.Equals(DOCUMENT_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase) || p.ContentType.Equals(TEMPLATE_DOCUMENTTYPE, StringComparison.CurrentCultureIgnoreCase)
-			).Single();
-
-			mainDocumentPart.CreateRelationship(word_styles.Uri, TargetMode.Internal, "http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles");
-			return stylesDoc;
-		}
-
-		internal static XElement CreateEdit(EditType t, DateTime edit_time, object content)
-		{
-			if (t == EditType.del)
-			{
-				foreach (object o in (IEnumerable<XElement>)content)
-				{
-					if (o is XElement)
-					{
-						XElement e = (o as XElement);
-						IEnumerable<XElement> ts = e.DescendantsAndSelf(XName.Get("t", DocX.w.NamespaceName));
-
-						for (int i = 0; i < ts.Count(); i++)
-						{
-							XElement text = ts.ElementAt(i);
-							text.ReplaceWith(new XElement(DocX.w + "delText", text.Attributes(), text.Value));
-						}
-					}
-				}
-			}
-
-			return
-			(
-				new XElement(DocX.w + t.ToString(),
-					new XAttribute(DocX.w + "id", 0),
-					new XAttribute(DocX.w + "author", WindowsIdentity.GetCurrent().Name),
-					new XAttribute(DocX.w + "date", edit_time),
-				content)
-			);
-		}
-
-		internal static XElement CreateTable(int rowCount, int columnCount)
-		{
-			int[] columnWidths = new int[columnCount];
-			for (int i = 0; i < columnCount; i++)
-			{
-				columnWidths[i] = 2310;
-			}
-			return CreateTable(rowCount, columnWidths);
-		}
-
-		internal static XElement CreateTable(int rowCount, int[] columnWidths)
-		{
-			XElement newTable =
-			new XElement
-			(
-				XName.Get("tbl", DocX.w.NamespaceName),
-				new XElement
-				(
-					XName.Get("tblPr", DocX.w.NamespaceName),
-						new XElement(XName.Get("tblStyle", DocX.w.NamespaceName), new XAttribute(XName.Get("val", DocX.w.NamespaceName), "TableGrid")),
-						new XElement(XName.Get("tblW", DocX.w.NamespaceName), new XAttribute(XName.Get("w", DocX.w.NamespaceName), "5000"), new XAttribute(XName.Get("type", DocX.w.NamespaceName), "auto")),
-						new XElement(XName.Get("tblLook", DocX.w.NamespaceName), new XAttribute(XName.Get("val", DocX.w.NamespaceName), "04A0"))
-				)
-			);
-
-			/*XElement tableGrid = new XElement(XName.Get("tblGrid", DocX.w.NamespaceName));
-            for (int i = 0; i < columnWidths.Length; i++)
-                tableGrid.Add(new XElement(XName.Get("gridCol", DocX.w.NamespaceName), new XAttribute(XName.Get("w", DocX.w.NamespaceName), XmlConvert.ToString(columnWidths[i]))));
-
-            newTable.Add(tableGrid);*/
-
-			for (int i = 0; i < rowCount; i++)
-			{
-				XElement row = new XElement(XName.Get("tr", DocX.w.NamespaceName));
-
-				for (int j = 0; j < columnWidths.Length; j++)
-				{
-					XElement cell = CreateTableCell();
-					row.Add(cell);
-				}
-
-				newTable.Add(row);
-			}
-			return newTable;
-		}
-
-		/// <summary>
-		/// Create and return a cell of a table        
-		/// </summary>        
-		internal static XElement CreateTableCell(double w = 2310)
-		{
-			return new XElement
-					(
-						XName.Get("tc", DocX.w.NamespaceName),
-							new XElement(XName.Get("tcPr", DocX.w.NamespaceName),
-							new XElement(XName.Get("tcW", DocX.w.NamespaceName),
-									new XAttribute(XName.Get("w", DocX.w.NamespaceName), w),
-									new XAttribute(XName.Get("type", DocX.w.NamespaceName), "dxa"))),
-							new XElement(XName.Get("p", DocX.w.NamespaceName),
-								new XElement(XName.Get("pPr", DocX.w.NamespaceName)))
-					);
-		}
-
-		internal static List CreateItemInList(List list, string listText, int level = 0, ListItemType listType = ListItemType.Numbered, int? startNumber = null, bool trackChanges = false, bool continueNumbering = false)
-		{
-			if (list.NumId == 0)
-			{
-				list.CreateNewNumberingNumId(level, listType, startNumber, continueNumbering);
-			}
-
-			if (listText != null) //I see no reason why you shouldn't be able to insert an empty element. It simplifies tasks such as populating an item from html.
-			{
-				var newParagraphSection = new XElement
-					(
-					XName.Get("p", DocX.w.NamespaceName),
-					new XElement(XName.Get("pPr", DocX.w.NamespaceName),
-								 new XElement(XName.Get("numPr", DocX.w.NamespaceName),
-											  new XElement(XName.Get("ilvl", DocX.w.NamespaceName), new XAttribute(DocX.w + "val", level)),
-											  new XElement(XName.Get("numId", DocX.w.NamespaceName), new XAttribute(DocX.w + "val", list.NumId)))),
-					new XElement(XName.Get("r", DocX.w.NamespaceName), new XElement(XName.Get("t", DocX.w.NamespaceName), listText))
-					);
-
-				if (trackChanges)
-					newParagraphSection = CreateEdit(EditType.ins, DateTime.Now, newParagraphSection);
-
-				if (startNumber == null)
-				{
-					list.AddItem(new Paragraph(list.Document, newParagraphSection, 0, ContainerType.Paragraph));
-				}
-				else
-				{
-					list.AddItemWithStartValue(new Paragraph(list.Document, newParagraphSection, 0, ContainerType.Paragraph), (int)startNumber);
-				}
-			}
-
-			return list;
-		}
-
-		internal static void RenumberIDs(DocX document)
-		{
-			IEnumerable<XAttribute> trackerIDs =
-							(from d in document.mainDoc.Descendants()
-							 where d.Name.LocalName == "ins" || d.Name.LocalName == "del"
-							 select d.Attribute(XName.Get("id", "http://schemas.openxmlformats.org/wordprocessingml/2006/main")));
-
-			for (int i = 0; i < trackerIDs.Count(); i++)
-				trackerIDs.ElementAt(i).Value = i.ToString();
-		}
-
-		internal static Paragraph GetFirstParagraphEffectedByInsert(DocX document, int index)
-		{
-			// This document contains no Paragraphs and insertion is at index 0
-			if (document.paragraphLookup.Keys.Count() == 0 && index == 0)
-				return null;
-
-			foreach (int paragraphEndIndex in document.paragraphLookup.Keys)
-			{
-				if (paragraphEndIndex >= index)
-					return document.paragraphLookup[paragraphEndIndex];
-			}
-
-			throw new ArgumentOutOfRangeException();
-		}
-
-		internal static List<XElement> FormatInput(string text, XElement rPr)
-		{
-			List<XElement> newRuns = new List<XElement>();
-			XElement tabRun = new XElement(DocX.w + "tab");
-			XElement breakRun = new XElement(DocX.w + "br");
-
-			StringBuilder sb = new StringBuilder();
-
-			if (string.IsNullOrEmpty(text))
-			{
-				return newRuns; //I dont wanna get an exception if text == null, so just return empy list
-			}
-
-			char lastChar = '\0';
-
-			foreach (char c in text)
-			{
-				switch (c)
-				{
-					case '\t':
-						if (sb.Length > 0)
-						{
-							XElement t = new XElement(DocX.w + "t", sb.ToString());
-							Novacode.Text.PreserveSpace(t);
-							newRuns.Add(new XElement(DocX.w + "r", rPr, t));
-							sb = new StringBuilder();
-						}
-						newRuns.Add(new XElement(DocX.w + "r", rPr, tabRun));
-						break;
-					case '\r':
-						if (sb.Length > 0)
-						{
-							XElement t = new XElement(DocX.w + "t", sb.ToString());
-							Novacode.Text.PreserveSpace(t);
-							newRuns.Add(new XElement(DocX.w + "r", rPr, t));
-							sb = new StringBuilder();
-						}
-						newRuns.Add(new XElement(DocX.w + "r", rPr, breakRun));
-						break;
-					case '\n':
-						if (lastChar == '\r') break;
-
-						if (sb.Length > 0)
-						{
-							XElement t = new XElement(DocX.w + "t", sb.ToString());
-							Novacode.Text.PreserveSpace(t);
-							newRuns.Add(new XElement(DocX.w + "r", rPr, t));
-							sb = new StringBuilder();
-						}
-						newRuns.Add(new XElement(DocX.w + "r", rPr, breakRun));
-						break;
-
-					default:
-						sb.Append(c);
-						break;
-				}
-
-				lastChar = c;
-			}
-
-			if (sb.Length > 0)
-			{
-				XElement t = new XElement(DocX.w + "t", sb.ToString());
-				Novacode.Text.PreserveSpace(t);
-				newRuns.Add(new XElement(DocX.w + "r", rPr, t));
-			}
-
-			return newRuns;
-		}
-
-		internal static XElement[] SplitParagraph(Paragraph p, int index)
-		{
-			// In this case edit dosent really matter, you have a choice.
-			Run r = p.GetFirstRunEffectedByEdit(index, EditType.ins);
-
-			XElement[] split;
-			XElement before, after;
-
-			if (r.Xml.Parent.Name.LocalName == "ins")
-			{
-				split = p.SplitEdit(r.Xml.Parent, index, EditType.ins);
-				before = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.Parent.ElementsBeforeSelf(), split[0]);
-				after = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.Parent.ElementsAfterSelf(), split[1]);
-			}
-			else if (r.Xml.Parent.Name.LocalName == "del")
-			{
-				split = p.SplitEdit(r.Xml.Parent, index, EditType.del);
-
-				before = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.Parent.ElementsBeforeSelf(), split[0]);
-				after = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.Parent.ElementsAfterSelf(), split[1]);
-			}
-			else
-			{
-				split = Run.SplitRun(r, index);
-
-				before = new XElement(p.Xml.Name, p.Xml.Attributes(), r.Xml.ElementsBeforeSelf(), split[0]);
-				after = new XElement(p.Xml.Name, p.Xml.Attributes(), split[1], r.Xml.ElementsAfterSelf());
-			}
-
-			if (before.Elements().Count() == 0)
-				before = null;
-
-			if (after.Elements().Count() == 0)
-				after = null;
-
-			return new XElement[] { before, after };
-		}
-
-		/// <!-- 
-		/// Bug found and fixed by trnilse. To see the change, 
-		/// please compare this release to the previous release using TFS compare.
-		/// -->
-		internal static bool IsSameFile(Stream streamOne, Stream streamTwo)
-		{
-			int file1byte, file2byte;
-
-			if (streamOne.Length != streamTwo.Length)
-			{
-				// Return false to indicate files are different
-				return false;
-			}
-
-			// Read and compare a byte from each file until either a
-			// non-matching set of bytes is found or until the end of
-			// file1 is reached.
-			do
-			{
-				// Read one byte from each file.
-				file1byte = streamOne.ReadByte();
-				file2byte = streamTwo.ReadByte();
-			}
-			while ((file1byte == file2byte) && (file1byte != -1));
-
-			// Return the success of the comparison. "file1byte" is 
-			// equal to "file2byte" at this point only if the files are 
-			// the same.
-
-			streamOne.Position = 0;
-			streamTwo.Position = 0;
-
-			return ((file1byte - file2byte) == 0);
-		}
-
-		internal static UnderlineStyle GetUnderlineStyle(string underlineStyle)
-		{
-			switch (underlineStyle)
-			{
-				case "single":
-					return UnderlineStyle.singleLine;
-				case "double":
-					return UnderlineStyle.doubleLine;
-				case "thick":
-					return UnderlineStyle.thick;
-				case "dotted":
-					return UnderlineStyle.dotted;
-				case "dottedHeavy":
-					return UnderlineStyle.dottedHeavy;
-				case "dash":
-					return UnderlineStyle.dash;
-				case "dashedHeavy":
-					return UnderlineStyle.dashedHeavy;
-				case "dashLong":
-					return UnderlineStyle.dashLong;
-				case "dashLongHeavy":
-					return UnderlineStyle.dashLongHeavy;
-				case "dotDash":
-					return UnderlineStyle.dotDash;
-				case "dashDotHeavy":
-					return UnderlineStyle.dashDotHeavy;
-				case "dotDotDash":
-					return UnderlineStyle.dotDotDash;
-				case "dashDotDotHeavy":
-					return UnderlineStyle.dashDotDotHeavy;
-				case "wave":
-					return UnderlineStyle.wave;
-				case "wavyHeavy":
-					return UnderlineStyle.wavyHeavy;
-				case "wavyDouble":
-					return UnderlineStyle.wavyDouble;
-				case "words":
-					return UnderlineStyle.words;
-				default:
-					return UnderlineStyle.none;
-			}
-		}
-
-
 
 	}
 
-	/// <summary>
-	/// Represents a Hyperlink in a document.
-	/// </summary>
+	/// <summary>Represents a Hyperlink in a document</summary>
 	public class Hyperlink : DocXElement
 	{
+
 		internal Uri uri;
+
 		internal String text;
 
 		internal Dictionary<PackagePart, PackageRelationship> hyperlink_rels;
@@ -9509,14 +10261,7 @@ namespace Novacode
 		}
 	}
 
-	interface IContentContainer
-	{
-		ReadOnlyCollection<Content> Paragraphs { get; }
-	}
-
-	/// <summary>
-	/// Represents an Image embedded in a document.
-	/// </summary>
+	/// <summary>Represents an Image embedded in a document</summary>
 	public class Image
 	{
 		/// <summary>
@@ -9526,22 +10271,26 @@ namespace Novacode
 		private DocX document;
 		internal PackageRelationship pr;
 
+		/// <summary></summary>
+		/// <param name="mode"></param>
+		/// <param name="access"></param>
+		/// <returns></returns>
 		public Stream GetStream(FileMode mode, FileAccess access)
 		{
 			string temp = pr.SourceUri.OriginalString;
 			string start = temp.Remove(temp.LastIndexOf('/'));
 			string end = pr.TargetUri.OriginalString;
 			string full = start + "/" + end;
-
 			return (new PackagePartStream(document.package.GetPart(new Uri(full, UriKind.Relative)).GetStream(mode, access)));
 		}
 
-		/// <summary>
-		/// Returns the id of this Image.
-		/// </summary>
+		/// <summary>Returns the id of this Image</summary>
 		public string Id
 		{
-			get { return id; }
+			get
+			{
+				return id;
+			}
 		}
 
 		internal Image(DocX document, PackageRelationship pr)
@@ -9585,6 +10334,11 @@ namespace Novacode
 		{
 			return Paragraph.CreatePicture(document, id, string.Empty, string.Empty);
 		}
+
+		/// <summary></summary>
+		/// <param name="height"></param>
+		/// <param name="width"></param>
+		/// <returns></returns>
 		public Picture CreatePicture(int height, int width)
 		{
 			Picture picture = Paragraph.CreatePicture(document, id, string.Empty, string.Empty);
@@ -9593,9 +10347,7 @@ namespace Novacode
 			return picture;
 		}
 
-		///<summary>
-		/// Returns the name of the image file.
-		///</summary>
+		///<summary>Returns the name of the image file</summary>
 		public string FileName
 		{
 			get
@@ -9603,35 +10355,31 @@ namespace Novacode
 				return Path.GetFileName(this.pr.TargetUri.ToString());
 			}
 		}
+
 	}
 
-	public interface IParagraphContainer
-	{
-		ReadOnlyCollection<Paragraph> Paragraphs { get; }
-	}
-
-	/// <summary>
-	/// Represents a List in a document.
-	/// </summary>
+	/// <summary>Represents a List in a document</summary>
 	public class List : InsertBeforeOrAfter
 	{
+
 		/// <summary>
 		/// This is a list of paragraphs that will be added to the document
 		/// when the list is inserted into the document.
 		/// The paragraph needs a numPr defined to be in this items collection.
 		/// </summary>
 		public List<Paragraph> Items { get; private set; }
+
 		/// <summary>
 		/// The numId used to reference the list settings in the numbering.xml
 		/// </summary>
 		public int NumId { get; private set; }
+
 		/// <summary>
 		/// The ListItemType (bullet or numbered) of the list.
 		/// </summary>
 		public ListItemType? ListType { get; private set; }
 
-		internal List(DocX document, XElement xml)
-			: base(document, xml)
+		internal List(DocX document, XElement xml) : base(document, xml)
 		{
 			Items = new List<Paragraph>();
 			ListType = null;
@@ -9661,12 +10409,14 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="paragraph"></param>
+		/// <param name="start"></param>
 		public void AddItemWithStartValue(Paragraph paragraph, int start)
 		{
 			//TODO: Update the numbering
 			UpdateNumberingForLevelStartNumber(int.Parse(paragraph.IndentLevel.ToString()), start);
-			if (ContainsLevel(start))
-				throw new InvalidOperationException("Cannot add a paragraph with a start value if another element already exists in this list with that level.");
+			if (ContainsLevel(start)) throw new InvalidOperationException("Cannot add a paragraph with a start value if another element already exists in this list with that level.");
 			AddItem(paragraph);
 		}
 
@@ -9701,6 +10451,9 @@ namespace Novacode
 			return false;
 		}
 
+		/// <summary></summary>
+		/// <param name="ilvl"></param>
+		/// <returns></returns>
 		public bool ContainsLevel(int ilvl)
 		{
 			return Items.Any(i => i.ParagraphNumberProperties.Descendants().First(el => el.Name.LocalName == "ilvl").Value == ilvl.ToString());
@@ -9836,61 +10589,91 @@ namespace Novacode
 		}
 	}
 
-	/// <summary>
-	/// See <a href="https://support.microsoft.com/en-gb/kb/951731" /> for explanation
-	/// </summary>
+	/// <summary>See <a href="https://support.microsoft.com/en-gb/kb/951731" /> for explanation</summary>
 	public class PackagePartStream : Stream
 	{
+
 		private static readonly Mutex Mutex = new Mutex(false);
 
 		private readonly Stream stream;
 
+		/// <summary></summary>
+		/// <param name="stream"></param>
 		public PackagePartStream(Stream stream)
 		{
 			this.stream = stream;
 		}
 
+		/// <summary></summary>
 		public override bool CanRead
 		{
-			get { return this.stream.CanRead; }
+			get
+			{
+				return stream.CanRead;
+			}
 		}
 
+		/// <summary></summary>
 		public override bool CanSeek
 		{
-			get { return this.stream.CanSeek; }
+			get
+			{
+				return this.stream.CanSeek;
+			}
 		}
 
+		/// <summary></summary>
 		public override bool CanWrite
 		{
-			get { return this.stream.CanWrite; }
+			get
+			{
+				return this.stream.CanWrite;
+			}
 		}
 
+		/// <summary></summary>
 		public override long Length
 		{
 			get { return this.stream.Length; }
 		}
 
+		/// <summary></summary>
 		public override long Position
 		{
 			get { return this.stream.Position; }
 			set { this.stream.Position = value; }
 		}
 
+		/// <summary></summary>
+		/// <param name="offset"></param>
+		/// <param name="origin"></param>
+		/// <returns></returns>
 		public override long Seek(long offset, SeekOrigin origin)
 		{
 			return this.stream.Seek(offset, origin);
 		}
 
+		/// <summary></summary>
+		/// <param name="value"></param>
 		public override void SetLength(long value)
 		{
 			this.stream.SetLength(value);
 		}
 
+		/// <summary></summary>
+		/// <param name="buffer"></param>
+		/// <param name="offset"></param>
+		/// <param name="count"></param>
+		/// <returns></returns>
 		public override int Read(byte[] buffer, int offset, int count)
 		{
 			return this.stream.Read(buffer, offset, count);
 		}
 
+		/// <summary></summary>
+		/// <param name="buffer"></param>
+		/// <param name="offset"></param>
+		/// <param name="count"></param>
 		public override void Write(byte[] buffer, int offset, int count)
 		{
 			Mutex.WaitOne(Timeout.Infinite, false);
@@ -9898,6 +10681,7 @@ namespace Novacode
 			Mutex.ReleaseMutex();
 		}
 
+		/// <summary></summary>
 		public override void Flush()
 		{
 			Mutex.WaitOne(Timeout.Infinite, false);
@@ -9905,25 +10689,30 @@ namespace Novacode
 			Mutex.ReleaseMutex();
 		}
 
+		/// <summary></summary>
 		public override void Close()
 		{
 			this.stream.Close();
 		}
 
+		/// <summary></summary>
+		/// <param name="disposing"></param>
 		protected override void Dispose(bool disposing)
 		{
 			this.stream.Dispose();
 		}
+
 	}
 
+	/// <summary></summary>
 	public class PageLayout : DocXElement
 	{
+
 		internal PageLayout(DocX document, XElement xml) : base(document, xml)
 		{
-
 		}
 
-
+		/// <summary></summary>
 		public Orientation Orientation
 		{
 			get
@@ -9985,9 +10774,7 @@ namespace Novacode
 		}
 	}
 
-	/// <summary>
-	/// Represents a document paragraph.
-	/// </summary>
+	/// <summary>Represents a document paragraph</summary>
 	public class Paragraph : InsertBeforeOrAfter
 	{
 
@@ -9997,9 +10784,11 @@ namespace Novacode
 		// This paragraphs text alignment
 		private Alignment alignment;
 
+		/// <summary></summary>
 		public ContainerType ParentContainer;
 
 		private XElement ParagraphNumberPropertiesBacker { get; set; }
+
 		/// <summary>
 		/// Fetch the paragraph number properties for a list element.
 		/// </summary>
@@ -10409,6 +11198,7 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
 		public bool IsKeepWithNext
 		{
 
@@ -11045,6 +11835,10 @@ namespace Novacode
 			base.InsertPageBreakAfterSelf();
 		}
 
+		/// <summary></summary>
+		/// <param name="index"></param>
+		/// <param name="h"></param>
+		/// <returns></returns>
 		[Obsolete("Instead use: InsertHyperlink(Hyperlink h, int index)")]
 		public Paragraph InsertHyperlink(int index, Hyperlink h) { return InsertHyperlink(h, index); }
 
@@ -12198,7 +12992,11 @@ namespace Novacode
 			return this;
 		}
 
-
+		/// <summary></summary>
+		/// <param name="lineType"></param>
+		/// <param name="size"></param>
+		/// <param name="space"></param>
+		/// <param name="color"></param>
 		public void InsertHorizontalLine(string lineType = "single", int size = 6, int space = 1, string color = "auto")
 		{
 			var pPr = this.GetOrCreate_pPr();
@@ -12371,11 +13169,17 @@ namespace Novacode
 			return this;
 		}
 
+		/// <summary></summary>
+		/// <param name="bookmarkName"></param>
+		/// <returns></returns>
 		public bool ValidateBookmark(string bookmarkName)
 		{
 			return GetBookmarks().Any(b => b.Name.Equals(bookmarkName));
 		}
 
+		/// <summary></summary>
+		/// <param name="bookmarkName"></param>
+		/// <returns></returns>
 		public Paragraph AppendBookmark(String bookmarkName)
 		{
 			XElement wBookmarkStart = new XElement(
@@ -12393,6 +13197,8 @@ namespace Novacode
 			return this;
 		}
 
+		/// <summary></summary>
+		/// <returns></returns>
 		public IEnumerable<Bookmark> GetBookmarks()
 		{
 			return Xml.Descendants(XName.Get("bookmarkStart", DocX.w.NamespaceName))
@@ -12404,6 +13210,9 @@ namespace Novacode
 						});
 		}
 
+		/// <summary></summary>
+		/// <param name="toInsert"></param>
+		/// <param name="bookmarkName"></param>
 		public void InsertAtBookmark(string toInsert, string bookmarkName)
 		{
 			var bookmark = Xml.Descendants(XName.Get("bookmarkStart", DocX.w.NamespaceName))
@@ -12418,6 +13227,9 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="toInsert"></param>
+		/// <param name="bookmarkName"></param>
 		public void ReplaceAtBookmark(string toInsert, string bookmarkName)
 		{
 			XElement bookmark = Xml.Descendants(XName.Get("bookmarkStart", DocX.w.NamespaceName))
@@ -13297,6 +14109,7 @@ namespace Novacode
 			return this;
 		}
 
+		/// <summary></summary>
 		public float LineSpacing
 		{
 			get
@@ -13430,7 +14243,9 @@ namespace Novacode
 
 		}
 
-
+		/// <summary></summary>
+		/// <param name="spacing"></param>
+		/// <returns></returns>
 		public Paragraph Spacing(double spacing)
 		{
 			spacing *= 20;
@@ -13449,6 +14264,9 @@ namespace Novacode
 			return this;
 		}
 
+		/// <summary></summary>
+		/// <param name="spacingBefore"></param>
+		/// <returns></returns>
 		public Paragraph SpacingBefore(double spacingBefore)
 		{
 			spacingBefore *= 20;
@@ -13479,6 +14297,9 @@ namespace Novacode
 			return this;
 		}
 
+		/// <summary></summary>
+		/// <param name="spacingAfter"></param>
+		/// <returns></returns>
 		public Paragraph SpacingAfter(double spacingAfter)
 		{
 			spacingAfter *= 20;
@@ -13510,32 +14331,33 @@ namespace Novacode
 			return this;
 		}
 
+		/// <summary></summary>
+		/// <param name="kerning"></param>
+		/// <returns></returns>
 		public Paragraph Kerning(int kerning)
 		{
-			if (!new int?[] { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 }.Contains(kerning))
-				throw new ArgumentOutOfRangeException("Kerning", "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72");
-
+			if (!new int?[] { 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72 }.Contains(kerning)) throw new ArgumentOutOfRangeException("Kerning", "Value must be one of the following: 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48 or 72");
 			ApplyTextFormattingProperty(XName.Get("kern", DocX.w.NamespaceName), string.Empty, new XAttribute(XName.Get("val", DocX.w.NamespaceName), kerning * 2));
 			return this;
 		}
 
+		/// <summary></summary>
+		/// <param name="position"></param>
+		/// <returns></returns>
 		public Paragraph Position(double position)
 		{
-			if (!(position > -1585 && position < 1585))
-				throw new ArgumentOutOfRangeException("Position", "Value must be in the range -1585 - 1585");
-
+			if (!(position > -1585 && position < 1585)) throw new ArgumentOutOfRangeException("Position", "Value must be in the range -1585 - 1585");
 			ApplyTextFormattingProperty(XName.Get("position", DocX.w.NamespaceName), string.Empty, new XAttribute(XName.Get("val", DocX.w.NamespaceName), position * 2));
-
 			return this;
 		}
 
+		/// <summary></summary>
+		/// <param name="percentageScale"></param>
+		/// <returns></returns>
 		public Paragraph PercentageScale(int percentageScale)
 		{
-			if (!(new int?[] { 200, 150, 100, 90, 80, 66, 50, 33 }).Contains(percentageScale))
-				throw new ArgumentOutOfRangeException("PercentageScale", "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33");
-
+			if (!(new int?[] { 200, 150, 100, 90, 80, 66, 50, 33 }).Contains(percentageScale)) throw new ArgumentOutOfRangeException("PercentageScale", "Value must be one of the following: 200, 150, 100, 90, 80, 66, 50 or 33");
 			ApplyTextFormattingProperty(XName.Get("w", DocX.w.NamespaceName), string.Empty, new XAttribute(XName.Get("val", DocX.w.NamespaceName), percentageScale));
-
 			return this;
 		}
 
@@ -14356,6 +15178,7 @@ namespace Novacode
 			Xml.Add(fldSimple);
 		}
 
+		/// <summary></summary>
 		public float LineSpacingBefore
 		{
 			get
@@ -14384,6 +15207,7 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
 		public float LineSpacingAfter
 		{
 			get
@@ -14414,13 +15238,17 @@ namespace Novacode
 		}
 	}
 
+	/// <summary></summary>
 	public class Run : DocXElement
 	{
+
 		// A lookup for the text elements in this paragraph
 		Dictionary<int, Text> textLookup = new Dictionary<int, Text>();
 
 		private int startIndex;
+
 		private int endIndex;
+
 		private string text;
 
 		/// <summary>
@@ -14542,143 +15370,7 @@ namespace Novacode
 		}
 	}
 
-	internal class Text : DocXElement
-	{
-		private int startIndex;
-		private int endIndex;
-		private string text;
-
-		/// <summary>
-		/// Gets the start index of this Text (text length before this text)
-		/// </summary>
-		public int StartIndex { get { return startIndex; } }
-
-		/// <summary>
-		/// Gets the end index of this Text (text length before this text + this texts length)
-		/// </summary>
-		public int EndIndex { get { return endIndex; } }
-
-		/// <summary>
-		/// The text value of this text element
-		/// </summary>
-		public string Value { get { return text; } }
-
-		internal Text(DocX document, XElement xml, int startIndex)
-			: base(document, xml)
-		{
-			this.startIndex = startIndex;
-
-			switch (Xml.Name.LocalName)
-			{
-				case "t":
-					{
-						goto case "delText";
-					}
-
-				case "delText":
-					{
-						endIndex = startIndex + xml.Value.Length;
-						text = xml.Value;
-						break;
-					}
-
-				case "br":
-					{
-						text = "\n";
-						endIndex = startIndex + 1;
-						break;
-					}
-
-				case "tab":
-					{
-						text = "\t";
-						endIndex = startIndex + 1;
-						break;
-					}
-				default:
-					{
-						break;
-					}
-			}
-		}
-
-		internal static XElement[] SplitText(Text t, int index)
-		{
-			if (index < t.startIndex || index > t.EndIndex)
-				throw new ArgumentOutOfRangeException(nameof(index));
-
-			XElement splitLeft = null, splitRight = null;
-			if (t.Xml.Name.LocalName == "t" || t.Xml.Name.LocalName == "delText")
-			{
-				// The origional text element, now containing only the text before the index point.
-				splitLeft = new XElement(t.Xml.Name, t.Xml.Attributes(), t.Xml.Value.Substring(0, index - t.startIndex));
-				if (splitLeft.Value.Length == 0)
-					splitLeft = null;
-				else
-					PreserveSpace(splitLeft);
-
-				// The origional text element, now containing only the text after the index point.
-				splitRight = new XElement(t.Xml.Name, t.Xml.Attributes(), t.Xml.Value.Substring(index - t.startIndex, t.Xml.Value.Length - (index - t.startIndex)));
-				if (splitRight.Value.Length == 0)
-					splitRight = null;
-				else
-					PreserveSpace(splitRight);
-			}
-
-			else
-			{
-				if (index == t.EndIndex)
-					splitLeft = t.Xml;
-
-				else
-					splitRight = t.Xml;
-			}
-
-			return
-			(
-				new XElement[]
-				{
-					splitLeft,
-					splitRight
-				}
-			);
-		}
-
-		/// <summary>
-		/// If a text element or delText element, starts or ends with a space,
-		/// it must have the attribute space, otherwise it must not have it.
-		/// </summary>
-		/// <param name="e">The (t or delText) element check</param>
-		public static void PreserveSpace(XElement e)
-		{
-			// PreserveSpace should only be used on (t or delText) elements
-			if (!e.Name.Equals(DocX.w + "t") && !e.Name.Equals(DocX.w + "delText"))
-				throw new ArgumentException("SplitText can only split elements of type t or delText", "e");
-
-			// Check if this w:t contains a space atribute
-			XAttribute space = e.Attributes().Where(a => a.Name.Equals(XNamespace.Xml + "space")).SingleOrDefault();
-
-			// This w:t's text begins or ends with whitespace
-			if (e.Value.StartsWith(" ") || e.Value.EndsWith(" "))
-			{
-				// If this w:t contains no space attribute, add one.
-				if (space == null)
-					e.Add(new XAttribute(XNamespace.Xml + "space", "preserve"));
-			}
-
-			// This w:t's text does not begin or end with a space
-			else
-			{
-				// If this w:r contains a space attribute, remove it.
-				if (space != null)
-					space.Remove();
-			}
-		}
-	}
-
-	/// <summary>
-	/// Represents a Picture in this document, a Picture is a customized view of an Image.
-	/// </summary>
+	/// <summary>Represents a Picture in this document, a Picture is a customized view of an Image</summary>
 	public class Picture : DocXElement
 	{
 		private const int EmusInPixel = 9525;
@@ -15054,26 +15746,32 @@ namespace Novacode
 		//}
 	}
 
+	/// <summary></summary>
 	public class Section : Container
 	{
 
+		/// <summary></summary>
 		public SectionBreakType SectionBreakType;
 
 		internal Section(DocX document, XElement xml) : base(document, xml)
 		{
 		}
 
+		/// <summary></summary>
 		public List<Paragraph> SectionParagraphs { get; set; }
+
 	}
 
-	/// <summary>
-	/// Represents a Table in a document.
-	/// </summary>
+	/// <summary>Represents a Table in a document</summary>
 	public class Table : InsertBeforeOrAfter
 	{
+
 		private Alignment alignment;
+
 		private AutoFit autofit;
+
 		private float[] ColumnWidthsValue;
+
 		/// <summary>
 		/// Merge cells in given column starting with startRow and ending with endRow.
 		/// </summary>
@@ -15251,6 +15949,8 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="widths"></param>
 		public void SetWidths(float[] widths)
 		{
 			this.ColumnWidthsValue = widths;
@@ -15300,12 +16000,10 @@ namespace Novacode
 			return tblPr;
 		}
 
-		/// <summary>
-		/// Set the specified cell margin for the table-level.
-		/// </summary>
-		/// <param name="type">The side of the cell margin.</param>
-		/// <param name="margin">The value for the specified cell margin.</param>
-		/// <remarks>More information can be found <see cref="http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tablecellmargindefault.aspx">here</see></remarks>
+		/// <summary>Set the specified cell margin for the table-level</summary>
+		/// <param name="type">The side of the cell margin</param>
+		/// <param name="margin">The value for the specified cell margin</param>
+		/// <remarks>More information can be found here http://msdn.microsoft.com/en-us/library/documentformat.openxml.wordprocessing.tablecellmargindefault.aspx</remarks>
 		public void SetTableCellMargin(TableCellMarginType type, double margin)
 		{
 			XElement tblPr = GetOrCreate_tblPr();
@@ -15630,12 +16328,20 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		public TableLook TableLook
+		{
+			get;
+			set;
+		}
 
-		public TableLook TableLook { get; set; }
-
+		/// <summary></summary>
 		public Alignment Alignment
 		{
-			get { return alignment; }
+			get
+			{
+				return alignment;
+			}
 			set
 			{
 				string alignmentString = string.Empty;
@@ -15646,33 +16352,25 @@ namespace Novacode
 							alignmentString = "left";
 							break;
 						}
-
 					case Alignment.both:
 						{
 							alignmentString = "both";
 							break;
 						}
-
-
 					case Alignment.right:
 						{
 							alignmentString = "right";
 							break;
 						}
-
 					case Alignment.center:
 						{
 							alignmentString = "center";
 							break;
 						}
 				}
-
 				XElement tblPr = Xml.Descendants(XName.Get("tblPr", DocX.w.NamespaceName)).First();
 				XElement jc = tblPr.Descendants(XName.Get("jc", DocX.w.NamespaceName)).FirstOrDefault();
-
-				if (jc != null)
-					jc.Remove();
-
+				if (jc != null) jc.Remove();
 				jc = new XElement(XName.Get("jc", DocX.w.NamespaceName), new XAttribute(XName.Get("val", DocX.w.NamespaceName), alignmentString));
 				tblPr.Add(jc);
 				alignment = value;
@@ -15685,8 +16383,10 @@ namespace Novacode
 		/// <remarks>Added by Roger Saele, April 2012. Thank you for your contribution Roger.</remarks>
 		public AutoFit AutoFit
 		{
-			get { return autofit; }
-
+			get
+			{
+				return autofit;
+			}
 			set
 			{
 				string tableAttributeValue = string.Empty;
@@ -15773,22 +16473,15 @@ namespace Novacode
 										  where (d.Name.LocalName == "tblLayout") && type != null
 										  select type;
 
-								foreach (XAttribute type in qry)
-									type.Value = "fixed";
-
-
+								foreach (XAttribute type in qry) type.Value = "fixed";
 								XElement tmp = tblPr.Element(XName.Get("tblW", DocX.w.NamespaceName));
 								Double i = 0;
-								foreach (Double w in ColumnWidths)
-									i += w;
-
+								foreach (Double w in ColumnWidths) i += w;
 								tmp.SetAttributeValue(XName.Get("w", DocX.w.NamespaceName), i.ToString());
 								break;
 							}
-
 						}
 				}
-
 				// Set table attributes
 				var query = from d in Xml.Descendants()
 							let type = d.Attribute(XName.Get("type", DocX.w.NamespaceName))
@@ -17464,9 +18157,7 @@ namespace Novacode
 
 	}
 
-	/// <summary>
-	/// Represents a single row in a Table.
-	/// </summary>
+	/// <summary>Represents a single row in a Table</summary>
 	public class Row : Container
 	{
 		/// <summary>
@@ -17536,6 +18227,7 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
 		public void Remove()
 		{
 			XElement table = Xml.Parent;
@@ -17545,6 +18237,7 @@ namespace Novacode
 				table.Remove();
 		}
 
+		/// <summary></summary>
 		public override ReadOnlyCollection<Paragraph> Paragraphs
 		{
 			get
@@ -17855,32 +18548,30 @@ namespace Novacode
 		}
 	}
 
+	/// <summary></summary>
 	public class Cell : Container
 	{
+
 		internal Row row;
 
-		internal Cell(Row row, DocX document, XElement xml)
-			: base(document, xml)
+		internal Cell(Row row, DocX document, XElement xml) : base(document, xml)
 		{
 			this.row = row;
 			this.mainPart = row.mainPart;
 		}
 
+		/// <summary></summary>
 		public override ReadOnlyCollection<Paragraph> Paragraphs
 		{
 			get
 			{
 				ReadOnlyCollection<Paragraph> paragraphs = base.Paragraphs;
-
-				foreach (Paragraph p in paragraphs)
-					p.PackagePart = row.table.mainPart;
-
+				foreach (Paragraph p in paragraphs) p.PackagePart = row.table.mainPart;
 				return paragraphs;
 			}
 		}
-		/// <summary>
-		/// Returns the GridSpan of a specific Cell ie. How many cells are merged
-		/// </summary>
+
+		/// <summary>Returns the GridSpan of a specific Cell ie. How many cells are merged.</summary>
 		public int GridSpan
 		{
 			get
@@ -18017,6 +18708,7 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
 		public Color Shading
 		{
 			get
@@ -19003,6 +19695,10 @@ namespace Novacode
 			}
 		}
 
+		/// <summary></summary>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		/// <returns></returns>
 		public override Table InsertTable(int rowCount, int columnCount)
 		{
 			Table table = base.InsertTable(rowCount, columnCount);
@@ -19012,6 +19708,7 @@ namespace Novacode
 			return table;
 		}
 
+		/// <summary></summary>
 		public TextDirection TextDirection
 		{
 			get
@@ -19071,14 +19768,52 @@ namespace Novacode
 		}
 	}
 
+	/// <summary></summary>
 	public class TableLook
 	{
-		public bool FirstRow { get; set; }
-		public bool LastRow { get; set; }
-		public bool FirstColumn { get; set; }
-		public bool LastColumn { get; set; }
-		public bool NoHorizontalBanding { get; set; }
-		public bool NoVerticalBanding { get; set; }
+
+		/// <summary></summary>
+		public bool FirstRow
+		{
+			get;
+			set;
+		}
+
+		/// <summary></summary>
+		public bool LastRow
+		{
+			get;
+			set;
+		}
+
+		/// <summary></summary>
+		public bool FirstColumn
+		{
+			get;
+			set;
+		}
+
+		/// <summary></summary>
+		public bool LastColumn
+		{
+			get;
+			set;
+		}
+
+		/// <summary></summary>
+		public bool NoHorizontalBanding
+		{
+			get;
+			set;
+		}
+
+		/// <summary></summary>
+		public bool NoVerticalBanding
+		{
+			get;
+			set;
+		}
+
 	}
 
 	/// <summary>Represents a table of contents in the document</summary>
@@ -19173,5 +19908,9 @@ namespace Novacode
 		}
 
 	}
+
+	#endregion
+
+	#endregion
 
 }
